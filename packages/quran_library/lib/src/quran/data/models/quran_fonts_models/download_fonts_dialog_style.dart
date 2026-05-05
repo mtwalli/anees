@@ -298,7 +298,7 @@ class DownloadFontsDialogStyle {
       iconColor: primary,
       iconSize: 24.0,
       iconWidget: Icon(
-        Icons.more_vert_rounded,
+        Icons.text_fields,
         size: 24.0,
         color: Theme.of(context).colorScheme.primary,
       ),
