@@ -7,6 +7,9 @@ part of '/quran.dart';
 /// Pass -1.0 (or any negative) to disable the sweep and use uniform fill.
 /// The sweep fills from right to left (RTL Arabic direction).
 ///
+/// [alphaScale] multiplies every alpha value (0.0–1.0, default 1.0).
+/// Used by the enter animation to fade the box in from transparent.
+///
 /// Layer order (back → front):
 ///   1. Blur glow (spread slightly beyond the rect)
 ///   2. Top-to-bottom gradient fill (clipped to swept region if playback active)
@@ -18,12 +21,14 @@ void paintFancyHighlight(
   Color baseColor,
   double animValue, {
   double playbackProgress = -1.0,
+  double alphaScale = 1.0,
 }) {
   final bool sweeping = playbackProgress >= 0.0;
 
   // ── 1. Glow ────────────────────────────────────────────────────────────────
   final glowPaint = Paint()
-    ..color = baseColor.withValues(alpha: 0.30 + 0.15 * animValue)
+    ..color = baseColor.withValues(
+        alpha: (0.30 + 0.15 * animValue) * alphaScale)
     ..maskFilter =
         MaskFilter.blur(BlurStyle.normal, 6.0 + 2.0 * animValue);
   canvas.drawRRect(rRect.inflate(2.0), glowPaint);
@@ -49,8 +54,10 @@ void paintFancyHighlight(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        baseColor.withValues(alpha: 0.55 + 0.10 * animValue),
-        baseColor.withValues(alpha: 0.32 + 0.07 * animValue),
+        baseColor.withValues(
+            alpha: (0.55 + 0.10 * animValue) * alphaScale),
+        baseColor.withValues(
+            alpha: (0.32 + 0.07 * animValue) * alphaScale),
       ],
     );
     canvas.save();
@@ -68,7 +75,8 @@ void paintFancyHighlight(
         outer.bottom,
       );
       final dimPaint = Paint()
-        ..color = baseColor.withValues(alpha: 0.12 + 0.03 * animValue);
+        ..color = baseColor.withValues(
+            alpha: (0.12 + 0.03 * animValue) * alphaScale);
       canvas.drawRect(unsweptRect, dimPaint);
     }
     canvas.restore();
@@ -78,8 +86,10 @@ void paintFancyHighlight(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        baseColor.withValues(alpha: 0.50 + 0.10 * animValue),
-        baseColor.withValues(alpha: 0.28 + 0.07 * animValue),
+        baseColor.withValues(
+            alpha: (0.50 + 0.10 * animValue) * alphaScale),
+        baseColor.withValues(
+            alpha: (0.28 + 0.07 * animValue) * alphaScale),
       ],
     );
     final fillPaint = Paint()..shader = gradient.createShader(outer);
@@ -88,7 +98,8 @@ void paintFancyHighlight(
 
   // ── 3. Stroke border ───────────────────────────────────────────────────────
   final strokePaint = Paint()
-    ..color = baseColor.withValues(alpha: 0.60 + 0.20 * animValue)
+    ..color = baseColor.withValues(
+        alpha: (0.60 + 0.20 * animValue) * alphaScale)
     ..style = PaintingStyle.stroke
     ..strokeWidth = 1.0;
   canvas.drawRRect(rRect, strokePaint);

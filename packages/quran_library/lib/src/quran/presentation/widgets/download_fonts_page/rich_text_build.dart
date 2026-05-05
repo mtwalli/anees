@@ -60,7 +60,7 @@ class QpcV4RichTextLine extends StatefulWidget {
 }
 
 class _QpcV4RichTextLineState extends State<QpcV4RichTextLine>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   /// كاش الويدجت المبني — يُعاد بناؤه فقط عند تغيّر selection/bookmarks/word_info
   Widget? _cachedWidget;
 
@@ -75,6 +75,19 @@ class _QpcV4RichTextLineState extends State<QpcV4RichTextLine>
     parent: _highlightAnim,
     curve: Curves.easeInOut,
   );
+
+  /// أنيميشن الدخول — يُشغَّل عند انتقال التظليل لآية جديدة على هذا السطر.
+  late final AnimationController _enterAnim = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 350),
+  );
+  late final Animation<double> _enterScale = CurvedAnimation(
+    parent: _enterAnim,
+    curve: Curves.easeOutCubic,
+  );
+
+  /// الآيات المظلّلة حالياً على هذا السطر — لاكتشاف وصول تظليل جديد.
+  Set<int> _lastLineUqs = {};
 
   /// تقدّم تشغيل الصوت للآية المحدّدة على هذا السطر (0.0–1.0، أو -1.0 إذا لم يكن نشطاً).
   /// يُستخدم مباشرة بواسطة [_AyahSelectionRenderBox] دون إعادة بناء الويدجت.
@@ -158,6 +171,7 @@ class _QpcV4RichTextLineState extends State<QpcV4RichTextLine>
   void dispose() {
     _positionSub?.cancel();
     _playbackProgress.dispose();
+    _enterAnim.dispose();
     _highlightAnim.dispose();
     super.dispose();
   }
@@ -462,11 +476,20 @@ class _QpcV4RichTextLineState extends State<QpcV4RichTextLine>
 
     if (!hasSelection && !hasBookmarks && !hasWordSelection) {
       _highlightAnim.stop();
+      _lastLineUqs = {};
       _positionSub?.cancel();
       _positionSub = null;
       if (_playbackProgress.value != -1.0) _playbackProgress.value = -1.0;
       return richText;
     }
+
+    // Fire the enter animation whenever a new ayah UQ appears on this line.
+    final currentLineUqs = ayahCharRanges.keys.toSet();
+    final hasNewUq = currentLineUqs.any((uq) => !_lastLineUqs.contains(uq));
+    if (hasNewUq) {
+      _enterAnim.forward(from: 0.0);
+    }
+    _lastLineUqs = currentLineUqs;
 
     // Start / keep running the pulse animation whenever there is something to highlight.
     if (!_highlightAnim.isAnimating) {
@@ -489,6 +512,7 @@ class _QpcV4RichTextLineState extends State<QpcV4RichTextLine>
       bookmarkRanges: bookmarkCharRanges.values.toList(),
       wordSelectionRange: wordSelectionRange,
       highlightAnimation: _highlightPulse,
+      enterAnimation: _enterScale,
       playbackProgressNotifier: _playbackProgress,
       child: richText,
     );
@@ -526,6 +550,8 @@ class _AyahSelectionWidget extends SingleChildRenderObjectWidget {
   final List<_ColoredTextRange> bookmarkRanges;
   final TextSelection? wordSelectionRange;
   final Animation<double> highlightAnimation;
+  /// أنيميشن الدخول عند انتقال التظليل لآية جديدة (0.0 → 1.0 مرة واحدة).
+  final Animation<double> enterAnimation;
   /// تقدّم تشغيل الصوت (0.0–1.0). القيمة -1.0 تعني لا يوجد تشغيل نشط.
   final ValueNotifier<double> playbackProgressNotifier;
 
@@ -535,6 +561,7 @@ class _AyahSelectionWidget extends SingleChildRenderObjectWidget {
     this.bookmarkRanges = const [],
     this.wordSelectionRange,
     required this.highlightAnimation,
+    required this.enterAnimation,
     required this.playbackProgressNotifier,
     required super.child,
   });
@@ -547,6 +574,7 @@ class _AyahSelectionWidget extends SingleChildRenderObjectWidget {
       bookmarkRanges: bookmarkRanges,
       wordSelectionRange: wordSelectionRange,
       highlightAnimation: highlightAnimation,
+      enterAnimation: enterAnimation,
       playbackProgressNotifier: playbackProgressNotifier,
     );
   }
@@ -560,6 +588,7 @@ class _AyahSelectionWidget extends SingleChildRenderObjectWidget {
       ..bookmarkRanges = bookmarkRanges
       ..wordSelectionRange = wordSelectionRange
       ..highlightAnimation = highlightAnimation
+      ..enterAnimation = enterAnimation
       ..playbackProgressNotifier = playbackProgressNotifier;
   }
 }
@@ -573,12 +602,14 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
     List<_ColoredTextRange> bookmarkRanges = const [],
     TextSelection? wordSelectionRange,
     required Animation<double> highlightAnimation,
+    required Animation<double> enterAnimation,
     required ValueNotifier<double> playbackProgressNotifier,
   })  : _selectedRanges = selectedRanges,
         _selectionColor = selectionColor,
         _bookmarkRanges = bookmarkRanges,
         _wordSelectionRange = wordSelectionRange,
         _highlightAnimation = highlightAnimation,
+        _enterAnimation = enterAnimation,
         _playbackProgressNotifier = playbackProgressNotifier;
 
   static const _wordSelectionColor =
@@ -624,6 +655,19 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
     markNeedsPaint();
   }
 
+  Animation<double> _enterAnimation;
+  set enterAnimation(Animation<double> value) {
+    if (_enterAnimation == value) return;
+    if (attached) {
+      _enterAnimation.removeListener(markNeedsPaint);
+    }
+    _enterAnimation = value;
+    if (attached) {
+      _enterAnimation.addListener(markNeedsPaint);
+    }
+    markNeedsPaint();
+  }
+
   ValueNotifier<double> _playbackProgressNotifier;
   set playbackProgressNotifier(ValueNotifier<double> value) {
     if (_playbackProgressNotifier == value) return;
@@ -641,12 +685,14 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
   void attach(PipelineOwner owner) {
     super.attach(owner);
     _highlightAnimation.addListener(markNeedsPaint);
+    _enterAnimation.addListener(markNeedsPaint);
     _playbackProgressNotifier.addListener(markNeedsPaint);
   }
 
   @override
   void detach() {
     _highlightAnimation.removeListener(markNeedsPaint);
+    _enterAnimation.removeListener(markNeedsPaint);
     _playbackProgressNotifier.removeListener(markNeedsPaint);
     super.detach();
   }
@@ -655,10 +701,11 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
   void paint(PaintingContext context, Offset offset) {
     if (child is RenderParagraph) {
       final animVal = _highlightAnimation.value;
+      final enterVal = _enterAnimation.value;
       final progress = _playbackProgressNotifier.value;
       // 1) علامات مرجعية (أسفل طبقة)
       if (_bookmarkRanges.isNotEmpty) {
-        _paintColoredRanges(context, offset, _bookmarkRanges, animVal);
+        _paintColoredRanges(context, offset, _bookmarkRanges, animVal, enterVal);
       }
       // 2) تحديد الكلمة
       if (_wordSelectionRange != null) {
@@ -669,31 +716,33 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
           [_wordSelectionRange!],
           _wordSelectionColor,
           animVal,
+          enterVal,
         );
       }
       // 3) تحديد الآية (أعلى طبقة) — مع تأثير شريط التقدّم عند التشغيل
       if (_selectedRanges.isNotEmpty) {
-        _paintSelectionBackgrounds(context, offset, animVal, progress);
+        _paintSelectionBackgrounds(context, offset, animVal, enterVal, progress);
       }
     }
     super.paint(context, offset);
   }
 
   /// رسم خلفيات التحديد خلف الآيات المحدّدة.
-  void _paintSelectionBackgrounds(
-      PaintingContext context, Offset offset, double animVal, double progress) {
+  void _paintSelectionBackgrounds(PaintingContext context, Offset offset,
+      double animVal, double enterVal, double progress) {
     _paintMergedBoxes(
         child! as RenderParagraph, context, offset, _selectedRanges,
-        _selectionColor, animVal,
+        _selectionColor, animVal, enterVal,
         playbackProgress: progress);
   }
 
   /// رسم خلفيات العلامات المرجعية - كل نطاق بلونه الخاص.
   void _paintColoredRanges(PaintingContext context, Offset offset,
-      List<_ColoredTextRange> ranges, double animVal) {
+      List<_ColoredTextRange> ranges, double animVal, double enterVal) {
     final paragraph = child! as RenderParagraph;
     for (final cr in ranges) {
-      _paintMergedBoxes(paragraph, context, offset, [cr.range], cr.color, animVal);
+      _paintMergedBoxes(
+          paragraph, context, offset, [cr.range], cr.color, animVal, enterVal);
     }
   }
 
@@ -704,7 +753,8 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
     Offset offset,
     List<TextSelection> ranges,
     Color baseColor,
-    double animVal, {
+    double animVal,
+    double enterVal, {
     double playbackProgress = -1.0,
   }) {
     const padding = EdgeInsets.only(right: 4, top: 0, bottom: -6);
@@ -743,13 +793,36 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
 
       for (final rect in mergedRects) {
         final padded = padding.inflateRect(rect).shift(offset);
-        paintFancyHighlight(
-          context.canvas,
-          RRect.fromRectAndRadius(padded, const Radius.circular(16)),
-          baseColor,
-          animVal,
-          playbackProgress: playbackProgress,
-        );
+        final rRect =
+            RRect.fromRectAndRadius(padded, const Radius.circular(16));
+
+        // أنيميشن الدخول: scale من المركز (0.88 → 1.0) + fade-in للألفا.
+        if (enterVal < 1.0) {
+          final scale = 0.88 + 0.12 * enterVal;
+          final center = padded.center;
+          final canvas = context.canvas;
+          canvas.save();
+          canvas.translate(center.dx, center.dy);
+          canvas.scale(scale, scale);
+          canvas.translate(-center.dx, -center.dy);
+          paintFancyHighlight(
+            canvas,
+            rRect,
+            baseColor,
+            animVal,
+            playbackProgress: playbackProgress,
+            alphaScale: enterVal,
+          );
+          canvas.restore();
+        } else {
+          paintFancyHighlight(
+            context.canvas,
+            rRect,
+            baseColor,
+            animVal,
+            playbackProgress: playbackProgress,
+          );
+        }
       }
     }
   }
