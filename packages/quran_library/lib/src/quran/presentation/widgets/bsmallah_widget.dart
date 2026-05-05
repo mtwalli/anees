@@ -67,7 +67,8 @@ class BasmallahWidget extends StatelessWidget {
             fontFamily: 'bismillah',
             fontSize: basmalaStyle?.basmalaFontSize ?? 50,
             height: 2,
-            color: basmalaStyle?.basmalaColor ?? Colors.black,
+            color: basmalaStyle?.basmalaColor ??
+                Theme.of(context).colorScheme.onSurface,
             package: 'quran_library',
           ),
         ),

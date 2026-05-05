@@ -44,6 +44,9 @@ class ShowTafseer extends StatelessWidget {
     final double deviceWidth = MediaQuery.maybeOf(context)?.size.width ?? 400;
     final double sheetHeight = s.heightOfBottomSheet ?? (deviceHeight * 0.9);
     final double sheetWidth = s.widthOfBottomSheet ?? deviceWidth;
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final Color tabBgColor = scheme.surfaceContainerLow;
+    final Color indicatorColor = scheme.primaryContainer;
     // تحسين الشكل: إضافة شريط علوي أنيق مع زر إغلاق واسم التفسير
     // UI Enhancement: Add a modern top bar with close button and tafsir name
     // final stored = GetStorage()
@@ -66,7 +69,7 @@ class ShowTafseer extends StatelessWidget {
                   vertical: s.verticalMargin ?? 0.0),
               decoration: BoxDecoration(
                 color: s.backgroundColor ??
-                    (isDark ? const Color(0xff1E1E1E) : Colors.white),
+                    (isDark ? scheme.surfaceContainerHigh : scheme.surface),
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16),
                   topRight: Radius.circular(16),
@@ -87,32 +90,50 @@ class ShowTafseer extends StatelessWidget {
                         height: 5,
                         margin: const EdgeInsets.only(bottom: 8, top: 8),
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade500,
+                          color: scheme.outlineVariant,
                           borderRadius: BorderRadius.circular(3),
                         ),
                       ),
-                  TabBar(
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    labelStyle: s.tabBarLabelStyle ??
-                        TextStyle(
-                          fontFamily: 'cairo',
-                          package: 'quran_library',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: AppColors.getTextColor(isDark),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Material(
+                      color: tabBgColor,
+                      borderRadius: BorderRadius.circular(10),
+                      child: TabBar(
+                        automaticIndicatorColorAdjustment: false,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        indicatorPadding: const EdgeInsets.all(4),
+                        dividerColor: Colors.transparent,
+                        indicator: BoxDecoration(
+                          color: indicatorColor,
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                    unselectedLabelStyle: s.tabBarUnselectedLabelStyle ??
-                        TextStyle(
-                          fontFamily: 'cairo',
-                          package: 'quran_library',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: AppColors.getTextColor(isDark),
-                        ),
-                    tabs: [
-                      Tab(text: QuranLocalizations.of(context).tafsirTabLabel),
-                      Tab(text: QuranLocalizations.of(context).tajweedTabLabel),
-                    ],
+                        labelColor: scheme.onPrimaryContainer,
+                        unselectedLabelColor: scheme.onSurfaceVariant,
+                        labelStyle: s.tabBarLabelStyle ??
+                            TextStyle(
+                              fontFamily: 'cairo',
+                              package: 'quran_library',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                        unselectedLabelStyle: s.tabBarUnselectedLabelStyle ??
+                            TextStyle(
+                              fontFamily: 'cairo',
+                              package: 'quran_library',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                        tabs: [
+                          Tab(
+                              text: QuranLocalizations.of(context)
+                                  .tafsirTabLabel),
+                          Tab(
+                              text: QuranLocalizations.of(context)
+                                  .tajweedTabLabel),
+                        ],
+                      ),
+                    ),
                   ),
                   const Divider(height: 1),
                   Expanded(
@@ -135,7 +156,7 @@ class ShowTafseer extends StatelessWidget {
                                       Container(
                                           width: 1,
                                           height: 24,
-                                          color: Colors.grey.shade300),
+                                          color: scheme.outlineVariant),
                                       const SizedBox(width: 8),
                                       s.fontSizeWidget ??
                                           fontSizeDropDown(

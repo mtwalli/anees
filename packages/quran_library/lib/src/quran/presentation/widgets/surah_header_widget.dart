@@ -50,7 +50,8 @@ class SurahHeaderWidget extends StatelessWidget {
           child: Text(
             surahNumber.toString(),
             style: TextStyle(
-              color: surahNameStyle?.surahNameColor ?? Colors.black,
+              color: surahNameStyle?.surahNameColor ??
+                  Theme.of(context).colorScheme.onSurface,
               fontFamily: "surahName",
               fontSize: surahNameStyle?.surahNameSize,
               fontFamilyFallback: const ["surahName"],

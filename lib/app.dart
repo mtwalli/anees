@@ -23,11 +23,7 @@ class AneesApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [
-        Locale('en'),
-        Locale('de'),
-        Locale('ar'),
-      ],
+      supportedLocales: const [Locale('en'), Locale('de'), Locale('ar')],
       home: const _QuranHome(),
     );
   }
@@ -104,22 +100,31 @@ class _QuranHome extends StatelessWidget {
           fontFamily: AppTheme.arabicUIFont,
           fontSize: 12,
         ),
-        searchHintStyle: TextStyle(color: sub, fontFamily: AppTheme.arabicUIFont),
-        searchTextStyle: TextStyle(color: text, fontFamily: AppTheme.arabicUIFont),
+        searchHintStyle: TextStyle(
+          color: sub,
+          fontFamily: AppTheme.arabicUIFont,
+        ),
+        searchTextStyle: TextStyle(
+          color: text,
+          fontFamily: AppTheme.arabicUIFont,
+        ),
         resultsDividerColor: divider,
       ),
 
       // ── Bookmarks tab ─────────────────────────────────────────────────────
-      bookmarksTabStyle: BookmarksTabStyle.defaults(isDark: isDark, context: context).copyWith(
-        textColor: text,
-        subtitleTextColor: sub,
-        emptyStateIconColor: accent.withValues(alpha: 0.4),
-        emptyStateTextColor: sub,
-      ),
+      bookmarksTabStyle:
+          BookmarksTabStyle.defaults(isDark: isDark, context: context).copyWith(
+            textColor: text,
+            subtitleTextColor: sub,
+            emptyStateIconColor: accent.withValues(alpha: 0.4),
+            emptyStateTextColor: sub,
+          ),
 
       // ── Ayah long-press menu ──────────────────────────────────────────────
       ayahMenuStyle: AyahMenuStyle(
-        backgroundColor: isDark ? AppColors.darkSurface : AppColors.lightSurface,
+        backgroundColor: isDark
+            ? AppColors.darkSurface
+            : AppColors.lightSurface,
         borderColor: accent.withValues(alpha: 0.5),
         borderWidth: 1.0,
         copyIconColor: accent,
@@ -142,14 +147,13 @@ class _QuranHome extends StatelessWidget {
       ),
 
       // ── Surah name banner ─────────────────────────────────────────────────
-      surahNameStyle: SurahNameStyle(
-        surahNameColor: accent,
-        surahNameSize: 22,
-      ),
+      surahNameStyle: SurahNameStyle(surahNameColor: accent, surahNameSize: 22),
 
       // ── Surah info bottom sheet ───────────────────────────────────────────
       surahInfoStyle: SurahInfoStyle(
-        backgroundColor: isDark ? AppColors.darkSurface : AppColors.lightSurface,
+        backgroundColor: isDark
+            ? AppColors.darkSurface
+            : AppColors.lightSurface,
         surahNameColor: accent,
         surahNumberColor: accent,
         surahNumberDecorationColor: accent.withValues(alpha: 0.3),
@@ -161,15 +165,10 @@ class _QuranHome extends StatelessWidget {
       ),
 
       // ── Banner (surah header ornament) ────────────────────────────────────
-      bannerStyle: BannerStyle(
-        svgBannerColor: accent,
-      ),
+      bannerStyle: BannerStyle(svgBannerColor: accent),
 
       // ── Basmala ───────────────────────────────────────────────────────────
-      basmalaStyle: BasmalaStyle(
-        basmalaColor: accent,
-        basmalaFontSize: 22,
-      ),
+      basmalaStyle: BasmalaStyle(basmalaColor: accent, basmalaFontSize: 22),
 
       // ── Page header / footer labels ───────────────────────────────────────
       topBottomQuranStyle: TopBottomQuranStyle(
@@ -182,14 +181,20 @@ class _QuranHome extends StatelessWidget {
 
       // ── Tafsir inline ─────────────────────────────────────────────────────
       ayahTafsirInlineStyle: AyahTafsirInlineStyle(
-        backgroundColor: isDark ? AppColors.darkSurface : AppColors.lightSurface,
+        backgroundColor: isDark
+            ? AppColors.darkSurface
+            : AppColors.lightSurface,
         ayahTextColor: text,
         tafsirTextColor: text,
-        tafsirBackgroundColor:
-            isDark ? AppColors.darkBackground : AppColors.lightBackground,
+        tafsirBackgroundColor: isDark
+            ? AppColors.darkBackground
+            : AppColors.lightBackground,
         dividerColor: divider,
         readMoreButtonColor: accent,
-        readMoreTextStyle: TextStyle(color: accent, fontFamily: AppTheme.arabicUIFont),
+        readMoreTextStyle: TextStyle(
+          color: accent,
+          fontFamily: AppTheme.arabicUIFont,
+        ),
         ayahNumberColor: accent,
         optionsBarBackgroundColor: AppColors.darkBackground,
         tafsirSelectorBarColor: AppColors.darkBackground,

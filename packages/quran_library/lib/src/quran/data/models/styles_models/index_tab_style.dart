@@ -57,6 +57,7 @@ class IndexTabStyle {
     final text = AppColors.getTextColor(isDark);
     final scheme = Theme.of(context).colorScheme;
     final primary = scheme.primary;
+    final onPrimary = scheme.onPrimary;
     return IndexTabStyle(
       textColor: text,
       accentColor: primary,
@@ -64,8 +65,8 @@ class IndexTabStyle {
       tabBarRadius: 12.0,
       indicatorRadius: 10.0,
       indicatorPadding: const EdgeInsets.all(4),
-      labelColor: Colors.white,
-      unselectedLabelColor: text.withValues(alpha: 0.6),
+      labelColor: onPrimary,
+      unselectedLabelColor: text.withValues(alpha: 0.45),
       labelStyle: QuranLibrary().cairoStyle.copyWith(
             fontSize: 13,
             fontWeight: FontWeight.w700,
@@ -74,14 +75,14 @@ class IndexTabStyle {
       unselectedLabelStyle: QuranLibrary().cairoStyle.copyWith(
             fontSize: 13,
           ),
-      tabBarBgAlpha: 0.06,
+      tabBarBgAlpha: 0.1,
       tabSurahsLabel: QuranLocalizations.of(context).tabSurahs,
       tabJozzLabel: QuranLocalizations.of(context).tabJuz,
       listItemRadius: 8.0,
       surahRowAltBgAlpha: 0.1,
       jozzAltBgAlpha: 0.1,
       hizbItemAltBgAlpha: 0.05,
-      surahNumberDecorationColor: Colors.teal.withValues(alpha: 0.6),
+      surahNumberDecorationColor: primary.withValues(alpha: 0.6),
     );
   }
 

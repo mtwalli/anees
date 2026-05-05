@@ -40,7 +40,8 @@ class ReadMoreLess extends StatefulWidget {
       customButtonBuilder;
 
   /// The color of the icon in the read more/less button. Does not work when [iconCollapsed] or [iconExpanded] are specified.
-  final Color iconColor;
+  /// Defaults to [ColorScheme.onSurface] if not provided.
+  final Color? iconColor;
 
   /// The textstyle used for the read more/less button
   final TextStyle? buttonTextStyle;
@@ -60,7 +61,7 @@ class ReadMoreLess extends StatefulWidget {
     this.iconCollapsed,
     this.iconExpanded,
     this.customButtonBuilder,
-    this.iconColor = Colors.black,
+    this.iconColor,
     this.buttonTextStyle,
     this.textDirection = TextDirection.ltr,
   })  : assert(
@@ -116,6 +117,8 @@ class _ReadMoreLessState extends State<ReadMoreLess> {
   @override
   Widget build(BuildContext context) {
     TextStyle ts = widget.textStyle ?? Theme.of(context).textTheme.bodyMedium!;
+    final Color resolvedIconColor =
+        widget.iconColor ?? Theme.of(context).colorScheme.onSurface;
 
     return Column(
       children: <Widget>[
@@ -133,7 +136,7 @@ class _ReadMoreLessState extends State<ReadMoreLess> {
                     iconCollapsed: widget.iconCollapsed,
                     iconExpanded: widget.iconExpanded,
                     customButtonBuilder: widget.customButtonBuilder,
-                    iconColor: widget.iconColor,
+                    iconColor: resolvedIconColor,
                     buttonTextStyle: widget.buttonTextStyle,
                     textDirection: widget.textDirection,
                   )

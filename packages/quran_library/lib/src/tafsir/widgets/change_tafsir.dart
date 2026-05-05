@@ -112,7 +112,8 @@ class DailogBuild extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: HeaderDialogWidget(
-                      title: tafsirStyle?.dialogHeaderTitle ?? QuranLocalizations.of(context).changeTafsirLabel,
+                      title: tafsirStyle?.dialogHeaderTitle ??
+                          QuranLocalizations.of(context).changeTafsirLabel,
                       isDark: isDark,
                       titleColor: tafsirStyle?.dialogHeaderTitleColor,
                       backgroundGradient:

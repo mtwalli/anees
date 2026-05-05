@@ -1,7 +1,8 @@
 part of '../../tafsir.dart';
 
 extension DownloadExtension on TafsirCtrl {
-  Future<bool> downloadFile(String path, String url, {String? fallbackUrl}) async {
+  Future<bool> downloadFile(String path, String url,
+      {String? fallbackUrl}) async {
     Dio dio = Dio();
     cancelToken = CancelToken();
     try {
@@ -59,8 +60,7 @@ extension DownloadExtension on TafsirCtrl {
   Future<void> _doDownload(Dio dio, String url, String path) async {
     await dio.download(url, path, onReceiveProgress: (rec, total) {
       progressString.value =
-          ((rec / (total == -1 ? 50000000 : total)) * 100)
-              .toStringAsFixed(0);
+          ((rec / (total == -1 ? 50000000 : total)) * 100).toStringAsFixed(0);
       progress.value =
           (rec / (total == -1 ? (total == -1 ? 50000000 : total) : total))
               .toDouble();

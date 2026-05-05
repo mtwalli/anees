@@ -252,6 +252,16 @@ class _MenuBottomSheet extends StatelessWidget {
     final Color textColor = style.textColor ?? AppColors.getTextColor(isDark);
     final Color accentColor =
         style.accentColor ?? Theme.of(context).colorScheme.primary;
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final Color tabBgColor = style.accentColor != null
+        ? accentColor.withValues(alpha: 0.1)
+        : scheme.surfaceContainerLow;
+    final Color indicatorColor = style.accentColor != null
+        ? accentColor.withValues(alpha: 0.2)
+        : scheme.primaryContainer;
+    final Color selectedLabelColor =
+        style.accentColor ?? scheme.onPrimaryContainer;
+    final Color unselectedLabelColor = scheme.onSurfaceVariant;
 
     return DefaultTabController(
       length: isSingleSurah ? 2 : 3,
@@ -277,35 +287,42 @@ class _MenuBottomSheet extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              Container(
+              SizedBox(
                 height: 40,
-                decoration: BoxDecoration(
-                  color: accentColor.withValues(alpha: 0.06),
+                child: Material(
+                  color: tabBgColor,
                   borderRadius: BorderRadius.circular(12),
-                ),
-                child: TabBar(
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  indicator: BoxDecoration(
-                    color: accentColor,
-                    borderRadius: BorderRadius.circular(10),
+                  child: TabBar(
+                    automaticIndicatorColorAdjustment: false,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicator: BoxDecoration(
+                      color: indicatorColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    indicatorPadding:
+                        style.indicatorPadding ?? const EdgeInsets.all(4),
+                    padding: EdgeInsets.zero,
+                    labelColor: selectedLabelColor,
+                    unselectedLabelColor: unselectedLabelColor,
+                    indicatorColor: indicatorColor,
+                    indicatorWeight: .5,
+                    labelStyle: QuranLibrary().cairoStyle.copyWith(
+                        fontSize: 15, fontWeight: FontWeight.w700, height: 1.3),
+                    unselectedLabelStyle:
+                        QuranLibrary().cairoStyle.copyWith(fontSize: 15),
+                    tabs: [
+                      if (!isSingleSurah)
+                        Tab(
+                            text: style.tabIndexLabel ??
+                                QuranLocalizations.of(context).tabIndex),
+                      Tab(
+                          text: style.tabSearchLabel ??
+                              QuranLocalizations.of(context).tabSearch),
+                      Tab(
+                          text: style.tabBookmarksLabel ??
+                              QuranLocalizations.of(context).tabBookmarks),
+                    ],
                   ),
-                  indicatorPadding:
-                      style.indicatorPadding ?? const EdgeInsets.all(4),
-                  padding: EdgeInsets.zero,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: textColor.withValues(alpha: 0.6),
-                  indicatorColor: accentColor,
-                  indicatorWeight: .5,
-                  labelStyle: QuranLibrary().cairoStyle.copyWith(
-                      fontSize: 15, fontWeight: FontWeight.w700, height: 1.3),
-                  unselectedLabelStyle:
-                      QuranLibrary().cairoStyle.copyWith(fontSize: 15),
-                  tabs: [
-                    if (!isSingleSurah)
-                      Tab(text: style.tabIndexLabel ?? QuranLocalizations.of(context).tabIndex),
-                    Tab(text: style.tabSearchLabel ?? QuranLocalizations.of(context).tabSearch),
-                    Tab(text: style.tabBookmarksLabel ?? QuranLocalizations.of(context).tabBookmarks),
-                  ],
                 ),
               ),
               const SizedBox(height: 4),

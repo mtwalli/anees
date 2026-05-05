@@ -48,7 +48,8 @@ class FontsDownloadWidget extends StatelessWidget {
         children: [
           HeaderDialogWidget(
             isDark: isDark,
-            title: downloadFontsDialogStyle?.headerTitle ?? QuranLocalizations.of(context).fontsLabel,
+            title: downloadFontsDialogStyle?.headerTitle ??
+                QuranLocalizations.of(context).fontsLabel,
             titleColor: downloadFontsDialogStyle?.titleColor,
             closeIconColor: downloadFontsDialogStyle?.closeIconColor,
             backgroundGradient: downloadFontsDialogStyle?.backgroundGradient,
@@ -128,8 +129,8 @@ class TajweedButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final fontsSelected = QuranCtrl.instance.state.fontsSelected.value == 0;
     final isTajweed = QuranCtrl.instance.state.isTajweedEnabled.value == true;
-    String tajweedNames =
-        downloadFontsDialogStyle?.tajweedOptionNames ?? QuranLocalizations.of(context).tajweedOption;
+    String tajweedNames = downloadFontsDialogStyle?.tajweedOptionNames ??
+        QuranLocalizations.of(context).tajweedOption;
     return AnimatedSize(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
@@ -424,6 +425,8 @@ class _FontsRecitationTile extends StatelessWidget {
       return style!.downloadedFontsText!;
     }
 
-    return languageCode == 'ar' ? recitation.arabicName : recitation.englishName;
+    return languageCode == 'ar'
+        ? recitation.arabicName
+        : recitation.englishName;
   }
 }

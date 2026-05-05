@@ -197,7 +197,8 @@ class QuranTopBarStyle {
       iconColor: null, // will fallback to textColor
       fontsDialogTitle: QuranLocalizations.of(context).fontsLabel,
       fontsDialogNotes: QuranLocalizations.of(context).fontsDialogNotes,
-      fontsDialogDownloadingText: QuranLocalizations.of(context).fontsDownloadingText,
+      fontsDialogDownloadingText:
+          QuranLocalizations.of(context).fontsDownloadingText,
       tabIndexLabel: QuranLocalizations.of(context).tabIndex,
       tabSearchLabel: QuranLocalizations.of(context).tabSearch,
       tabBookmarksLabel: QuranLocalizations.of(context).tabBookmarks,

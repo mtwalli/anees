@@ -53,8 +53,10 @@ extension SurahUi on AudioCtrl {
         await state.audioPlayer.play();
       }
     } else {
-      ToastUtils().showToast(context,
-          style?.noInternetConnectionText ?? QuranLocalizations.of(context).noInternetText);
+      ToastUtils().showToast(
+          context,
+          style?.noInternetConnectionText ??
+              QuranLocalizations.of(context).noInternetText);
     }
   }
 
@@ -137,8 +139,10 @@ extension SurahUi on AudioCtrl {
       await state.audioPlayer.play();
       state.isSheetOpen.value = true;
     } else {
-      ToastUtils().showToast(context,
-          style?.noInternetConnectionText ?? QuranLocalizations.of(context).noInternetText);
+      ToastUtils().showToast(
+          context,
+          style?.noInternetConnectionText ??
+              QuranLocalizations.of(context).noInternetText);
     }
   }
 }

@@ -239,7 +239,9 @@ class AyahAudioStyle {
       // شريط التقدم
       seekBarThumbColor: primary,
       seekBarActiveTrackColor: primary,
-      seekBarInactiveTrackColor: isDark ? Colors.white24 : Colors.black12,
+      seekBarInactiveTrackColor: isDark
+          ? scheme.onSurface.withValues(alpha: 0.12)
+          : scheme.onSurface.withValues(alpha: 0.08),
       seekBarHorizontalPadding: 32.0,
       seekBarTimeContainerColor: primary,
 
@@ -249,15 +251,16 @@ class AyahAudioStyle {
       readerNameInItemColor: onBg,
 
       // التبويبات
-      tabIndicatorColor: primary,
-      tabLabelColor: primary,
-      tabUnselectedLabelColor: onBg,
+      tabIndicatorColor: scheme.primaryContainer,
+      tabLabelColor: scheme.onPrimaryContainer,
+      tabUnselectedLabelColor: scheme.onSurfaceVariant,
       tabLabelStyle: QuranLibrary().cairoStyle.copyWith(
             fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
       readersTabText: QuranLocalizations.of(context).readersTab,
-      downloadedSurahsTabText: QuranLocalizations.of(context).downloadedSurahsTab,
+      downloadedSurahsTabText:
+          QuranLocalizations.of(context).downloadedSurahsTab,
       dialogHeaderTitle: QuranLocalizations.of(context).changeReaderLabel,
       noInternetConnectionText: QuranLocalizations.of(context).noInternetText,
       headerDialogTitleStyle: null,

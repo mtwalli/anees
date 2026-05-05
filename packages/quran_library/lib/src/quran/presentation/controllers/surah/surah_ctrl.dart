@@ -173,7 +173,8 @@ class SurahCtrl extends GetxController {
   String getSurahName({BuildContext? context}) {
     return currentSurah.value?.arabicName ??
         (context != null
-            ? QuranLocalizations.of(context).surahFallbackName(_surahNumber.toString())
+            ? QuranLocalizations.of(context)
+                .surahFallbackName(_surahNumber.toString())
             : 'السورة $_surahNumber');
   }
 

@@ -158,8 +158,8 @@ class AudioCtrl extends GetxController {
       );
       if (Get.context != null) {
         // تنبيه ودّي للمستخدم النهائي بدون تفاصيل تقنية
-        ToastUtils().showToast(
-            Get.context!, QuranLocalizations.of(Get.context!).audioServiceInitError);
+        ToastUtils().showToast(Get.context!,
+            QuranLocalizations.of(Get.context!).audioServiceInitError);
       }
       // علّم الحالة ليتصرّف المشغّل دون تكامل النظام
       state.audioServiceInitialized.value = false;
@@ -209,7 +209,8 @@ class AudioCtrl extends GetxController {
     } else {
       if (!isConnected) {
         if (Get.context != null) {
-          ToastUtils().showToast(Get.context!, QuranLocalizations.of(Get.context!).noInternetText);
+          ToastUtils().showToast(
+              Get.context!, QuranLocalizations.of(Get.context!).noInternetText);
         }
       } else {
         state.isPlaying.value = true;
@@ -259,11 +260,12 @@ class AudioCtrl extends GetxController {
       if (context!.mounted) {
         if (showSnakbars && !state.snackBarShownForBatch) {
           if (!isConnected) {
-            ToastUtils().showToast(context, QuranLocalizations.of(context).noInternetText);
+            ToastUtils().showToast(
+                context, QuranLocalizations.of(context).noInternetText);
           } else if (isPhoneData) {
             state.snackBarShownForBatch = true; // Set the flag to true
-            ToastUtils()
-                .showToast(context, QuranLocalizations.of(context).mobileDataWarning);
+            ToastUtils().showToast(
+                context, QuranLocalizations.of(context).mobileDataWarning);
           }
         }
       }
@@ -280,7 +282,8 @@ class AudioCtrl extends GetxController {
         }
       } else {
         if (context.mounted) {
-          ToastUtils().showToast(context, QuranLocalizations.of(context).noInternetText);
+          ToastUtils().showToast(
+              context, QuranLocalizations.of(context).noInternetText);
         }
       }
     }

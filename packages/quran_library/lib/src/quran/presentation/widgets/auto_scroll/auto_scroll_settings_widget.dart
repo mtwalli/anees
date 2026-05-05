@@ -26,12 +26,18 @@ class AutoScrollSettingsWidget extends StatelessWidget {
     final style = autoScrollStyle ?? AutoScrollTheme.of(context)?.style;
 
     // ─── Resolve texts ──────────────────────────────────────────
-    final titleText = style?.settingsTitleText ?? QuranLocalizations.of(context).autoScrollTitle;
-    final stopLabel = style?.stopConditionLabelText ?? QuranLocalizations.of(context).stopAtLabel;
-    final pageCountLabel = style?.pageCountLabelText ?? QuranLocalizations.of(context).pageCountLabel;
-    final speedLabel = style?.speedLabelText ?? QuranLocalizations.of(context).speedLabel;
-    final slowText = style?.slowLabelText ?? QuranLocalizations.of(context).slowLabel;
-    final fastText = style?.fastLabelText ?? QuranLocalizations.of(context).fastLabel;
+    final titleText = style?.settingsTitleText ??
+        QuranLocalizations.of(context).autoScrollTitle;
+    final stopLabel = style?.stopConditionLabelText ??
+        QuranLocalizations.of(context).stopAtLabel;
+    final pageCountLabel = style?.pageCountLabelText ??
+        QuranLocalizations.of(context).pageCountLabel;
+    final speedLabel =
+        style?.speedLabelText ?? QuranLocalizations.of(context).speedLabel;
+    final slowText =
+        style?.slowLabelText ?? QuranLocalizations.of(context).slowLabel;
+    final fastText =
+        style?.fastLabelText ?? QuranLocalizations.of(context).fastLabel;
     final notesText =
         style?.notesLabelText ?? QuranLocalizations.of(context).autoScrollNotes;
 
@@ -121,8 +127,8 @@ class AutoScrollSettingsWidget extends StatelessWidget {
               runSpacing: 4,
               children: AutoScrollStopCondition.values.map((condition) {
                 final isSelected = selectedCondition == condition;
-                final chipLabel =
-                    style?.stopConditionLabels?[condition] ?? condition.label(context);
+                final chipLabel = style?.stopConditionLabels?[condition] ??
+                    condition.label(context);
                 final chipStyle = style?.chipTextStyle != null
                     ? style!.chipTextStyle!.copyWith(
                         color: isSelected

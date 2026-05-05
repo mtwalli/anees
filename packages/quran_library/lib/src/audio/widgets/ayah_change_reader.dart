@@ -13,35 +13,44 @@ class AyahChangeReader extends StatelessWidget {
     final AyahAudioStyle effectiveStyle =
         style ?? AyahAudioStyle.defaults(isDark: dark, context: context);
 
-    return GestureDetector(
-      onTap: () => showDialog(
-        context: context,
-        builder: (context) => Dialog(
-          backgroundColor: effectiveStyle.dialogBackgroundColor ??
-              AppColors.getBackgroundColor(dark),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                effectiveStyle.dialogBorderRadius ?? 16.0),
-          ),
-          insetPadding:
-              const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: effectiveStyle.dialogHeight ??
-                  MediaQuery.of(context).size.height * 0.7,
-              maxWidth: effectiveStyle.dialogWidth ??
-                  MediaQuery.of(context).size.width,
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: () => showDialog(
+          context: context,
+          builder: (context) => Dialog(
+            backgroundColor: effectiveStyle.dialogBackgroundColor ??
+                AppColors.getBackgroundColor(dark),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  effectiveStyle.dialogBorderRadius ?? 16.0),
             ),
-            child: _buildDialog(context, effectiveStyle, dark),
+            insetPadding:
+                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: effectiveStyle.dialogHeight ??
+                    MediaQuery.of(context).size.height * 0.7,
+                maxWidth: effectiveStyle.dialogWidth ??
+                    MediaQuery.of(context).size.width,
+              ),
+              child: _buildDialog(context, effectiveStyle, dark),
+            ),
           ),
         ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          child: _buildTitle(effectiveStyle, dark),
+        ),
       ),
-      child: _buildTitle(effectiveStyle, dark),
     );
   }
 
   Widget _buildDialog(
       BuildContext context, AyahAudioStyle effectiveStyle, bool dark) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
     final Color activeColor = effectiveStyle.dialogSelectedReaderColor!;
     final Color inactiveColor = effectiveStyle.dialogUnSelectedReaderColor!;
     final double itemFontSize = effectiveStyle.readerNameInItemFontSize!;
@@ -57,7 +66,8 @@ class AyahChangeReader extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: HeaderDialogWidget(
-            title: effectiveStyle.dialogHeaderTitle ?? QuranLocalizations.of(context).changeReaderLabel,
+            title: effectiveStyle.dialogHeaderTitle ??
+                QuranLocalizations.of(context).changeReaderLabel,
             isDark: dark,
             titleColor: effectiveStyle.dialogHeaderTitleColor,
             backgroundGradient: effectiveStyle.dialogHeaderBackgroundGradient,
@@ -76,18 +86,31 @@ class AyahChangeReader extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: TabBar(
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    indicatorColor: effectiveStyle.tabIndicatorColor!,
-                    labelColor: effectiveStyle.tabLabelColor!,
-                    unselectedLabelColor:
-                        effectiveStyle.tabUnselectedLabelColor!,
-                    labelStyle: effectiveStyle.tabLabelStyle!,
-                    tabs: [
-                      Tab(text: effectiveStyle.readersTabText!),
-                      if (!kIsWeb)
-                        Tab(text: effectiveStyle.downloadedSurahsTabText!),
-                    ],
+                  child: Material(
+                    color: scheme.surfaceContainerLow,
+                    borderRadius: BorderRadius.circular(10),
+                    child: TabBar(
+                      automaticIndicatorColorAdjustment: false,
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      indicatorPadding: const EdgeInsets.all(4),
+                      dividerColor: Colors.transparent,
+                      indicator: BoxDecoration(
+                        color: effectiveStyle.tabIndicatorColor ??
+                            scheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      labelColor: effectiveStyle.tabLabelColor ??
+                          scheme.onPrimaryContainer,
+                      unselectedLabelColor:
+                          effectiveStyle.tabUnselectedLabelColor ??
+                              scheme.onSurfaceVariant,
+                      labelStyle: effectiveStyle.tabLabelStyle!,
+                      tabs: [
+                        Tab(text: effectiveStyle.readersTabText!),
+                        if (!kIsWeb)
+                          Tab(text: effectiveStyle.downloadedSurahsTabText!),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
@@ -217,7 +240,7 @@ class ReaderListBuild extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 1.0),
           child: ListTile(
-            minTileHeight: 44,
+            minTileHeight: 48,
             dense: true,
             focusColor: itemColor.withValues(alpha: 0.12),
             splashColor: itemColor.withValues(alpha: 0.12),

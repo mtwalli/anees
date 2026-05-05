@@ -62,8 +62,10 @@ extension SurahCtrlExtension on AudioCtrl {
       state.isPlaying.value = true;
       await state.audioPlayer.play();
     } else if (!isConnected) {
-      ToastUtils().showToast(context,
-          style?.noInternetConnectionText ?? QuranLocalizations.of(context).noInternetText);
+      ToastUtils().showToast(
+          context,
+          style?.noInternetConnectionText ??
+              QuranLocalizations.of(context).noInternetText);
     } else {
       // التحقق من إمكانية التشغيل / Check if playback is allowed
       if (!await canPlayAudio()) {

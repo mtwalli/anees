@@ -106,7 +106,7 @@ extension SurahInfoExtension on void {
           width: width,
           decoration: BoxDecoration(
             color: surahStyle?.backgroundColor ??
-                (isDark ? const Color(0xff232323) : Colors.white),
+                Theme.of(validContext!).colorScheme.surface,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(18),
               topRight: Radius.circular(18),
@@ -127,7 +127,7 @@ extension SurahInfoExtension on void {
                 height: 5,
                 margin: const EdgeInsets.only(top: 12, bottom: 8),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade500,
+                  color: Theme.of(modalContext).colorScheme.outlineVariant,
                   borderRadius: BorderRadius.circular(3),
                 ),
               ),
@@ -157,7 +157,7 @@ extension SurahInfoExtension on void {
                                 width: 50,
                                 colorFilter: ColorFilter.mode(
                                     surahStyle?.surahNumberDecorationColor ??
-                                        Colors.teal,
+                                        Theme.of(context).colorScheme.primary,
                                     BlendMode.srcIn),
                               ),
                               Transform.translate(
@@ -284,41 +284,39 @@ extension SurahInfoExtension on void {
                                 margin:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 decoration: BoxDecoration(
-                                    color: surahStyle?.primaryColor ??
+                                    color: surahStyle?.primaryColor
+                                            ?.withValues(alpha: 0.10) ??
                                         Theme.of(context)
                                             .colorScheme
-                                            .primary
-                                            .withValues(alpha: .10),
+                                            .surfaceContainerLow,
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(8)),
                                     border: Border.all(
                                       width: 1,
-                                      color: surahStyle?.primaryColor ??
+                                      color: surahStyle?.primaryColor
+                                              ?.withValues(alpha: 0.35) ??
                                           Theme.of(context)
                                               .colorScheme
-                                              .primary
-                                              .withValues(alpha: .30),
+                                              .outlineVariant,
                                     )),
                                 child: TabBar(
-                                  unselectedLabelColor: Colors.grey,
+                                  automaticIndicatorColorAdjustment: false,
+                                  unselectedLabelColor: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant,
                                   indicatorSize: TabBarIndicatorSize.tab,
                                   dividerColor: Colors.transparent,
                                   indicatorColor: surahStyle?.primaryColor ??
                                       Theme.of(context)
                                           .colorScheme
-                                          .primary
-                                          .withValues(alpha: .20),
+                                          .primaryContainer,
                                   indicatorWeight: 3,
                                   labelStyle: TextStyle(
-                                    color: surahStyle?.titleColor ??
-                                        AppColors.getTextColor(isDark),
                                     fontFamily: 'kufi',
                                     fontSize: 12,
                                     package: "quran_library",
                                   ),
                                   unselectedLabelStyle: TextStyle(
-                                    color: surahStyle?.titleColor ??
-                                        AppColors.getTextColor(isDark),
                                     fontFamily: 'kufi',
                                     fontSize: 12,
                                     package: "quran_library",
@@ -329,9 +327,12 @@ extension SurahInfoExtension on void {
                                     color: surahStyle?.indicatorColor ??
                                         Theme.of(context)
                                             .colorScheme
-                                            .primary
-                                            .withValues(alpha: .20),
+                                            .primaryContainer,
                                   ),
+                                  labelColor: surahStyle?.titleColor ??
+                                      Theme.of(context)
+                                          .colorScheme
+                                          .onPrimaryContainer,
                                   tabs: [
                                     Tab(
                                         text: surahStyle?.firstTabText ??
@@ -354,23 +355,27 @@ extension SurahInfoExtension on void {
                                         padding: const EdgeInsets.all(16),
                                         decoration: BoxDecoration(
                                           color: surahStyle?.backgroundColor ??
-                                              (isDark
-                                                  ? const Color(0xff1E1E1E)
-                                                  : Colors.white),
+                                              Theme.of(modalContext)
+                                                  .colorScheme
+                                                  .surfaceContainerLow,
                                           borderRadius:
                                               BorderRadius.circular(16),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: Colors.grey
-                                                  .withValues(alpha: 0.10),
+                                              color: Theme.of(modalContext)
+                                                  .colorScheme
+                                                  .shadow
+                                                  .withValues(alpha: 0.08),
                                               blurRadius: 8,
                                               offset: const Offset(0, 0),
                                             ),
                                           ],
                                           border: Border.symmetric(
                                             horizontal: BorderSide(
-                                              color: Colors.grey
-                                                  .withValues(alpha: 0.18),
+                                              color: Theme.of(modalContext)
+                                                  .colorScheme
+                                                  .outlineVariant
+                                                  .withValues(alpha: 0.6),
                                               width: 1.2,
                                             ),
                                           ),
@@ -423,23 +428,27 @@ extension SurahInfoExtension on void {
                                         padding: const EdgeInsets.all(16),
                                         decoration: BoxDecoration(
                                           color: surahStyle?.backgroundColor ??
-                                              (isDark
-                                                  ? const Color(0xff1E1E1E)
-                                                  : Colors.white),
+                                              Theme.of(modalContext)
+                                                  .colorScheme
+                                                  .surfaceContainerLow,
                                           borderRadius:
                                               BorderRadius.circular(16),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: Colors.grey
-                                                  .withValues(alpha: 0.10),
+                                              color: Theme.of(modalContext)
+                                                  .colorScheme
+                                                  .shadow
+                                                  .withValues(alpha: 0.08),
                                               blurRadius: 8,
                                               offset: const Offset(0, 0),
                                             ),
                                           ],
                                           border: Border.symmetric(
                                             horizontal: BorderSide(
-                                              color: Colors.grey
-                                                  .withValues(alpha: 0.18),
+                                              color: Theme.of(modalContext)
+                                                  .colorScheme
+                                                  .outlineVariant
+                                                  .withValues(alpha: 0.6),
                                               width: 1.2,
                                             ),
                                           ),

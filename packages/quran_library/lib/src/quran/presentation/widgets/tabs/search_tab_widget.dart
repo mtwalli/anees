@@ -99,7 +99,8 @@ class _SearchTabState extends State<_SearchTab> {
                   color: textColor.withValues(
                       alpha: s.searchSuffixIconAlpha ?? 0.6),
                 ),
-                hintText: s.searchHintText ?? QuranLocalizations.of(context).searchHint,
+                hintText: s.searchHintText ??
+                    QuranLocalizations.of(context).searchHint,
                 hintStyle: s.searchHintStyle ??
                     QuranLibrary().cairoStyle.copyWith(
                         color: textColor.withValues(alpha: 0.6),
@@ -240,7 +241,10 @@ class _SearchTabState extends State<_SearchTab> {
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            QuranLocalizations.of(context).pageLabel(ayah.page.toString().convertNumbersAccordingToLang(languageCode: widget.languageCode)),
+                            QuranLocalizations.of(context).pageLabel(ayah.page
+                                .toString()
+                                .convertNumbersAccordingToLang(
+                                    languageCode: widget.languageCode)),
                             style: TextStyle(
                                 color: textColor.withValues(
                                     alpha: s.subtitleTextAlpha ?? 0.8)),

@@ -44,7 +44,10 @@ class DisplayModeBar extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: s.backgroundColor ??
-                    Colors.grey.shade200.withValues(alpha: .85),
+                    Theme.of(context)
+                        .colorScheme
+                        .surfaceContainerHigh
+                        .withValues(alpha: .85),
                 borderRadius: BorderRadius.circular(s.borderRadius ?? 16),
               ),
               padding: s.padding ??
@@ -84,31 +87,43 @@ class DisplayModeBar extends StatelessWidget {
       padding: EdgeInsets.symmetric(
         vertical: spacing,
       ),
-      child: GestureDetector(
-        onTap: onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: isSelected
-                ? (style.selectedBackgroundColor ??
-                    Theme.of(context).colorScheme.primary.withValues(alpha: .8))
-                : Colors.transparent,
-            borderRadius: BorderRadius.circular((style.borderRadius ?? 16) - 4),
-            border: !isSelected
-                ? Border.all(
-                    color: (style.selectedBackgroundColor ?? Colors.teal)
-                        .withValues(alpha: .5),
-                    width: 1,
-                  )
-                : null,
-          ),
-          child: Icon(
-            mode.icon,
-            size: iconSize,
-            color: isSelected
-                ? (style.selectedIconColor ?? Colors.white)
-                : (style.unselectedIconColor ?? Colors.grey.shade600),
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular((style.borderRadius ?? 16) - 4),
+        child: InkWell(
+          borderRadius: BorderRadius.circular((style.borderRadius ?? 16) - 4),
+          onTap: onTap,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? (style.selectedBackgroundColor ??
+                      Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withValues(alpha: .8))
+                  : Colors.transparent,
+              borderRadius:
+                  BorderRadius.circular((style.borderRadius ?? 16) - 4),
+              border: !isSelected
+                  ? Border.all(
+                      color: (style.selectedBackgroundColor ??
+                              Theme.of(context).colorScheme.primary)
+                          .withValues(alpha: .5),
+                      width: 1,
+                    )
+                  : null,
+            ),
+            child: Icon(
+              mode.icon,
+              size: iconSize,
+              color: isSelected
+                  ? (style.selectedIconColor ??
+                      Theme.of(context).colorScheme.onPrimary)
+                  : (style.unselectedIconColor ??
+                      Theme.of(context).colorScheme.onSurfaceVariant),
+            ),
           ),
         ),
       ),
@@ -119,11 +134,12 @@ class DisplayModeBar extends StatelessWidget {
         message: label,
         preferBelow: false,
         decoration: BoxDecoration(
-          color: style.tooltipBackgroundColor ?? Colors.grey.shade800,
+          color: style.tooltipBackgroundColor ??
+              Theme.of(context).colorScheme.inverseSurface,
           borderRadius: BorderRadius.circular(6),
         ),
-        textStyle:
-            style.tooltipTextStyle ?? const TextStyle(color: Colors.white),
+        textStyle: style.tooltipTextStyle ??
+            TextStyle(color: Theme.of(context).colorScheme.onInverseSurface),
         child: button,
       );
     }

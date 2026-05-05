@@ -293,7 +293,8 @@ extension AyahCtrlExtension on AudioCtrl {
       log('Error in ayahs playFile: $e', name: 'AudioController');
 
       // إظهار رسالة خطأ للمستخدم / Show error message to user
-      ToastUtils().showToast(context, QuranLocalizations.of(context).ayahPlayError(e.toString()));
+      ToastUtils().showToast(
+          context, QuranLocalizations.of(context).ayahPlayError(e.toString()));
     }
   }
 
@@ -684,7 +685,8 @@ extension AyahCtrlExtension on AudioCtrl {
         // محاولة إعلام المستخدم بتوست إن توفر سياق ممرّر أصلاً
         if (context != null) {
           try {
-            ToastUtils().showToast(context, QuranLocalizations.of(context).ayahDownloadManagerOpenError);
+            ToastUtils().showToast(context,
+                QuranLocalizations.of(context).ayahDownloadManagerOpenError);
           } catch (_) {}
         }
         return;

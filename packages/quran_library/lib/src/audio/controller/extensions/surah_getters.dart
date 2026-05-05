@@ -259,13 +259,9 @@ extension SurahGetters on AudioCtrl {
   String getAyahOrAyat(int ayahCount,
       {SurahAudioStyle? style, BuildContext? context}) {
     final singularText = style?.ayahSingularText ??
-        (context != null
-            ? QuranLocalizations.of(context).ayahSingular
-            : 'آية');
+        (context != null ? QuranLocalizations.of(context).ayahSingular : 'آية');
     final pluralText = style?.ayahPluralText ??
-        (context != null
-            ? QuranLocalizations.of(context).ayahPlural
-            : 'آيات');
+        (context != null ? QuranLocalizations.of(context).ayahPlural : 'آيات');
     return ayahCount > 10 ? singularText : pluralText;
   }
 }

@@ -101,7 +101,7 @@ class _QpcV4RichTextLineState extends State<QpcV4RichTextLine>
     // Cached per-ayah line fractions so we don't recompute on every position tick.
     int? cachedAyahUq;
     double lineStart = 0.0; // global progress at which this line starts filling
-    double lineEnd = 1.0;   // global progress at which this line is fully filled
+    double lineEnd = 1.0; // global progress at which this line is fully filled
 
     _positionSub = audioCtrl.positionDataStream.listen((data) {
       final playingUq = audioCtrl.state.currentAyahUniqueNumber.value;
@@ -550,8 +550,10 @@ class _AyahSelectionWidget extends SingleChildRenderObjectWidget {
   final List<_ColoredTextRange> bookmarkRanges;
   final TextSelection? wordSelectionRange;
   final Animation<double> highlightAnimation;
+
   /// أنيميشن الدخول عند انتقال التظليل لآية جديدة (0.0 → 1.0 مرة واحدة).
   final Animation<double> enterAnimation;
+
   /// تقدّم تشغيل الصوت (0.0–1.0). القيمة -1.0 تعني لا يوجد تشغيل نشط.
   final ValueNotifier<double> playbackProgressNotifier;
 
@@ -705,7 +707,8 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
       final progress = _playbackProgressNotifier.value;
       // 1) علامات مرجعية (أسفل طبقة)
       if (_bookmarkRanges.isNotEmpty) {
-        _paintColoredRanges(context, offset, _bookmarkRanges, animVal, enterVal);
+        _paintColoredRanges(
+            context, offset, _bookmarkRanges, animVal, enterVal);
       }
       // 2) تحديد الكلمة
       if (_wordSelectionRange != null) {
@@ -721,7 +724,8 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
       }
       // 3) تحديد الآية (أعلى طبقة) — مع تأثير شريط التقدّم عند التشغيل
       if (_selectedRanges.isNotEmpty) {
-        _paintSelectionBackgrounds(context, offset, animVal, enterVal, progress);
+        _paintSelectionBackgrounds(
+            context, offset, animVal, enterVal, progress);
       }
     }
     super.paint(context, offset);
@@ -730,9 +734,8 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
   /// رسم خلفيات التحديد خلف الآيات المحدّدة.
   void _paintSelectionBackgrounds(PaintingContext context, Offset offset,
       double animVal, double enterVal, double progress) {
-    _paintMergedBoxes(
-        child! as RenderParagraph, context, offset, _selectedRanges,
-        _selectionColor, animVal, enterVal,
+    _paintMergedBoxes(child! as RenderParagraph, context, offset,
+        _selectedRanges, _selectionColor, animVal, enterVal,
         playbackProgress: progress);
   }
 

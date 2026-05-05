@@ -555,7 +555,7 @@ class SurahDisplayScreen extends StatelessWidget {
                 showAyahBookmarkedIcon: showAyahBookmarkedIcon,
                 onAyahLongPress: onAyahLongPress,
                 bookmarksColor: bookmarksColor,
-                                  customBookmarksColor: customBookmarksColor,
+                customBookmarksColor: customBookmarksColor,
                 surahNameStyle: surahNameStyle,
                 bannerStyle: bannerStyle,
                 basmalaStyle: basmalaStyle,

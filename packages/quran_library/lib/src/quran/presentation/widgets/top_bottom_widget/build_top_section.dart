@@ -35,7 +35,8 @@ class BuildTopSection extends StatelessWidget {
     final Widget? effectiveTopTitleChild =
         topBottomStyle.customChildBuilder?.call(context, pageIndex) ??
             topBottomStyle.customChild;
-    final String effectiveJuzName = (topBottomStyle.juzName) ?? QuranLocalizations.of(context).juzLabel;
+    final String effectiveJuzName =
+        (topBottomStyle.juzName) ?? QuranLocalizations.of(context).juzLabel;
     // final String? effectiveSurahName = topBottomStyle.surahName;
 
     return Padding(

@@ -35,7 +35,8 @@ class _TajweedAyaTab extends StatelessWidget {
     if (surahNumber == 0) {
       return Center(
         child: Text(
-          tafsirStyle.tajweedSurahNumberErrorText ?? QuranLocalizations.of(context).tajweedSurahError,
+          tafsirStyle.tajweedSurahNumberErrorText ??
+              QuranLocalizations.of(context).tajweedSurahError,
           style: tafsirStyle.tajweedStatusTextStyle ??
               TextStyle(
                 fontSize: 14,
@@ -127,8 +128,11 @@ class _TajweedAyaTab extends StatelessWidget {
                           Text(
                             isDownloading
                                 ? (tafsirStyle.tajweedDownloadingText ??
-                                    QuranLocalizations.of(context).tajweedDownloading)
-                                : (tafsirStyle.tajweedDownloadText ?? QuranLocalizations.of(context).tajweedDownload),
+                                    QuranLocalizations.of(context)
+                                        .tajweedDownloading)
+                                : (tafsirStyle.tajweedDownloadText ??
+                                    QuranLocalizations.of(context)
+                                        .tajweedDownload),
                             style: tafsirStyle.tajweedButtonTextStyle ??
                                 TextStyle(
                                   fontSize: 16,

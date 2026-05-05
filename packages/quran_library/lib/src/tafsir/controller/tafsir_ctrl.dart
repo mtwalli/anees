@@ -150,7 +150,8 @@ class TafsirCtrl extends GetxController {
     return _decodeBytesToText(Uint8List.fromList(data));
   }
 
-  Future<String> _getRemoteTextWithFallback(String url, String fallbackUrl) async {
+  Future<String> _getRemoteTextWithFallback(
+      String url, String fallbackUrl) async {
     try {
       return await _getRemoteText(url);
     } catch (_) {
@@ -241,8 +242,7 @@ class TafsirCtrl extends GetxController {
           );
         } else {
           if (kIsWeb) {
-            final url =
-                '$_ghTafsirAndTranslate/${selectedTafsir.databaseName}';
+            final url = '$_ghTafsirAndTranslate/${selectedTafsir.databaseName}';
             final urlGl =
                 '$_glTafsirAndTranslate/${selectedTafsir.databaseName}';
             jsonString = await _getRemoteTextWithFallback(url, urlGl);
@@ -311,10 +311,8 @@ class TafsirCtrl extends GetxController {
           fallbackPlainAssetPath: 'packages/quran_library/assets/en.json',
         );
       } else if (kIsWeb) {
-        final url =
-            '$_ghTafsirAndTranslate/$translationLangCode.json.gz';
-        final urlGl =
-            '$_glTafsirAndTranslate/$translationLangCode.json.gz';
+        final url = '$_ghTafsirAndTranslate/$translationLangCode.json.gz';
+        final urlGl = '$_glTafsirAndTranslate/$translationLangCode.json.gz';
         jsonString = await _getRemoteTextWithFallback(url, urlGl);
       } else {
         final String path = join(_appDir.path, '$translationLangCode.json');
@@ -496,7 +494,8 @@ class TafsirCtrl extends GetxController {
 
     if (!onDownloading.value) {
       onDownloading.value = true;
-      await downloadFile(path, fileUrl, fallbackUrl: fallbackUrl).then((_) async {
+      await downloadFile(path, fileUrl, fallbackUrl: fallbackUrl)
+          .then((_) async {
         log('Download completed for $path', name: 'TafsirCtrl');
         _onDownloadSuccess(i);
         await _saveTafsirDownloadIndex(i);

@@ -13,44 +13,62 @@ class _IndexTab extends StatelessWidget {
     final hizbList = QuranLibrary.allHizb;
     final surahs = QuranLibrary.getAllSurahs(isArabic: false);
 
-    final Color textColor = style.textColor ?? AppColors.getTextColor(isDark);
     final Color accentColor =
         style.accentColor ?? Theme.of(context).colorScheme.primary;
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final Color tabBarBgColor = style.accentColor != null
+        ? accentColor.withValues(alpha: 0.1)
+        : scheme.surfaceContainerLow;
+    final Color indicatorColor = style.accentColor != null
+        ? accentColor.withValues(alpha: 0.2)
+        : scheme.primaryContainer;
+    final Color selectedLabelColor = style.labelColor ??
+        (style.accentColor != null ? accentColor : scheme.onPrimaryContainer);
+    final Color unselectedLabelColor =
+        style.unselectedLabelColor ?? scheme.onSurfaceVariant;
+    final TextStyle selectedLabelStyle = (style.labelStyle ??
+            QuranLibrary().cairoStyle.copyWith(
+                fontSize: 13, fontWeight: FontWeight.w700, height: 1.3))
+        .copyWith(color: selectedLabelColor);
+    final TextStyle unselectedStyle = (style.unselectedLabelStyle ??
+            QuranLibrary().cairoStyle.copyWith(fontSize: 13))
+        .copyWith(color: unselectedLabelColor);
 
     return DefaultTabController(
       length: 2,
       child: Column(
         children: [
-          Container(
-            height: style.tabBarHeight ?? 35,
-            decoration: BoxDecoration(
-              color: accentColor.withValues(alpha: style.tabBarBgAlpha ?? 0.06),
-              borderRadius:
-                  BorderRadius.circular((style.tabBarRadius ?? 12).toDouble()),
-            ),
+          Material(
+            color: tabBarBgColor,
+            borderRadius:
+                BorderRadius.circular((style.tabBarRadius ?? 12).toDouble()),
             child: TabBar(
+              automaticIndicatorColorAdjustment: false,
+              dividerColor: scheme.outlineVariant.withValues(alpha: 0.6),
               indicatorSize: TabBarIndicatorSize.tab,
               indicator: BoxDecoration(
-                color: accentColor,
+                color: indicatorColor,
                 borderRadius: BorderRadius.circular(
                     (style.indicatorRadius ?? 10).toDouble()),
               ),
               indicatorPadding:
                   style.indicatorPadding ?? const EdgeInsets.all(4),
+              splashBorderRadius: BorderRadius.circular(
+                  (style.indicatorRadius ?? 10).toDouble()),
               padding: EdgeInsets.zero,
-              labelColor: style.labelColor ?? Colors.white,
-              unselectedLabelColor: style.unselectedLabelColor ??
-                  textColor.withValues(alpha: 0.6),
-              indicatorColor: accentColor,
+              labelColor: selectedLabelColor,
+              unselectedLabelColor: unselectedLabelColor,
+              indicatorColor: indicatorColor,
               indicatorWeight: .5,
-              labelStyle: style.labelStyle ??
-                  QuranLibrary().cairoStyle.copyWith(
-                      fontSize: 13, fontWeight: FontWeight.w700, height: 1.3),
-              unselectedLabelStyle: style.unselectedLabelStyle ??
-                  QuranLibrary().cairoStyle.copyWith(fontSize: 13),
+              labelStyle: selectedLabelStyle,
+              unselectedLabelStyle: unselectedStyle,
               tabs: [
-                Tab(text: style.tabSurahsLabel ?? QuranLocalizations.of(context).tabSurahs),
-                Tab(text: style.tabJozzLabel ?? QuranLocalizations.of(context).tabJuz),
+                Tab(
+                    text: style.tabSurahsLabel ??
+                        QuranLocalizations.of(context).tabSurahs),
+                Tab(
+                    text: style.tabJozzLabel ??
+                        QuranLocalizations.of(context).tabJuz),
               ],
             ),
           ),
@@ -113,8 +131,7 @@ class _SurahsList extends StatelessWidget {
     });
 
     final Color textColor = style.textColor ?? AppColors.getTextColor(isDark);
-    final Color accentColor =
-        style.accentColor ?? Theme.of(context).colorScheme.primary;
+    final ColorScheme scheme = Theme.of(context).colorScheme;
     return ListView.builder(
       controller: scrollCtrl,
       itemCount: surahs.length,
@@ -123,6 +140,8 @@ class _SurahsList extends StatelessWidget {
         return Material(
           color: Colors.transparent,
           child: InkWell(
+            borderRadius:
+                BorderRadius.circular((style.listItemRadius ?? 8).toDouble()),
             onTap: () {
               Navigator.pop(context);
               QuranLibrary().jumpToSurah(index + 1);
@@ -133,13 +152,18 @@ class _SurahsList extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 2.0),
               decoration: BoxDecoration(
                 color: isCurrent
-                    ? accentColor.withValues(alpha: 0.15)
+                    ? scheme.secondaryContainer.withValues(alpha: 0.6)
                     : (index.isEven
-                        ? accentColor.withValues(
-                            alpha: (style.surahRowAltBgAlpha ?? 0.1))
+                        ? scheme.surfaceContainerLow
                         : Colors.transparent),
                 borderRadius: BorderRadius.circular(
                     (style.listItemRadius ?? 8).toDouble()),
+                border: Border.all(
+                  color: isCurrent
+                      ? scheme.secondary
+                      : scheme.outlineVariant.withValues(alpha: 0.5),
+                  width: 1,
+                ),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -240,8 +264,7 @@ class _JozzList extends StatelessWidget {
     });
 
     final Color textColor = style.textColor ?? AppColors.getTextColor(isDark);
-    final Color accentColor =
-        style.accentColor ?? Theme.of(context).colorScheme.primary;
+    final ColorScheme scheme = Theme.of(context).colorScheme;
     return ListView.builder(
       controller: jozzScrollCtrl,
       itemCount: jozzList.length,
@@ -249,10 +272,14 @@ class _JozzList extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 2.0),
         decoration: BoxDecoration(
           color: jozzIndex.isEven
-              ? accentColor.withValues(alpha: (style.jozzAltBgAlpha ?? 0.1))
+              ? scheme.surfaceContainerLow
               : Colors.transparent,
           borderRadius:
               BorderRadius.circular((style.listItemRadius ?? 8).toDouble()),
+          border: Border.all(
+            color: scheme.outlineVariant.withValues(alpha: 0.5),
+            width: 1,
+          ),
         ),
         child: ExpansionTile(
           initiallyExpanded: currentJozzIndex == jozzIndex,
@@ -298,8 +325,7 @@ class _JozzList extends StatelessWidget {
                       horizontal: 16.0, vertical: 2.0),
                   decoration: BoxDecoration(
                     color: index.isEven
-                        ? accentColor.withValues(
-                            alpha: (style.hizbItemAltBgAlpha ?? 0.05))
+                        ? scheme.surfaceContainerHighest.withValues(alpha: 0.5)
                         : Colors.transparent,
                     borderRadius: BorderRadius.circular(4),
                   ),
