@@ -117,11 +117,10 @@ TextSpan _qpcV4SpanSegment({
       longHoldDuration: const Duration(milliseconds: 500),
     )
       ..onQuickTapCallback = onPagePress
-      ..onShortHoldStartCallback = () {
-        wordInfoCtrl.setSelectedWord(wordRef);
-      }
+      ..onShortHoldStartCallback = null
       ..onShortHoldCompleteCallback = () {
         () async {
+          wordInfoCtrl.setSelectedWord(wordRef);
           if (!context.mounted) return;
           await showWordInfoBottomSheet(
               context: context, ref: wordRef, isDark: isDark);
@@ -130,7 +129,6 @@ TextSpan _qpcV4SpanSegment({
         }();
       }
       ..onLongHoldStartCallback = (details) {
-        wordInfoCtrl.clearSelectedWord();
         onLongPressStart?.call(details);
       };
   }

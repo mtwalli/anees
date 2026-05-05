@@ -51,6 +51,7 @@ class DownloadButtonWidget extends StatelessWidget {
               isVisible: isVisible,
               progress: progress,
               downloading: downloading,
+              preparing: preparing,
               background: background,
               valueColor: valueColor,
             ),
@@ -75,6 +76,7 @@ class _DownloadProgressBackground extends StatelessWidget {
   final bool isVisible;
   final double progress;
   final bool downloading;
+  final bool preparing;
   final Color background;
   final Color valueColor;
 
@@ -82,6 +84,7 @@ class _DownloadProgressBackground extends StatelessWidget {
     required this.isVisible,
     required this.progress,
     required this.downloading,
+    required this.preparing,
     required this.background,
     required this.valueColor,
   });
@@ -93,24 +96,36 @@ class _DownloadProgressBackground extends StatelessWidget {
     const double buttonHeight = 55;
     const double radius = 8;
 
+    // مؤشر لا نهائي فقط أثناء مرحلة التحضير (قبل وصول أي بيانات).
+    // في كل الأحوال الأخرى نعرض شريط محدد القيمة.
+    final bool indeterminate = preparing && progress == 0.0;
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(radius),
       child: SizedBox(
         width: double.infinity,
         height: buttonHeight,
-        child: TweenAnimationBuilder<double>(
-          tween: Tween<double>(begin: 0.0, end: progress),
-          duration: const Duration(milliseconds: 1000),
-          curve: Curves.fastEaseInToSlowEaseOut,
-          builder: (context, value, child) => LinearProgressIndicator(
-            minHeight: buttonHeight,
-            value: downloading ? (value / 100).clamp(0.0, 1.0) : null,
-            backgroundColor: background,
-            valueColor: AlwaysStoppedAnimation<Color>(
-              valueColor.withValues(alpha: .25),
-            ),
-          ),
-        ),
+        child: indeterminate
+            ? LinearProgressIndicator(
+                minHeight: buttonHeight,
+                backgroundColor: background,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  valueColor.withValues(alpha: .25),
+                ),
+              )
+            : TweenAnimationBuilder<double>(
+                tween: Tween<double>(begin: 0.0, end: progress),
+                duration: const Duration(milliseconds: 1000),
+                curve: Curves.fastEaseInToSlowEaseOut,
+                builder: (context, value, child) => LinearProgressIndicator(
+                  minHeight: buttonHeight,
+                  value: (value / 100).clamp(0.0, 1.0),
+                  backgroundColor: background,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    valueColor.withValues(alpha: .25),
+                  ),
+                ),
+              ),
       ),
     );
   }
