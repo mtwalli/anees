@@ -272,12 +272,12 @@ class AyahTafsirInlineStyle {
       fontSizeWidget: null,
       headerWidget: null,
       optionsBarWidget: null,
-      playIconData: Icons.play_arrow,
+      playIconData: Icons.play_arrow_rounded,
       playIconColor: scheme.primary,
       iconSize: 24,
-      playAllIconData: Icons.playlist_play,
+      playAllIconData: Icons.queue_music_rounded,
       playAllIconColor: scheme.primary,
-      copyIconData: Icons.copy_rounded,
+      copyIconData: Icons.copy_all_rounded,
       copyIconColor: scheme.primary,
       bookmarkColorCodes: const [
         0xAAFFD354,
@@ -285,7 +285,7 @@ class AyahTafsirInlineStyle {
         0xAA00CD00,
       ],
       iconHorizontalPadding: 4.0,
-      bookmarkIconData: Icons.bookmark,
+      bookmarkIconData: Icons.bookmark_rounded,
       tafsirBackgroundBorderRadius: 12.0,
     );
   }

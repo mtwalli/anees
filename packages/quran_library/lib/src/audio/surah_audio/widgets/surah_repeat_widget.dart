@@ -13,8 +13,8 @@ class SurahRepeatWidget extends StatelessWidget {
       builder: (context, snapshot) {
         final loopMode = snapshot.data ?? LoopMode.off;
         List<IconData> icons = [
-          Icons.repeat,
-          Icons.repeat,
+          Icons.repeat_rounded,
+          Icons.repeat_rounded,
         ];
         const cycleModes = [
           LoopMode.off,

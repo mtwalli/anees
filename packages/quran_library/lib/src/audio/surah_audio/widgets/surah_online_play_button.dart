@@ -88,7 +88,7 @@ class SurahOnlinePlayButton extends StatelessWidget {
                     enabled: true,
                     label: 'replaySurah'.tr,
                     child: Icon(
-                      Icons.replay,
+                      Icons.replay_rounded,
                       color: style?.playIconColor ??
                           Theme.of(context).colorScheme.primary,
                     )),

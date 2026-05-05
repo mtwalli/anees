@@ -153,7 +153,7 @@ class SurahChangeSurahReader extends StatelessWidget {
               enabled: true,
               label: 'Change Reader'.tr,
               child: Icon(
-                Icons.keyboard_arrow_down_outlined,
+                Icons.expand_more_rounded,
                 size: fontSize.clamp(16, 20),
                 color: s.playIconColor,
               ),
@@ -180,7 +180,7 @@ class _SelectionIndicator extends StatelessWidget {
       ),
       child: isSelected
           ? Icon(
-              Icons.done,
+              Icons.check_rounded,
               size: 14,
               color: color ?? Theme.of(context).colorScheme.primary,
             )

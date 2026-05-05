@@ -30,7 +30,7 @@ class JumpingPageControllerWidget extends StatelessWidget {
               backgroundColor:
                   backgroundColor ?? AppColors.getBackgroundColor(isDark),
               iconColor: textColor ?? AppColors.getTextColor(isDark),
-              iconData: Icons.arrow_back_ios_new,
+              iconData: Icons.arrow_back_rounded,
               onPressed: () {
                 final controller = quranCtrl.quranPagesController;
                 if (!controller.hasClients) return;
@@ -49,7 +49,7 @@ class JumpingPageControllerWidget extends StatelessWidget {
               backgroundColor:
                   backgroundColor ?? AppColors.getBackgroundColor(isDark),
               iconColor: textColor ?? AppColors.getTextColor(isDark),
-              iconData: Icons.arrow_forward_ios_outlined,
+              iconData: Icons.arrow_forward_rounded,
               onPressed: () {
                 final controller = quranCtrl.quranPagesController;
                 if (!controller.hasClients) return;

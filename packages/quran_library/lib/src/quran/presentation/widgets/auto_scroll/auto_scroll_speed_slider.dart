@@ -58,7 +58,7 @@ class AutoScrollSpeedSlider extends StatelessWidget {
               children: [
                 // زر إغلاق
                 _AutoScrollIconButton(
-                  icon: Icons.close,
+                  icon: Icons.close_rounded,
                   color: style.iconColor ?? AppColors.getTextColor(isDark),
                   onTap: () => autoScrollCtrl.stopAutoScroll(),
                 ),

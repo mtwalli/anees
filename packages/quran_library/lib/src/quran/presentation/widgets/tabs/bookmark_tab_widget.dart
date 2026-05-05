@@ -51,7 +51,7 @@ class _BookmarksTab extends StatelessWidget {
                     borderRadius: BorderRadius.circular(
                         effectiveStyle.groupBorderRadius!),
                   ),
-                  leading: Icon(Icons.bookmark,
+                  leading: Icon(Icons.bookmark_rounded,
                       color: groupColor,
                       size: effectiveStyle.expansionTileIconSize!),
                   title: Text(
@@ -124,7 +124,7 @@ class _BookmarksTab extends StatelessWidget {
                                   child: Stack(
                                     alignment: Alignment.center,
                                     children: [
-                                      Icon(Icons.bookmark,
+                                      Icon(Icons.bookmark_rounded,
                                           color: Color(bookmark.colorCode),
                                           size: effectiveStyle
                                               .leadingBookmarkIconSize!),
@@ -203,7 +203,7 @@ class _BookmarksTab extends StatelessWidget {
                                 SizedBox(
                                     width:
                                         effectiveStyle.textToChevronSpacing!),
-                                Icon(Icons.chevron_left,
+                                Icon(Icons.navigate_before_rounded,
                                     color: effectiveStyle.textColor!,
                                     size: effectiveStyle.chevronIconSize!),
                               ],
@@ -223,7 +223,7 @@ class _BookmarksTab extends StatelessWidget {
               child: Column(
                 children: [
                   Icon(
-                    Icons.bookmark_border,
+                    Icons.bookmark_border_rounded,
                     size: effectiveStyle.emptyStateIconSize!,
                     color: effectiveStyle.emptyStateIconColor!,
                   ),

@@ -510,7 +510,7 @@ class _WordAudioButtons extends StatelessWidget {
               tooltip: style.playAyahWordsTooltip ?? 'تشغيل كلمات الآية',
               icon: isAyahPlaying
                   ? Icons.stop_rounded
-                  : Icons.playlist_play_rounded,
+                  : Icons.queue_music_rounded,
               isActive: isAyahPlaying,
               isLoading: isAyahLoading,
               color: buttonColor,

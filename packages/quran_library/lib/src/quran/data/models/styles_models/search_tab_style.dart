@@ -76,7 +76,7 @@ class SearchTabStyle {
       searchFillAlpha: 0.1,
       searchContentPadding:
           const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-      searchSuffixIconData: Icons.search,
+      searchSuffixIconData: Icons.search_rounded,
       searchSuffixIconAlpha: 0.6,
       surahChipRowHeight: 64.0,
       surahChipRadius: 8.0,

@@ -95,7 +95,7 @@ class _SearchTabState extends State<_SearchTab> {
                 contentPadding: s.searchContentPadding ??
                     const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
                 suffixIcon: Icon(
-                  s.searchSuffixIconData ?? Icons.search,
+                  s.searchSuffixIconData ?? Icons.search_rounded,
                   color: textColor.withValues(
                       alpha: s.searchSuffixIconAlpha ?? 0.6),
                 ),

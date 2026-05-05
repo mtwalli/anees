@@ -20,7 +20,7 @@ class SurahSkipToNext extends StatelessWidget {
             enabled: true,
             label: 'next'.tr,
             child: Icon(
-              isRtl ? Icons.skip_next : Icons.skip_previous,
+              isRtl ? Icons.skip_next_rounded : Icons.skip_previous_rounded,
               color:
                   style!.playIconColor ?? Theme.of(context).colorScheme.primary,
               size: style!.nextIconHeight ?? 38,

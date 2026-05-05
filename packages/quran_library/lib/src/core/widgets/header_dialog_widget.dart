@@ -63,7 +63,7 @@ class HeaderDialogWidget extends StatelessWidget {
           alignment: AlignmentDirectional.centerStart,
           child: IconButton(
             tooltip: 'إغلاق',
-            icon: Icon(Icons.close,
+            icon: Icon(Icons.close_rounded,
                 color: closeIconColor ?? AppColors.getTextColor(isDark!),
                 size: 20),
             onPressed: () => Navigator.of(context).maybePop(),

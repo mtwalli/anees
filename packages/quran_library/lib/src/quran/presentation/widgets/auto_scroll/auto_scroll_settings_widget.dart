@@ -180,7 +180,7 @@ class AutoScrollSettingsWidget extends StatelessWidget {
                           ),
                           const SizedBox(width: 8),
                           _PageCountButton(
-                            icon: Icons.remove,
+                            icon: Icons.remove_rounded,
                             color: resolvedPageCountBtnColor,
                             onTap: () {
                               if (pageCount > 1) {
@@ -205,7 +205,7 @@ class AutoScrollSettingsWidget extends StatelessWidget {
                             ),
                           ),
                           _PageCountButton(
-                            icon: Icons.add,
+                            icon: Icons.add_rounded,
                             color: resolvedPageCountBtnColor,
                             onTap: () {
                               if (pageCount < 604) {

@@ -913,7 +913,7 @@ class _ExpandableTafsirTextState extends State<_ExpandableTafsirText> {
             overflow: TextOverflow.visible,
           ),
           _buildToggleButton(widget.readLessText, buttonStyle, buttonColor,
-              Icons.keyboard_arrow_up),
+              Icons.expand_less_rounded),
         ],
       );
     }
@@ -931,7 +931,7 @@ class _ExpandableTafsirTextState extends State<_ExpandableTafsirText> {
           style: textStyle,
         ),
         _buildToggleButton(widget.readMoreText, buttonStyle, buttonColor,
-            Icons.keyboard_arrow_down),
+            Icons.expand_more_rounded),
       ],
     );
   }

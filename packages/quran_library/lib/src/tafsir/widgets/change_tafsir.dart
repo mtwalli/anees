@@ -62,7 +62,7 @@ class ChangeTafsirDialog extends StatelessWidget {
               ),
               const SizedBox(width: 6),
               tafsirStyle?.tafsirDropdownWidget ??
-                  Icon(Icons.keyboard_arrow_down_rounded,
+                  Icon(Icons.expand_more_rounded,
                       size: 24,
                       color: tafsirStyle?.currentTafsirColor ?? Colors.grey),
             ],
@@ -250,7 +250,7 @@ class TafsirItemWidget extends StatelessWidget {
                             ? IconButton(
                                 icon: tafsirStyle.removeTafsirIconWidget ??
                                     Icon(
-                                      Icons.delete_forever_outlined,
+                                      Icons.delete_forever_rounded,
                                       size: 22,
                                       color: tafsirStyle.downloadIconColor,
                                     ),
@@ -276,7 +276,7 @@ class TafsirItemWidget extends StatelessWidget {
                                 child:
                                     tafsirCtrl.radioValue.value == tafsirIndex
                                         ? const Icon(
-                                            Icons.done,
+                                            Icons.check_rounded,
                                             size: 14,
                                             color: Colors.black,
                                           )
@@ -345,7 +345,7 @@ class TafsirItemWidget extends StatelessWidget {
                                         icon: tafsirStyle
                                                 .downloadTafsirIconWidget ??
                                             Icon(
-                                              Icons.cloud_download_outlined,
+                                              Icons.cloud_download_rounded,
                                               size: 22,
                                               color:
                                                   tafsirStyle.downloadIconColor,

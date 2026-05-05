@@ -177,8 +177,8 @@ class TajweedButtonWidget extends StatelessWidget {
                         ),
                         Icon(
                           isTajweed
-                              ? Icons.check_box
-                              : Icons.check_box_outline_blank,
+                              ? Icons.check_box_rounded
+                              : Icons.check_box_outline_blank_rounded,
                           color: accent,
                         ),
                       ],
@@ -283,8 +283,8 @@ class _FontsRecitationTile extends StatelessWidget {
                     flex: 1,
                     child: Icon(
                       isSelected
-                          ? Icons.radio_button_checked
-                          : Icons.radio_button_unchecked,
+                          ? Icons.radio_button_checked_rounded
+                          : Icons.radio_button_unchecked_rounded,
                       color: accent,
                     ),
                   ),

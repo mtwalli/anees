@@ -206,7 +206,7 @@ class AyahDownloadManagerStyle {
       handleRadius: 8.0,
 
       // Stop/Cancel button
-      stopButtonIcon: Icons.stop_circle_outlined,
+      stopButtonIcon: Icons.stop_circle_rounded,
       stopButtonForeground: Colors.white,
       stopButtonBackground: primary,
 
@@ -244,13 +244,13 @@ class AyahDownloadManagerStyle {
       progressRadius: 8.0,
 
       // Delete action
-      deleteIcon: Icons.delete_outline,
+      deleteIcon: Icons.delete_rounded,
       deleteIconColor: Colors.red,
 
       // Download action
-      downloadIcon: Icons.download,
+      downloadIcon: Icons.download_rounded,
       redownloadText: 'إعادة',
-      redownloadIcon: Icons.refresh,
+      redownloadIcon: Icons.refresh_rounded,
       downloadForeground: Colors.white,
       downloadBackground: primary,
 

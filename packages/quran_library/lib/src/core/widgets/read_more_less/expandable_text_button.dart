@@ -35,7 +35,7 @@ class ExpandableTextButton extends StatelessWidget {
               ),
               label: iconExpanded ??
                   Icon(
-                    Icons.arrow_drop_up,
+                    Icons.arrow_drop_up_rounded,
                     color: iconColor,
                   ),
               onPressed: toggleExpand,
@@ -48,7 +48,7 @@ class ExpandableTextButton extends StatelessWidget {
             ),
             label: iconCollapsed ??
                 Icon(
-                  Icons.arrow_drop_down,
+                  Icons.arrow_drop_down_rounded,
                   color: iconColor,
                 ),
             onPressed: toggleExpand,

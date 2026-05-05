@@ -169,7 +169,7 @@ class AyahChangeReader extends StatelessWidget {
               enabled: true,
               label: 'Change Reader'.tr,
               child: Icon(
-                Icons.keyboard_arrow_down_outlined,
+                Icons.expand_more_rounded,
                 size: fontSize.clamp(16, 20),
                 color: playIconColor,
               ),

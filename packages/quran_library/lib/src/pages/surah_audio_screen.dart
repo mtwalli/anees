@@ -92,7 +92,7 @@ class AppBarWidget extends StatelessWidget {
                 Navigator.pop(context);
               },
               icon: Icon(
-                Icons.arrow_back_ios_new_outlined,
+                Icons.arrow_back_rounded,
                 color: s.backIconColor,
               ),
               color: s.backIconColor ?? textColor,

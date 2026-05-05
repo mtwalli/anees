@@ -48,7 +48,7 @@ class SurahDownloadPlayButton extends StatelessWidget {
                         ),
                         GestureDetector(
                           child: Icon(
-                            Icons.close,
+                            Icons.close_rounded,
                             color: style?.iconColor ?? Colors.black,
                             size: 28,
                           ),
@@ -77,8 +77,8 @@ class SurahDownloadPlayButton extends StatelessWidget {
                             surahAudioCtrl.downloadSurah(surahNum: surahNumber),
                         child: Icon(
                           isDownloaded
-                              ? Icons.download_done
-                              : Icons.cloud_download_outlined,
+                              ? Icons.download_done_rounded
+                              : Icons.cloud_download_rounded,
                           color: isSelected
                               ? Colors.white
                               : (style?.primaryColor ??

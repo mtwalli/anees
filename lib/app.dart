@@ -113,11 +113,11 @@ class _QuranHome extends StatelessWidget {
         playIconColor: accent,
         playAllIconColor: accent,
         dividerColor: divider,
-        copyIconData: Icons.copy_rounded,
-        tafsirIconData: Icons.text_snippet_rounded,
-        playIconData: Icons.play_arrow,
-        playAllIconData: Icons.playlist_play,
-        bookmarkIconData: Icons.bookmark,
+        copyIconData: Icons.copy_all_rounded,
+        tafsirIconData: Icons.article_rounded,
+        playIconData: Icons.play_arrow_rounded,
+        playAllIconData: Icons.queue_music_rounded,
+        bookmarkIconData: Icons.bookmark_rounded,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.4),

@@ -282,7 +282,7 @@ class DownloadedAndDeleteWidget extends StatelessWidget {
                       style?.stopButtonForeground ?? Colors.white),
                 ),
                 child:
-                    Icon(style?.stopButtonIcon ?? Icons.stop_circle_outlined),
+                    Icon(style?.stopButtonIcon ?? Icons.stop_circle_rounded),
               );
             }
 
@@ -307,8 +307,8 @@ class DownloadedAndDeleteWidget extends StatelessWidget {
                 ),
                 child: Icon(
                   fullyDownloaded
-                      ? (style?.deleteIcon ?? Icons.delete_outline)
-                      : (style?.downloadIcon ?? Icons.download),
+                      ? (style?.deleteIcon ?? Icons.delete_rounded)
+                      : (style?.downloadIcon ?? Icons.download_rounded),
                   color: Colors.white,
                 ),
               ),
