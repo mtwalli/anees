@@ -26,6 +26,9 @@ dev_dependencies:
 dependency_overrides:
   quran_library:
     path: packages/quran_library
+  # objective_c 9.x uses native assets which fail to load on iOS 26 (dylib path changed).
+  # pin path_provider_foundation to 2.4.4 which has no objective_c dependency.
+  path_provider_foundation: 2.4.4
 
 flutter:
   generate: true
