@@ -65,7 +65,9 @@ class InternetConnectionService {
   ConnectivityStatus _resolveStatus(List<ConnectivityResult> result) {
     if (result.contains(ConnectivityResult.wifi) ||
         result.contains(ConnectivityResult.ethernet) ||
-        result.contains(ConnectivityResult.vpn)) {
+        result.contains(ConnectivityResult.vpn) ||
+        result.contains(ConnectivityResult.other)) {
+      // ConnectivityResult.other يغطي المحاكيات (iOS/Android) والأنفاق الافتراضية
       return ConnectivityStatus.connected;
     } else if (result.contains(ConnectivityResult.mobile)) {
       return ConnectivityStatus.phoneData;
