@@ -298,15 +298,19 @@ class TafsirStyle {
 
     // أسماء افتراضية نصية
     final defaultTafsirName = QuranLocalizations.of(context).tafsirLabel;
-    final defaultTranslateName = QuranLocalizations.of(context).translationLabel;
+    final defaultTranslateName =
+        QuranLocalizations.of(context).translationLabel;
     final defaultFootnotesName = QuranLocalizations.of(context).footnotesLabel;
     final defaultEmptyNote = QuranLocalizations.of(context).emptyTafsirNote;
 
     // نصوص افتراضية لتبويب أحكام التجويد
-    final tajweedSurahNumberError = QuranLocalizations.of(context).tajweedSurahError;
-    final tajweedUnavailable = QuranLocalizations.of(context).tajweedUnavailable;
+    final tajweedSurahNumberError =
+        QuranLocalizations.of(context).tajweedSurahError;
+    final tajweedUnavailable =
+        QuranLocalizations.of(context).tajweedUnavailable;
     final tajweedDownload = QuranLocalizations.of(context).tajweedDownload;
-    final tajweedDownloading = QuranLocalizations.of(context).tajweedDownloading;
+    final tajweedDownloading =
+        QuranLocalizations.of(context).tajweedDownloading;
     final tajweedLoadError = QuranLocalizations.of(context).tajweedLoadError;
     final tajweedNoData = QuranLocalizations.of(context).tajweedNoData;
 
@@ -371,7 +375,7 @@ class TafsirStyle {
         enabled: true,
         label: QuranLocalizations.of(context).changeFontSize,
         child: Icon(
-          Icons.text_format_outlined,
+          Icons.text_increase,
           size: 34,
           color: AppColors.getTextColor(isDark),
         ),

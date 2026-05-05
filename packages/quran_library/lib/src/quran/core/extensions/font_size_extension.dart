@@ -10,13 +10,14 @@ extension FontSizeExtension on Widget {
     final box = GetStorage();
     return PopupMenuButton(
       position: PopupMenuPosition.under,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       icon: tafsirStyle?.fontSizeIconWidget ??
           Semantics(
             button: true,
             enabled: true,
             label: 'Change Font Size',
             child: Icon(
-              Icons.text_format_outlined,
+              Icons.text_increase,
               size: 34,
               color: AppColors.getTextColor(isDark),
             ),
@@ -26,29 +27,23 @@ extension FontSizeExtension on Widget {
       itemBuilder: (context) => [
         PopupMenuItem(
           height: 30,
-          child: Obx(
-            () => SizedBox(
-              height: 30,
-              width: MediaQuery.sizeOf(context).width,
-              child: Theme(
-                data: ThemeData(
-                  sliderTheme: SliderThemeData(
-                    thumbColor: tafsirStyle?.fontSizeThumbColor,
-                    activeTrackColor: tafsirStyle?.fontSizeActiveTrackColor,
-                    inactiveTrackColor: tafsirStyle?.fontSizeInactiveTrackColor,
-                    overlayColor: Colors.white.withValues(alpha: 0.2),
-                    valueIndicatorColor: Colors.white,
-                    inactiveTickMarkColor: Colors.transparent,
-                    activeTickMarkColor: Colors.transparent,
-                  ),
-                ),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          child: Material(
+            color: Theme.of(context)
+                .colorScheme
+                .surfaceContainerLow
+                .withValues(alpha: 0.45),
+            borderRadius: BorderRadius.circular(10),
+            child: Obx(
+              () => SizedBox(
+                height: 30,
+                width: MediaQuery.sizeOf(context).width,
                 child: Slider(
                   value: TafsirCtrl.instance.fontSizeArabic.value,
                   max: 50,
                   min: 20,
                   onChanged: (value) {
                     TafsirCtrl.instance.fontSizeArabic.value = value;
-
                     box.write(_StorageConstants().fontSize, value);
                     TafsirCtrl.instance.update(['change_font_size']);
                   },
