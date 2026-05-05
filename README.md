@@ -16,13 +16,13 @@ A Flutter application for reading and listening to the Holy Quran, built with an
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Flutter 3 / Dart |
-| Quran engine | `quran_library ^4.0.3` |
-| Fonts | UthmanicHafs V20, NotoNaskhArabic, SurahNameNaskh |
-| Min Android SDK | 21 |
-| iOS | Runner (Swift) |
+| Layer           | Technology                                        |
+|-----------------|---------------------------------------------------|
+| Framework       | Flutter 3 / Dart                                  |
+| Quran engine    | `quran_library ^4.0.3`                            |
+| Fonts           | UthmanicHafs V20, NotoNaskhArabic, SurahNameNaskh |
+| Min Android SDK | 21                                                |
+| iOS             | Runner (Swift)                                    |
 
 ## Getting Started
 
