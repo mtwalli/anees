@@ -138,7 +138,7 @@ class ActualTafsirWidget extends StatelessWidget {
 
       spans.add(TextSpan(
         text:
-            '${(tafsirStyle ?? (TafsirTheme.of(context)?.style ?? TafsirStyle.defaults(isDark: isDark, context: context))).footnotesName ?? 'الحواشي:'}\n',
+            '${(tafsirStyle ?? (TafsirTheme.of(context)?.style ?? TafsirStyle.defaults(isDark: isDark, context: context))).footnotesName ?? QuranLocalizations.of(context).footnotesHeader}\n',
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: fontSizeArabic * 0.95,

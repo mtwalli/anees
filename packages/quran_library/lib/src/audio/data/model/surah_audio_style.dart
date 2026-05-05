@@ -438,14 +438,14 @@ class SurahAudioStyle {
       withAppBar: true,
 
       // نصوص الآيات الافتراضية
-      ayahSingularText: 'آية',
-      ayahPluralText: 'آيات',
+      ayahSingularText: QuranLocalizations.of(context).ayahSingular,
+      ayahPluralText: QuranLocalizations.of(context).ayahPlural,
 
       // نص آخر استماع الافتراضي
-      lastListenText: 'آخر إستماع',
-      dialogHeaderTitle: 'تغيير القارئ',
+      lastListenText: QuranLocalizations.of(context).lastListenLabel,
+      dialogHeaderTitle: QuranLocalizations.of(context).changeReaderLabel,
       downloadProgressColor: Colors.white,
-      noInternetConnectionText: 'لا يوجد اتصال بالإنترنت',
+      noInternetConnectionText: QuranLocalizations.of(context).noInternetText,
       timeContainerColor: primary,
       readerDropdownWidget: null,
     );

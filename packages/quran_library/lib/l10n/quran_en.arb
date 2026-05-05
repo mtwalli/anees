@@ -1,0 +1,318 @@
+{
+  "@@locale": "en",
+
+  "searchHint": "Search the Quran",
+  "@searchHint": { "description": "Hint text in the search field" },
+
+  "wordInfoTitle": "About the Word",
+  "@wordInfoTitle": { "description": "Title of the word info bottom sheet" },
+
+  "tabRecitations": "Recitations",
+  "@tabRecitations": { "description": "Word info tab: recitations" },
+
+  "tabMorphology": "Morphology",
+  "@tabMorphology": { "description": "Word info tab: morphology / tasreef" },
+
+  "tabGrammar": "Grammar",
+  "@tabGrammar": { "description": "Word info tab: grammar / i'rab" },
+
+  "unavailableDataTemplate": "{kind} data not loaded on device.",
+  "@unavailableDataTemplate": {
+    "description": "Message shown when word-info data for a given kind is not downloaded",
+    "placeholders": {
+      "kind": { "type": "String", "example": "Morphology" }
+    }
+  },
+
+  "downloadLabel": "Download",
+  "@downloadLabel": { "description": "Button label to start a download" },
+
+  "downloadingLabel": "Downloading…",
+  "@downloadingLabel": { "description": "Button label while a download is in progress" },
+
+  "loadErrorText": "Failed to load word data.",
+  "@loadErrorText": { "description": "Error message when word data cannot be loaded" },
+
+  "noDataText": "No data for this word.",
+  "@noDataText": { "description": "Empty-state message when no word data exists" },
+
+  "playWordTooltip": "Play word",
+  "@playWordTooltip": { "description": "Tooltip on the play-word audio button" },
+
+  "playAyahWordsTooltip": "Play ayah words",
+  "@playAyahWordsTooltip": { "description": "Tooltip on the play-all-ayah-words audio button" },
+
+  "tafsirLabel": "Tafsir",
+  "@tafsirLabel": { "description": "Tab/section label for tafsir (Quranic commentary)" },
+
+  "translationLabel": "Translation",
+  "@translationLabel": { "description": "Tab/section label for translation" },
+
+  "footnotesLabel": "Footnotes",
+  "@footnotesLabel": { "description": "Tab/section label for footnotes / hawashi" },
+
+  "emptyTafsirNote": "\n\nTafsir for this ayah is in the preceding ayahs.",
+  "@emptyTafsirNote": { "description": "Note shown when tafsir for an ayah appears in earlier ayahs" },
+
+  "tajweedSurahError": "Could not determine surah number.",
+  "@tajweedSurahError": { "description": "Error when surah number cannot be identified for tajweed" },
+
+  "tajweedUnavailable": "Tajweed data not loaded.",
+  "@tajweedUnavailable": { "description": "Message when tajweed data is not downloaded" },
+
+  "tajweedDownload": "Download",
+  "@tajweedDownload": { "description": "Button to download tajweed data" },
+
+  "tajweedDownloading": "Downloading…",
+  "@tajweedDownloading": { "description": "Label while tajweed data is downloading" },
+
+  "tajweedLoadError": "Failed to load tajweed rules.",
+  "@tajweedLoadError": { "description": "Error message when tajweed data fails to load" },
+
+  "tajweedNoData": "No tajweed data for this ayah.",
+  "@tajweedNoData": { "description": "Empty state when no tajweed data exists for an ayah" },
+
+  "changeFontSize": "Change Font Size",
+  "@changeFontSize": { "description": "Semantics label / tooltip for the font size control" },
+
+  "readMore": "Read more",
+  "@readMore": { "description": "Button to expand truncated text" },
+
+  "readLess": "Read less",
+  "@readLess": { "description": "Button to collapse expanded text" },
+
+  "closeLabel": "Close",
+  "@closeLabel": { "description": "Tooltip on the close / dismiss button in dialogs" },
+
+  "fontsLabel": "Fonts",
+  "@fontsLabel": { "description": "Title of the fonts download dialog" },
+
+  "tajweedRulesLabel": "Tajweed Rules",
+  "@tajweedRulesLabel": { "description": "Title of the tajweed rules dialog" },
+
+  "autoScrollTitle": "Auto-Scroll",
+  "@autoScrollTitle": { "description": "Title of the auto-scroll settings panel" },
+
+  "stopAtLabel": "Stop at:",
+  "@stopAtLabel": { "description": "Label for the stop-condition setting in auto-scroll" },
+
+  "pageCountLabel": "Page count:",
+  "@pageCountLabel": { "description": "Label for the page-count setting in auto-scroll" },
+
+  "speedLabel": "Speed:",
+  "@speedLabel": { "description": "Label for the speed slider in auto-scroll settings" },
+
+  "slowLabel": "Slow",
+  "@slowLabel": { "description": "Minimum-speed label on the auto-scroll slider" },
+
+  "fastLabel": "Fast",
+  "@fastLabel": { "description": "Maximum-speed label on the auto-scroll slider" },
+
+  "autoScrollNotes": "Adjust scroll speed and auto-stop",
+  "@autoScrollNotes": { "description": "Helper note in the auto-scroll settings panel" },
+
+  "lastListenLabel": "Last listened",
+  "@lastListenLabel": { "description": "Label showing the last-listened surah" },
+
+  "changeReaderLabel": "Change Reader",
+  "@changeReaderLabel": { "description": "Title of the change-reciter dialog" },
+
+  "ayahSingular": "Ayah",
+  "@ayahSingular": { "description": "Singular form of the word 'ayah' (verse)" },
+
+  "ayahPlural": "Ayahs",
+  "@ayahPlural": { "description": "Plural form of the word 'ayah' (verses)" },
+
+  "noInternetText": "No internet connection",
+  "@noInternetText": { "description": "Message shown when the device has no internet" },
+
+  "tabIndex": "Index",
+  "@tabIndex": { "description": "Top-bar tab label for the surah/juz index" },
+
+  "tabSearch": "Search",
+  "@tabSearch": { "description": "Top-bar tab label for search" },
+
+  "tabBookmarks": "Bookmarks",
+  "@tabBookmarks": { "description": "Top-bar tab label for bookmarks" },
+
+  "tabSurahs": "Surahs",
+  "@tabSurahs": { "description": "Index sub-tab label for the surah list" },
+
+  "tabJuz": "Juz",
+  "@tabJuz": { "description": "Index sub-tab label for the juz list" },
+
+  "audioScreenTitle": "Listen to Surahs",
+  "@audioScreenTitle": { "description": "Title shown in the audio / surah listening screen" },
+
+  "fontsDialogNotes": "To make the Mushaf look like the Madinah Mushaf, you can download the Mushaf fonts",
+  "@fontsDialogNotes": { "description": "Instruction note inside the fonts download dialog" },
+
+  "tajweedOption": "With Tajweed",
+  "@tajweedOption": { "description": "Label for the 'with tajweed' font option toggle" },
+
+  "fontsDownloadingText": "Downloading",
+  "@fontsDownloadingText": { "description": "Status text shown while fonts are being downloaded" },
+
+  "bookmarkCount": "{count} bookmarks",
+  "@bookmarkCount": {
+    "description": "Subtitle showing how many bookmarks are in a group",
+    "placeholders": {
+      "count": { "type": "String", "example": "5" }
+    }
+  },
+
+  "ayahLabel": "Ayah {number}",
+  "@ayahLabel": {
+    "description": "Chip label showing an ayah number in the bookmarks list",
+    "placeholders": {
+      "number": { "type": "String", "example": "12" }
+    }
+  },
+
+  "pageLabel": "Page {number}",
+  "@pageLabel": {
+    "description": "Chip/subtitle label showing a page number",
+    "placeholders": {
+      "number": { "type": "String", "example": "5" }
+    }
+  },
+
+  "juzLabel": "Juz",
+  "@juzLabel": { "description": "Label prefix before the juz name/number on the page header" },
+
+  "hizbLabel": "Hizb",
+  "@hizbLabel": { "description": "Label prefix before the hizb fraction on the page footer" },
+
+  "sajdaLabel": "Sajda",
+  "@sajdaLabel": { "description": "Label shown when an ayah of prostration (sajda) is on the page" },
+
+  "surahFallbackName": "Surah {number}",
+  "@surahFallbackName": {
+    "description": "Fallback surah name used when the Arabic name is unavailable",
+    "placeholders": {
+      "number": { "type": "String", "example": "1" }
+    }
+  },
+
+  "quranTabMain": "The Holy Quran",
+  "@quranTabMain": { "description": "Main Quran tab label in the top-level tab bar" },
+
+  "tenRecitationsTab": "Ten Recitations",
+  "@tenRecitationsTab": { "description": "Ten Recitations tab label in the top-level tab bar" },
+
+  "tafsirTabLabel": "Tafsir",
+  "@tafsirTabLabel": { "description": "Tab label inside show_tafsir screen" },
+
+  "tajweedTabLabel": "Tajweed Rules",
+  "@tajweedTabLabel": { "description": "Tab label inside show_tafsir screen" },
+
+  "displayModeDefault": "Default",
+  "@displayModeDefault": { "description": "Display mode: default page view" },
+
+  "displayModeScrollable": "Scrollable Page",
+  "@displayModeScrollable": { "description": "Display mode: single scrollable page" },
+
+  "displayModeDual": "Two Pages",
+  "@displayModeDual": { "description": "Display mode: dual page spread" },
+
+  "displayModeWithTafsirSide": "Quran with Tafsir",
+  "@displayModeWithTafsirSide": { "description": "Display mode: Quran and tafsir side by side" },
+
+  "displayModeAyahTafsir": "Ayah with Tafsir",
+  "@displayModeAyahTafsir": { "description": "Display mode: each ayah with inline tafsir" },
+
+  "stopConditionNextHizb": "Next Hizb",
+  "@stopConditionNextHizb": { "description": "Auto-scroll stop condition: stop at next hizb" },
+
+  "stopConditionNextJuz": "Next Juz",
+  "@stopConditionNextJuz": { "description": "Auto-scroll stop condition: stop at next juz" },
+
+  "stopConditionPageCount": "Page count",
+  "@stopConditionPageCount": { "description": "Auto-scroll stop condition: stop after N pages" },
+
+  "stopConditionManual": "Manual",
+  "@stopConditionManual": { "description": "Auto-scroll stop condition: no automatic stop" },
+
+  "surahInfoAyahCount": "Ayah Count",
+  "@surahInfoAyahCount": { "description": "Label for the ayah count field in surah info sheet" },
+
+  "surahInfoAboutTab": "About the Surah",
+  "@surahInfoAboutTab": { "description": "Second tab in surah info sheet" },
+
+  "surahInfoNamesTab": "Surah Names",
+  "@surahInfoNamesTab": { "description": "First tab in surah info sheet" },
+
+  "noTafsirAvailable": "No tafsir available",
+  "@noTafsirAvailable": { "description": "Empty state when no tafsir text exists for an ayah" },
+
+  "footnotesHeader": "Footnotes:\n",
+  "@footnotesHeader": { "description": "Header label before footnote text in tafsir display" },
+
+  "bookmarksEmpty": "No bookmarks saved",
+  "@bookmarksEmpty": { "description": "Empty state text in the bookmarks tab" },
+
+  "bookmarksYellow": "Yellow Bookmarks",
+  "@bookmarksYellow": { "description": "Label for the yellow bookmark group" },
+
+  "bookmarksRed": "Red Bookmarks",
+  "@bookmarksRed": { "description": "Label for the red bookmark group" },
+
+  "bookmarksGreen": "Green Bookmarks",
+  "@bookmarksGreen": { "description": "Label for the green bookmark group" },
+
+  "readersTab": "Readers",
+  "@readersTab": { "description": "Tab label for the list of available reciters" },
+
+  "downloadedSurahsTab": "Downloaded Surahs",
+  "@downloadedSurahsTab": { "description": "Tab label for already-downloaded surahs" },
+
+  "downloadManagerTitle": "Manage Surah Downloads",
+  "@downloadManagerTitle": { "description": "Title of the ayah/surah download manager sheet" },
+
+  "redownloadLabel": "Re-download",
+  "@redownloadLabel": { "description": "Button label to re-download a previously downloaded item" },
+
+  "changeTafsirLabel": "Change Tafsir",
+  "@changeTafsirLabel": { "description": "Title of the change-tafsir dialog" },
+
+  "copySuccessMessage": "Copied to clipboard",
+  "@copySuccessMessage": { "description": "Snackbar/toast shown after an ayah is copied" },
+
+  "ayahPlayError": "Error playing ayahs: {error}",
+  "@ayahPlayError": {
+    "description": "Toast shown when ayah playback fails",
+    "placeholders": {
+      "error": { "type": "String", "example": "Connection refused" }
+    }
+  },
+
+  "ayahDownloadManagerOpenError": "Could not open download manager right now",
+  "@ayahDownloadManagerOpenError": { "description": "Toast shown when the download manager sheet cannot be opened" },
+
+  "mobileDataWarning": "Warning: You are using mobile data to download",
+  "@mobileDataWarning": { "description": "Toast shown when user is downloading over mobile data" },
+
+  "seekBarDownloadingLabel": "Downloading",
+  "@seekBarDownloadingLabel": { "description": "Text shown in seek bar while audio is being downloaded" },
+
+  "ayahDownloadCount": "Downloaded {downloaded}/{total} ayah",
+  "@ayahDownloadCount": {
+    "description": "Count text in the ayah download manager",
+    "placeholders": {
+      "downloaded": { "type": "String", "example": "5" },
+      "total": { "type": "String", "example": "10" }
+    }
+  },
+
+  "noAyahsForSurah": "No ayahs found for the selected surah",
+  "@noAyahsForSurah": { "description": "Error shown when a surah has no ayahs loaded" },
+
+  "audioServiceInitError": "Audio service failed to initialize. Will work without system controls.",
+  "@audioServiceInitError": { "description": "Toast shown when audio service cannot be initialized" },
+
+  "audioFocusError": "Another audio is playing in the app. Please stop it first.",
+  "@audioFocusError": { "description": "Toast shown when audio focus cannot be obtained" },
+
+  "surahLoadError": "Failed to load surah. Check connection and try again.",
+  "@surahLoadError": { "description": "Toast shown when a surah cannot be loaded" }
+}

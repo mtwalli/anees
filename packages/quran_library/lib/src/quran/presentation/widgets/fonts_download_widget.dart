@@ -48,7 +48,7 @@ class FontsDownloadWidget extends StatelessWidget {
         children: [
           HeaderDialogWidget(
             isDark: isDark,
-            title: downloadFontsDialogStyle?.headerTitle ?? 'الخطوط',
+            title: downloadFontsDialogStyle?.headerTitle ?? QuranLocalizations.of(context).fontsLabel,
             titleColor: downloadFontsDialogStyle?.titleColor,
             closeIconColor: downloadFontsDialogStyle?.closeIconColor,
             backgroundGradient: downloadFontsDialogStyle?.backgroundGradient,
@@ -61,7 +61,7 @@ class FontsDownloadWidget extends StatelessWidget {
           const SizedBox(height: 10.0),
           Text(
             downloadFontsDialogStyle?.notes ??
-                'لجعل مظهر المصحف مشابه لمصحف المدينة يمكنك تحميل خطوط المصحف',
+                QuranLocalizations.of(context).fontsDialogNotes,
             style: downloadFontsDialogStyle?.notesStyle ??
                 TextStyle(
                   fontSize: 14.0,
@@ -129,7 +129,7 @@ class TajweedButtonWidget extends StatelessWidget {
     final fontsSelected = QuranCtrl.instance.state.fontsSelected.value == 0;
     final isTajweed = QuranCtrl.instance.state.isTajweedEnabled.value == true;
     String tajweedNames =
-        downloadFontsDialogStyle?.tajweedOptionNames ?? 'مع التجويد';
+        downloadFontsDialogStyle?.tajweedOptionNames ?? QuranLocalizations.of(context).tajweedOption;
     return AnimatedSize(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
@@ -424,6 +424,6 @@ class _FontsRecitationTile extends StatelessWidget {
       return style!.downloadedFontsText!;
     }
 
-    return recitation.arabicName;
+    return languageCode == 'ar' ? recitation.arabicName : recitation.englishName;
   }
 }

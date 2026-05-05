@@ -254,7 +254,7 @@ extension SurahInfoExtension on void {
                                 fit: BoxFit.scaleDown,
                                 child: Center(
                                   child: Text(
-                                    '${surahStyle?.ayahCount ?? 'عدد الآيات'}: ${surah.ayahsNumber}'
+                                    '${surahStyle?.ayahCount ?? QuranLocalizations.of(context).surahInfoAyahCount}: ${surah.ayahsNumber}'
                                         .convertNumbersAccordingToLang(
                                             languageCode: languageCode ?? 'ar'),
                                     style: TextStyle(

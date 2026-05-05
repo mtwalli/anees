@@ -293,7 +293,7 @@ extension AyahCtrlExtension on AudioCtrl {
       log('Error in ayahs playFile: $e', name: 'AudioController');
 
       // إظهار رسالة خطأ للمستخدم / Show error message to user
-      ToastUtils().showToast(context, 'خطأ في تشغيل الآيات: ${e.toString()}');
+      ToastUtils().showToast(context, QuranLocalizations.of(context).ayahPlayError(e.toString()));
     }
   }
 
@@ -329,7 +329,7 @@ extension AyahCtrlExtension on AudioCtrl {
       ToastUtils().showToast(
           context,
           ayahAudioStyle?.noInternetConnectionText ??
-              'لا يوجد اتصال بالإنترنت');
+              QuranLocalizations.of(context).noInternetText);
       return;
     } else {
       // التحقق من إمكانية التشغيل / Check if playback is allowed
@@ -684,7 +684,7 @@ extension AyahCtrlExtension on AudioCtrl {
         // محاولة إعلام المستخدم بتوست إن توفر سياق ممرّر أصلاً
         if (context != null) {
           try {
-            ToastUtils().showToast(context, 'تعذّر فتح مدير تنزيل الآيات الآن');
+            ToastUtils().showToast(context, QuranLocalizations.of(context).ayahDownloadManagerOpenError);
           } catch (_) {}
         }
         return;

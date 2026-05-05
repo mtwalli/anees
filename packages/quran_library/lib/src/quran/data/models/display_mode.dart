@@ -54,6 +54,23 @@ extension QuranDisplayModeExtension on QuranDisplayMode {
     }
   }
 
+  /// التسمية المحلية لكل وضع بحسب الـ locale
+  String label(BuildContext context) {
+    final l = QuranLocalizations.of(context);
+    switch (this) {
+      case QuranDisplayMode.defaultMode:
+        return l.displayModeDefault;
+      case QuranDisplayMode.singleScrollable:
+        return l.displayModeScrollable;
+      case QuranDisplayMode.dualPage:
+        return l.displayModeDual;
+      case QuranDisplayMode.quranWithTafsirSide:
+        return l.displayModeWithTafsirSide;
+      case QuranDisplayMode.ayahWithTafsirInline:
+        return l.displayModeAyahTafsir;
+    }
+  }
+
   /// التسمية العربية لكل وضع
   String get labelAr {
     switch (this) {

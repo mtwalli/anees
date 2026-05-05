@@ -93,7 +93,7 @@ extension SurahGetters on AudioCtrl {
           name: 'AudioCtrl', stackTrace: s, error: e);
       if (Get.context != null) {
         ToastUtils().showToast(
-            Get.context!, 'تعذّر تحميل السورة. تحقّق من الاتصال وحاول مجددًا');
+            Get.context!, QuranLocalizations.of(Get.context!).surahLoadError);
       }
     } catch (e, s) {
       log('Unexpected error setting audio source: $e',
@@ -256,9 +256,16 @@ extension SurahGetters on AudioCtrl {
   /// Get "ayah" or "ayat" text based on count
   /// [ayahCount] - عدد الآيات / Number of ayahs
   /// [style] - الستايل المخصص (اختياري) / Custom style (optional)
-  String getAyahOrAyat(int ayahCount, {SurahAudioStyle? style}) {
-    final singularText = style?.ayahSingularText ?? 'آية';
-    final pluralText = style?.ayahPluralText ?? 'آيات';
+  String getAyahOrAyat(int ayahCount,
+      {SurahAudioStyle? style, BuildContext? context}) {
+    final singularText = style?.ayahSingularText ??
+        (context != null
+            ? QuranLocalizations.of(context).ayahSingular
+            : 'آية');
+    final pluralText = style?.ayahPluralText ??
+        (context != null
+            ? QuranLocalizations.of(context).ayahPlural
+            : 'آيات');
     return ayahCount > 10 ? singularText : pluralText;
   }
 }

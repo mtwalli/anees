@@ -1,0 +1,7 @@
+{
+  "@@locale": "en",
+  "appTitle": "Anees — The Intelligent Quran",
+  "@appTitle": {
+    "description": "The application title"
+  }
+}

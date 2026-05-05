@@ -190,7 +190,7 @@ class AyahDownloadManagerStyle {
     return AyahDownloadManagerStyle(
       backgroundColor: backgroundColor,
       // Header
-      titleText: 'إدارة تحميل آيات السور',
+      titleText: QuranLocalizations.of(context).downloadManagerTitle,
       titleTextStyle: QuranLibrary().cairoStyle.copyWith(
             fontSize: 18,
             color: onBg,
@@ -249,7 +249,7 @@ class AyahDownloadManagerStyle {
 
       // Download action
       downloadIcon: Icons.download_rounded,
-      redownloadText: 'إعادة',
+      redownloadText: QuranLocalizations.of(context).redownloadLabel,
       redownloadIcon: Icons.refresh_rounded,
       downloadForeground: Colors.white,
       downloadBackground: primary,

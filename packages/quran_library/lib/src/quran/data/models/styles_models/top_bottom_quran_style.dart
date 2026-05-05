@@ -93,18 +93,18 @@ class TopBottomQuranStyle {
     required BuildContext context,
   }) {
     // مبدئياً، النصوص تعتمد على اللغة الافتراضية العربية المستخدمة حالياً في الودجتات.
-    return const TopBottomQuranStyle(
-      juzName: 'الجزء',
-      sajdaName: 'سجدة',
+    return TopBottomQuranStyle(
+      juzName: QuranLocalizations.of(context).juzLabel,
+      sajdaName: QuranLocalizations.of(context).sajdaLabel,
       surahName: null,
       customChild: null,
       customChildBuilder: null,
-      hizbName: 'الحزب',
-      surahNameColor: Color(0xff77554B),
-      juzTextColor: Color(0xff77554B),
-      hizbTextColor: Color(0xff77554B),
-      pageNumberColor: Color(0xff77554B),
-      sajdaNameColor: Color(0xff77554B),
+      hizbName: QuranLocalizations.of(context).hizbLabel,
+      surahNameColor: const Color(0xff77554B),
+      juzTextColor: const Color(0xff77554B),
+      hizbTextColor: const Color(0xff77554B),
+      pageNumberColor: const Color(0xff77554B),
+      sajdaNameColor: const Color(0xff77554B),
     );
   }
 }

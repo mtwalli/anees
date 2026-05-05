@@ -61,9 +61,9 @@ class WordInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tabs = [
-      Tab(text: defaults.tabRecitationsText ?? 'القراءات'),
-      Tab(text: defaults.tabTasreefText ?? 'التصريف'),
-      Tab(text: defaults.tabEerabText ?? 'الإعراب'),
+      Tab(text: defaults.tabRecitationsText ?? QuranLocalizations.of(context).tabRecitations),
+      Tab(text: defaults.tabTasreefText ?? QuranLocalizations.of(context).tabMorphology),
+      Tab(text: defaults.tabEerabText ?? QuranLocalizations.of(context).tabGrammar),
     ];
 
     return Container(
@@ -90,7 +90,7 @@ class WordInfoWidget extends StatelessWidget {
               ),
           if (defaults.withTitle ?? true)
             Text(
-              defaults.titleText ?? 'عن الكلمة',
+              defaults.titleText ?? QuranLocalizations.of(context).wordInfoTitle,
               style: defaults.titleTextStyle ??
                   TextStyle(
                     fontSize: 20,
@@ -177,7 +177,7 @@ class WordInfoWidget extends StatelessWidget {
                             WordInfoKindTab(
                               kind: WordInfoKind.recitations,
                               kindLabelAr:
-                                  defaults.tabRecitationsText ?? 'القراءات',
+                                  defaults.tabRecitationsText ?? QuranLocalizations.of(context).tabRecitations,
                               ref: ref,
                               ctrl: ctrl,
                               isDark: isDark,
@@ -185,7 +185,7 @@ class WordInfoWidget extends StatelessWidget {
                             ),
                             WordInfoKindTab(
                               kind: WordInfoKind.tasreef,
-                              kindLabelAr: defaults.tabTasreefText ?? 'التصريف',
+                              kindLabelAr: defaults.tabTasreefText ?? QuranLocalizations.of(context).tabMorphology,
                               ref: ref,
                               ctrl: ctrl,
                               isDark: isDark,
@@ -193,7 +193,7 @@ class WordInfoWidget extends StatelessWidget {
                             ),
                             WordInfoKindTab(
                               kind: WordInfoKind.eerab,
-                              kindLabelAr: defaults.tabEerabText ?? 'الإعراب',
+                              kindLabelAr: defaults.tabEerabText ?? QuranLocalizations.of(context).tabGrammar,
                               ref: ref,
                               ctrl: ctrl,
                               isDark: isDark,
@@ -234,10 +234,10 @@ class WordInfoKindTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final unavailableTemplate =
-        style.unavailableDataTemplate ?? 'بيانات {kind} غير محمّلة على الجهاز.';
-    final unavailableText =
-        unavailableTemplate.replaceAll('{kind}', kindLabelAr);
+    final unavailableTemplate = style.unavailableDataTemplate;
+    final unavailableText = unavailableTemplate != null
+        ? unavailableTemplate.replaceAll('{kind}', kindLabelAr)
+        : QuranLocalizations.of(context).unavailableDataTemplate(kindLabelAr);
 
     return Container(
       margin: EdgeInsets.symmetric(
@@ -314,8 +314,8 @@ class WordInfoKindTab extends StatelessWidget {
                       children: [
                         Text(
                           isDownloading
-                              ? (style.downloadingText ?? 'جاري التحميل...')
-                              : (style.downloadText ?? 'تحميل'),
+                              ? (style.downloadingText ?? QuranLocalizations.of(context).downloadingLabel)
+                              : (style.downloadText ?? QuranLocalizations.of(context).downloadLabel),
                           style: style.buttonTextStyle ??
                               TextStyle(
                                 fontSize: 16,
@@ -361,7 +361,7 @@ class WordInfoKindTab extends StatelessWidget {
                     return Padding(
                       padding: style.contentPadding ?? const EdgeInsets.all(16),
                       child: Text(
-                        '${style.loadErrorText ?? 'تعذّر تحميل بيانات هذه الكلمة.'}\n${snap.error}',
+                        '${style.loadErrorText ?? QuranLocalizations.of(context).loadErrorText}\n${snap.error}',
                         style: style.bodyTextStyle ??
                             TextStyle(
                               fontSize: 14,
@@ -379,7 +379,7 @@ class WordInfoKindTab extends StatelessWidget {
                     return Padding(
                       padding: style.contentPadding ?? const EdgeInsets.all(16),
                       child: Text(
-                        style.noDataText ?? 'لا توجد بيانات لهذه الكلمة.',
+                        style.noDataText ?? QuranLocalizations.of(context).noDataText,
                         style: style.bodyTextStyle ??
                             TextStyle(
                               fontSize: 14,
@@ -494,7 +494,7 @@ class _WordAudioButtons extends StatelessWidget {
           children: [
             // زر تشغيل الكلمة
             _buildButton(
-              tooltip: style.playWordTooltip ?? 'تشغيل الكلمة',
+              tooltip: style.playWordTooltip ?? QuranLocalizations.of(context).playWordTooltip,
               icon:
                   isWordPlaying ? Icons.stop_rounded : Icons.volume_up_rounded,
               isActive: isWordPlaying,
@@ -507,7 +507,7 @@ class _WordAudioButtons extends StatelessWidget {
             const SizedBox(width: 16),
             // زر تشغيل كلمات الآية
             _buildButton(
-              tooltip: style.playAyahWordsTooltip ?? 'تشغيل كلمات الآية',
+              tooltip: style.playAyahWordsTooltip ?? QuranLocalizations.of(context).playAyahWordsTooltip,
               icon: isAyahPlaying
                   ? Icons.stop_rounded
                   : Icons.queue_music_rounded,

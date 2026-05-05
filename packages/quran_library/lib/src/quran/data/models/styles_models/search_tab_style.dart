@@ -65,7 +65,7 @@ class SearchTabStyle {
     return SearchTabStyle(
       textColor: text,
       accentColor: primary,
-      searchHintText: 'بحث في القرآن',
+      searchHintText: QuranLocalizations.of(context).searchHint,
       searchHintStyle: QuranLibrary().cairoStyle.copyWith(
             color: text.withValues(alpha: 0.6),
             fontSize: 14,

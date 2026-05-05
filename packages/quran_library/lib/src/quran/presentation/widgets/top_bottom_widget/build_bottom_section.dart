@@ -18,8 +18,8 @@ class BuildBottomSection extends StatelessWidget {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final topBottomStyle = TopBottomTheme.of(context)?.style ??
         TopBottomQuranStyle.defaults(isDark: isDark, context: context);
-    final String effectiveSajdaName = (topBottomStyle.sajdaName) ?? 'سجدة';
-    final String effectiveHizbName = topBottomStyle.hizbName ?? 'الحزب';
+    final String effectiveSajdaName = (topBottomStyle.sajdaName) ?? QuranLocalizations.of(context).sajdaLabel;
+    final String effectiveHizbName = topBottomStyle.hizbName ?? QuranLocalizations.of(context).hizbLabel;
     final Color hizbColor =
         topBottomStyle.hizbTextColor ?? const Color(0xff77554B);
     final Color pageNumberColor =

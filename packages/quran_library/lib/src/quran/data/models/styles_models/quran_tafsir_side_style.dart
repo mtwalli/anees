@@ -166,8 +166,8 @@ class QuranTafsirSideStyle {
       ayahFontSize: 20,
       tafsirMaxLines: 4,
       tafsirCollapsedHeight: 80,
-      readMoreText: 'اقرأ المزيد',
-      readLessText: 'اقرأ أقل',
+      readMoreText: QuranLocalizations.of(context).readMore,
+      readLessText: QuranLocalizations.of(context).readLess,
       readMoreButtonColor: scheme.primary,
       readMoreTextStyle: TextStyle(
         color: scheme.primary,

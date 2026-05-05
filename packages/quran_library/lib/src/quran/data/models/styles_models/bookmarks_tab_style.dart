@@ -421,15 +421,15 @@ class BookmarksTabStyle {
       // الحالة الفارغة
       emptyStateIconSize: 48.0,
       emptyStateIconColor: textColor.withValues(alpha: 0.5),
-      emptyStateText: 'لا توجد فواصل محفوظة',
+      emptyStateText: QuranLocalizations.of(context).bookmarksEmpty,
       emptyStateTextFontSize: 14.0,
       emptyStateTextColor: textColor.withValues(alpha: 0.7),
       emptyStateIconToTextSpacing: 16.0,
 
       // نصوص المجموعات
-      yellowGroupText: 'الفواصل الصفراء',
-      redGroupText: 'الفواصل الحمراء',
-      greenGroupText: 'الفواصل الخضراء',
+      yellowGroupText: QuranLocalizations.of(context).bookmarksYellow,
+      redGroupText: QuranLocalizations.of(context).bookmarksRed,
+      greenGroupText: QuranLocalizations.of(context).bookmarksGreen,
     );
   }
 }

@@ -100,7 +100,7 @@ class AppBarWidget extends StatelessWidget {
             ),
           ),
           Text(
-            'الإستماع للسور',
+            QuranLocalizations.of(context).audioScreenTitle,
             style: QuranLibrary().cairoStyle.copyWith(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,

@@ -17,11 +17,14 @@ dependencies:
   dio: ^5.9.2
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_scale_kit: ^1.5.2
   flutter_svg: ^2.2.4
   get: ^4.7.3
   get_storage: ^2.1.1
   html: ^0.15.6
+  intl: ^0.20.1
   just_audio: ^0.10.5
   just_audio_media_kit: ^2.1.0
   # media_kit_libs_windows_audio: ^1.0.9  # Commented out for WASM compatibility
@@ -61,6 +64,7 @@ package_rename_config:
     package_name: com.alheekmah.quranPackage
 
 flutter:
+  generate: true
   plugin:
     platforms:
       android:

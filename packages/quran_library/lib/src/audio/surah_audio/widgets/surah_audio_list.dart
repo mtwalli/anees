@@ -266,7 +266,7 @@ class BuildEnhancedSurahItem extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               child: Text(
-                                '${surah.ayahs.length} ${surahAudioCtrl.getAyahOrAyat(surah.ayahs.length, style: style)}'
+                                '${surah.ayahs.length} ${surahAudioCtrl.getAyahOrAyat(surah.ayahs.length, style: style, context: context)}'
                                     .convertNumbersAccordingToLang(
                                         languageCode: languageCode ?? 'ar'),
                                 style: QuranLibrary().cairoStyle.copyWith(

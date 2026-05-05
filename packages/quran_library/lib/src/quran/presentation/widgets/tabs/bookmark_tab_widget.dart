@@ -66,8 +66,7 @@ class _BookmarksTab extends StatelessWidget {
                         color: effectiveStyle.textColor!),
                   ),
                   subtitle: Text(
-                    'عدد: ${bookmarks.length}'.convertNumbersAccordingToLang(
-                        languageCode: languageCode),
+                    QuranLocalizations.of(context).bookmarkCount(bookmarks.length.toString().convertNumbersAccordingToLang(languageCode: languageCode)),
                     style: QuranLibrary().cairoStyle.copyWith(
                         color: effectiveStyle.subtitleTextColor!,
                         fontSize: effectiveStyle.subtitleFontSize!),
@@ -177,9 +176,7 @@ class _BookmarksTab extends StatelessWidget {
                                           _chip(
                                             context,
                                             effectiveStyle,
-                                            'آية ${bookmark.ayahNumber}'
-                                                .convertNumbersAccordingToLang(
-                                                    languageCode: languageCode),
+                                            QuranLocalizations.of(context).ayahLabel(bookmark.ayahNumber.toString().convertNumbersAccordingToLang(languageCode: languageCode)),
                                             groupColor.withValues(alpha: 0.12),
                                             effectiveStyle.textColor!,
                                           ),
@@ -187,10 +184,7 @@ class _BookmarksTab extends StatelessWidget {
                                             _chip(
                                               context,
                                               effectiveStyle,
-                                              'صفحة ${bookmark.page}'
-                                                  .convertNumbersAccordingToLang(
-                                                      languageCode:
-                                                          languageCode),
+                                              QuranLocalizations.of(context).pageLabel(bookmark.page.toString().convertNumbersAccordingToLang(languageCode: languageCode)),
                                               groupColor.withValues(
                                                   alpha: 0.12),
                                               effectiveStyle.textColor!,

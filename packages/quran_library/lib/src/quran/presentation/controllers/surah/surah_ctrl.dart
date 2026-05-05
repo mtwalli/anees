@@ -170,8 +170,11 @@ class SurahCtrl extends GetxController {
 
   /// الحصول على اسم السورة
   /// Get surah name
-  String getSurahName() {
-    return currentSurah.value?.arabicName ?? 'السورة $_surahNumber';
+  String getSurahName({BuildContext? context}) {
+    return currentSurah.value?.arabicName ??
+        (context != null
+            ? QuranLocalizations.of(context).surahFallbackName(_surahNumber.toString())
+            : 'السورة $_surahNumber');
   }
 
   /// الحصول على عدد صفحات السورة

@@ -443,7 +443,7 @@ class SurahDisplayScreen extends StatelessWidget {
     if (surahCtrl.surahPages.isEmpty) {
       return Center(
         child: Text(
-          'لا توجد آيات للسورة المحددة',
+          QuranLocalizations.of(context).noAyahsForSurah,
           style: TextStyle(
             color: AppColors.getTextColor(isDark),
             fontSize: 16,

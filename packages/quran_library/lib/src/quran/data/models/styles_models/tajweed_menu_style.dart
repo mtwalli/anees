@@ -132,7 +132,7 @@ class TajweedMenuStyle {
       borderRadius: 8,
       headerPadding:
           const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-      headerTitle: 'أحكام التجويد',
+      headerTitle: QuranLocalizations.of(context).tajweedRulesLabel,
       headerTitleColor: null,
       headerCloseIconColor: null,
       headerBackgroundGradient: null,

@@ -284,7 +284,7 @@ class DownloadFontsDialogStyle {
         package: 'quran_library',
       ),
       // عنوان ترويسة النافذة الافتراضي
-      headerTitle: 'الخطوط',
+      headerTitle: QuranLocalizations.of(context).fontsLabel,
       // لون أيقونة الإغلاق الافتراضي
       closeIconColor: AppColors.getTextColor(isDarkMode),
       backgroundGradient: LinearGradient(
@@ -301,7 +301,7 @@ class DownloadFontsDialogStyle {
           height: 24.0,
           colorFilter: ColorFilter.mode(
               Theme.of(context).colorScheme.primary, BlendMode.srcIn)),
-      notes: 'لجعل مظهر المصحف مشابه لمصحف المدينة يمكنك تحميل خطوط المصحف',
+      notes: QuranLocalizations.of(context).fontsDialogNotes,
       notesColor: AppColors.getTextColor(isDarkMode),
       notesStyle: TextStyle(
         fontSize: 14.0,
@@ -309,7 +309,7 @@ class DownloadFontsDialogStyle {
         fontFamily: 'cairo',
         package: 'quran_library',
       ),
-      tajweedOptionNames: 'مع التجويد',
+      tajweedOptionNames: QuranLocalizations.of(context).tajweedOption,
     );
   }
 }

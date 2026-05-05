@@ -282,7 +282,7 @@ class AyahMenuStyle {
       tafsirIconData: Icons.article_rounded,
       tapOffsetSpacing: 10.0,
       edgeSafeMargin: 10.0,
-      copySuccessMessage: 'تم النسخ الى الحافظة',
+      copySuccessMessage: QuranLocalizations.of(context).copySuccessMessage,
       customMenuItems: null,
       showPlayAllButton: true,
       showPlayButton: true,

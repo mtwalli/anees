@@ -35,7 +35,7 @@ class _TajweedAyaTab extends StatelessWidget {
     if (surahNumber == 0) {
       return Center(
         child: Text(
-          tafsirStyle.tajweedSurahNumberErrorText ?? 'تعذّر تحديد رقم السورة',
+          tafsirStyle.tajweedSurahNumberErrorText ?? QuranLocalizations.of(context).tajweedSurahError,
           style: tafsirStyle.tajweedStatusTextStyle ??
               TextStyle(
                 fontSize: 14,
@@ -92,7 +92,7 @@ class _TajweedAyaTab extends StatelessWidget {
                 children: [
                   Text(
                     tafsirStyle.tajweedUnavailableText ??
-                        'بيانات أحكام التجويد غير محمّلة.',
+                        QuranLocalizations.of(context).tajweedUnavailable,
                     style: tafsirStyle.tajweedStatusTextStyle ??
                         TextStyle(
                           fontSize: 14,
@@ -127,8 +127,8 @@ class _TajweedAyaTab extends StatelessWidget {
                           Text(
                             isDownloading
                                 ? (tafsirStyle.tajweedDownloadingText ??
-                                    'جاري التحميل...')
-                                : (tafsirStyle.tajweedDownloadText ?? 'تحميل'),
+                                    QuranLocalizations.of(context).tajweedDownloading)
+                                : (tafsirStyle.tajweedDownloadText ?? QuranLocalizations.of(context).tajweedDownload),
                             style: tafsirStyle.tajweedButtonTextStyle ??
                                 TextStyle(
                                   fontSize: 16,
@@ -178,7 +178,7 @@ class _TajweedAyaTab extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.all(16),
                       child: Text(
-                        '${tafsirStyle.tajweedLoadErrorText ?? 'تعذّر تحميل أحكام التجويد.'}\n${snap.error}',
+                        '${tafsirStyle.tajweedLoadErrorText ?? QuranLocalizations.of(context).tajweedLoadError}\n${snap.error}',
                         style: tafsirStyle.tajweedStatusTextStyle ??
                             TextStyle(
                               fontSize: 14,
@@ -197,7 +197,7 @@ class _TajweedAyaTab extends StatelessWidget {
                       padding: const EdgeInsets.all(16),
                       child: Text(
                         tafsirStyle.tajweedNoDataText ??
-                            'لا توجد بيانات تجويد لهذه الآية.',
+                            QuranLocalizations.of(context).tajweedNoData,
                         style: tafsirStyle.tajweedStatusTextStyle ??
                             TextStyle(
                               fontSize: 14,

@@ -18,6 +18,7 @@ import 'package:flutter_scale_kit/flutter_scale_kit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get_storage/get_storage.dart';
+import 'l10n/quran_localizations.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' as html_parser;
 import 'package:preload_page_view/preload_page_view.dart'

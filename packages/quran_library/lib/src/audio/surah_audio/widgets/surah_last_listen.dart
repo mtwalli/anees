@@ -49,7 +49,7 @@ class SurahLastListen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      style?.lastListenText ?? 'آخر إستماع',
+                      style?.lastListenText ?? QuranLocalizations.of(context).lastListenLabel,
                       style: QuranLibrary().cairoStyle.copyWith(
                             fontSize: 16,
                             height: 1.3,

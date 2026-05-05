@@ -320,9 +320,9 @@ class _MenuBottomSheet extends StatelessWidget {
                       QuranLibrary().cairoStyle.copyWith(fontSize: 15),
                   tabs: [
                     if (!isSingleSurah)
-                      Tab(text: style.tabIndexLabel ?? 'الفهرس'),
-                    Tab(text: style.tabSearchLabel ?? 'البحث'),
-                    Tab(text: style.tabBookmarksLabel ?? 'الفواصل'),
+                      Tab(text: style.tabIndexLabel ?? QuranLocalizations.of(context).tabIndex),
+                    Tab(text: style.tabSearchLabel ?? QuranLocalizations.of(context).tabSearch),
+                    Tab(text: style.tabBookmarksLabel ?? QuranLocalizations.of(context).tabBookmarks),
                   ],
                 ),
               ),

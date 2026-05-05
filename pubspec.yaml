@@ -10,6 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.20.1
 
   # Quran display engine — authentic Medina Mushaf rendering
   quran_library: ^4.0.3
@@ -25,6 +28,7 @@ dependency_overrides:
     path: packages/quran_library
 
 flutter:
+  generate: true
   uses-material-design: true
 
 flutter_launcher_icons:

@@ -338,7 +338,7 @@ class DownloadedTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       style?.countTextBuilder?.call(downloaded, total) ??
-          'تم تحميل $downloaded/$total آية'
+          QuranLocalizations.of(context).ayahDownloadCount(downloaded.toString(), total.toString())
               .convertNumbersAccordingToLang(languageCode: language ?? 'ar'),
       style: style?.surahSubtitleStyle ??
           QuranLibrary().cairoStyle.copyWith(
@@ -425,7 +425,7 @@ class HeaderBuild extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    style?.titleText ?? 'إدارة تحميل آيات السور',
+                    style?.titleText ?? QuranLocalizations.of(context).downloadManagerTitle,
                     style: style?.titleTextStyle ??
                         QuranLibrary().cairoStyle.copyWith(
                               fontSize: 18,

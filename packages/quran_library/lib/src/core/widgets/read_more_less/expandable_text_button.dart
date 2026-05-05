@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quran_library/l10n/quran_localizations.dart';
 
 class ExpandableTextButton extends StatelessWidget {
   const ExpandableTextButton({
@@ -30,7 +31,7 @@ class ExpandableTextButton extends StatelessWidget {
             constraints: const BoxConstraints(),
             child: TextButton.icon(
               icon: Text(
-                readLessText ?? 'Read less',
+                readLessText ?? QuranLocalizations.of(context).readLess,
                 style: buttonTextStyle,
               ),
               label: iconExpanded ??
@@ -43,7 +44,7 @@ class ExpandableTextButton extends StatelessWidget {
           )
         : TextButton.icon(
             icon: Text(
-              readMoreText ?? 'Read more',
+              readMoreText ?? QuranLocalizations.of(context).readMore,
               style: buttonTextStyle,
             ),
             label: iconCollapsed ??

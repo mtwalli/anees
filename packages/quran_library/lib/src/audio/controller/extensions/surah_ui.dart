@@ -54,7 +54,7 @@ extension SurahUi on AudioCtrl {
       }
     } else {
       ToastUtils().showToast(context,
-          style?.noInternetConnectionText ?? 'لا يوجد اتصال بالإنترنت');
+          style?.noInternetConnectionText ?? QuranLocalizations.of(context).noInternetText);
     }
   }
 
@@ -115,7 +115,7 @@ extension SurahUi on AudioCtrl {
       state.isSheetOpen.value = true;
     } else {
       ToastUtils().showToast(context,
-          style?.noInternetConnectionText ?? 'لا يوجد اتصال بالإنترنت');
+          style?.noInternetConnectionText ?? QuranLocalizations.of(context).noInternetText);
     }
   }
 }

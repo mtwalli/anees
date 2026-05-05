@@ -58,7 +58,7 @@ class AyahChangeReader extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: HeaderDialogWidget(
-            title: effectiveStyle.dialogHeaderTitle ?? 'تغيير القارئ',
+            title: effectiveStyle.dialogHeaderTitle ?? QuranLocalizations.of(context).changeReaderLabel,
             isDark: dark,
             titleColor: effectiveStyle.dialogHeaderTitleColor,
             backgroundGradient: effectiveStyle.dialogHeaderBackgroundGradient,

@@ -18,6 +18,21 @@ enum AutoScrollStopCondition {
 }
 
 extension AutoScrollStopConditionX on AutoScrollStopCondition {
+  /// التسمية المحلية بحسب الـ locale
+  String label(BuildContext context) {
+    final l = QuranLocalizations.of(context);
+    switch (this) {
+      case AutoScrollStopCondition.nextHizb:
+        return l.stopConditionNextHizb;
+      case AutoScrollStopCondition.nextJuz:
+        return l.stopConditionNextJuz;
+      case AutoScrollStopCondition.pageCount:
+        return l.stopConditionPageCount;
+      case AutoScrollStopCondition.manual:
+        return l.stopConditionManual;
+    }
+  }
+
   String get labelAr {
     switch (this) {
       case AutoScrollStopCondition.nextHizb:

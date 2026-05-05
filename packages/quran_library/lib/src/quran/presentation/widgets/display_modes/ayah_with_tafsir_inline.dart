@@ -742,7 +742,7 @@ class _InlineAyahTafsirItem extends StatelessWidget {
 
     if (!hasContent) {
       return Text(
-        languageCode == 'ar' ? 'لا يوجد تفسير متاح' : 'No tafsir available',
+        QuranLocalizations.of(context).noTafsirAvailable,
         style: TextStyle(
           color: isDark ? Colors.grey.shade500 : Colors.grey.shade500,
           fontSize: 14,
@@ -762,8 +762,8 @@ class _InlineAyahTafsirItem extends StatelessWidget {
       textDirection: context.alignmentLayoutWPassLang(
           language, TextDirection.rtl, TextDirection.ltr),
       maxLines: style.tafsirMaxLines ?? 4,
-      readMoreText: style.readMoreText ?? 'اقرأ المزيد',
-      readLessText: style.readLessText ?? 'اقرأ أقل',
+      readMoreText: style.readMoreText ?? QuranLocalizations.of(context).readMore,
+      readLessText: style.readLessText ?? QuranLocalizations.of(context).readLess,
       readMoreButtonColor: style.readMoreButtonColor,
       readMoreTextStyle: style.readMoreTextStyle,
       translation: !isTafsir ? translation : null,
@@ -834,7 +834,7 @@ class _ExpandableTafsirTextState extends State<_ExpandableTafsirText> {
         final footnoteSpans = <TextSpan>[
           const TextSpan(text: '\n\n'),
           TextSpan(
-            text: 'الحواشي:\n',
+            text: QuranLocalizations.of(context).footnotesHeader,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: widget.fontSize * 0.95,

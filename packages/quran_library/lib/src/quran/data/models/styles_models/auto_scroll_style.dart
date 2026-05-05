@@ -226,7 +226,7 @@ class AutoScrollStyle {
         color: AppColors.getTextColor(isDark),
         package: 'quran_library',
       ),
-      notesLabelText: 'ضبط سرعة السكرول والتوقف التلقائي',
+      notesLabelText: QuranLocalizations.of(context).autoScrollNotes,
     );
   }
 }

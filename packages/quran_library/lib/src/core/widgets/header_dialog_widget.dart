@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quran_library/l10n/quran_localizations.dart';
 import 'package:quran_library/src/core/utils/app_colors.dart';
 
 class HeaderDialogWidget extends StatelessWidget {
@@ -62,7 +63,7 @@ class HeaderDialogWidget extends StatelessWidget {
         Align(
           alignment: AlignmentDirectional.centerStart,
           child: IconButton(
-            tooltip: 'إغلاق',
+            tooltip: QuranLocalizations.of(context).closeLabel,
             icon: Icon(Icons.close_rounded,
                 color: closeIconColor ?? AppColors.getTextColor(isDark!),
                 size: 20),

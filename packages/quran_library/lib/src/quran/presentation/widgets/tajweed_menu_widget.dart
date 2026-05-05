@@ -38,7 +38,7 @@ class TajweedMenuWidget extends StatelessWidget {
                                 vertical: 8.0, horizontal: 12.0),
                         child: HeaderDialogWidget(
                           isDark: isDark,
-                          title: defaults.headerTitle ?? 'أحكام التجويد',
+                          title: defaults.headerTitle ?? QuranLocalizations.of(context).tajweedRulesLabel,
                           titleColor: defaults.headerTitleColor,
                           closeIconColor: defaults.headerCloseIconColor,
                           backgroundGradient: defaults.headerBackgroundGradient,

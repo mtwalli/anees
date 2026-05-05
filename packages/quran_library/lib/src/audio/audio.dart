@@ -10,6 +10,7 @@ import 'package:flutter_scale_kit/flutter_scale_kit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get_storage/get_storage.dart';
+import 'package:quran_library/l10n/quran_localizations.dart';
 import 'package:path/path.dart';
 import 'package:quran_library/src/audio/audio.dart';
 import 'package:rxdart/rxdart.dart' as r;

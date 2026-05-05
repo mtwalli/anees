@@ -49,8 +49,8 @@ class _IndexTab extends StatelessWidget {
               unselectedLabelStyle: style.unselectedLabelStyle ??
                   QuranLibrary().cairoStyle.copyWith(fontSize: 13),
               tabs: [
-                Tab(text: style.tabSurahsLabel ?? 'السور'),
-                Tab(text: style.tabJozzLabel ?? 'الأجزاء'),
+                Tab(text: style.tabSurahsLabel ?? QuranLocalizations.of(context).tabSurahs),
+                Tab(text: style.tabJozzLabel ?? QuranLocalizations.of(context).tabJuz),
               ],
             ),
           ),

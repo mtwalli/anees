@@ -193,7 +193,7 @@ class _PackageSliderWidgetState extends State<PackageSliderWidget> {
                       ),
                     ),
                     child: Text(
-                      'جارِ التحميل',
+                      QuranLocalizations.of(context).seekBarDownloadingLabel,
                       style: QuranLibrary().cairoStyle.copyWith(
                             color: widget.textColor ?? Colors.white,
                             height: 1.3,

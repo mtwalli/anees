@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:quran_library/quran_library.dart';
 import 'core/theme/app_colors.dart';
 import 'core/theme/app_theme.dart';
+import 'l10n/app_localizations.dart';
 
 class AneesApp extends StatelessWidget {
   const AneesApp({super.key});
@@ -9,11 +11,23 @@ class AneesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Anees — The Intelligent Quran',
+      title: 'Anees',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.system,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        QuranLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('de'),
+        Locale('ar'),
+      ],
       home: const _QuranHome(),
     );
   }
@@ -53,8 +67,8 @@ class _QuranHome extends StatelessWidget {
         accentColor: accent,
         iconColor: accent,
         shadowColor: Colors.black54,
-        quranTabText: 'Quran',
-        tenRecitationsTabText: 'Recitations',
+        quranTabText: QuranLocalizations.of(context).quranTabMain,
+        tenRecitationsTabText: QuranLocalizations.of(context).tenRecitationsTab,
         tabLabelStyle: TextStyle(
           color: accent,
           fontFamily: AppTheme.arabicUIFont,

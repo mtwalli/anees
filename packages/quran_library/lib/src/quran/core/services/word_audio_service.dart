@@ -117,7 +117,7 @@ class WordAudioService {
     } else {
       ToastUtils().showToast(
         Get.context!,
-        'لا يوجد اتصال بالإنترنت',
+        QuranLocalizations.of(Get.context!).noInternetText,
       );
     }
   }
@@ -182,7 +182,7 @@ class WordAudioService {
     } else {
       ToastUtils().showToast(
         Get.context!,
-        'لا يوجد اتصال بالإنترنت',
+        QuranLocalizations.of(Get.context!).noInternetText,
       );
     }
   }

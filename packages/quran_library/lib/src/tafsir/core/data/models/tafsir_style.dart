@@ -297,18 +297,18 @@ class TafsirStyle {
     final titleOnBg = primary;
 
     // أسماء افتراضية نصية
-    const defaultTafsirName = 'التفسير';
-    const defaultTranslateName = 'الترجمة';
-    const defaultFootnotesName = 'الحواشي';
-    const defaultEmptyNote = '\n\nتفسير هذه الآية في الأيات السابقة';
+    final defaultTafsirName = QuranLocalizations.of(context).tafsirLabel;
+    final defaultTranslateName = QuranLocalizations.of(context).translationLabel;
+    final defaultFootnotesName = QuranLocalizations.of(context).footnotesLabel;
+    final defaultEmptyNote = QuranLocalizations.of(context).emptyTafsirNote;
 
     // نصوص افتراضية لتبويب أحكام التجويد
-    const tajweedSurahNumberError = 'تعذّر تحديد رقم السورة';
-    const tajweedUnavailable = 'بيانات أحكام التجويد غير محمّلة.';
-    const tajweedDownload = 'تحميل';
-    const tajweedDownloading = 'جاري التحميل...';
-    const tajweedLoadError = 'تعذّر تحميل أحكام التجويد.';
-    const tajweedNoData = 'لا توجد بيانات تجويد لهذه الآية.';
+    final tajweedSurahNumberError = QuranLocalizations.of(context).tajweedSurahError;
+    final tajweedUnavailable = QuranLocalizations.of(context).tajweedUnavailable;
+    final tajweedDownload = QuranLocalizations.of(context).tajweedDownload;
+    final tajweedDownloading = QuranLocalizations.of(context).tajweedDownloading;
+    final tajweedLoadError = QuranLocalizations.of(context).tajweedLoadError;
+    final tajweedNoData = QuranLocalizations.of(context).tajweedNoData;
 
     return TafsirStyle(
       // الألوان العامة
@@ -369,7 +369,7 @@ class TafsirStyle {
       fontSizeIconWidget: Semantics(
         button: true,
         enabled: true,
-        label: 'Change Font Size',
+        label: QuranLocalizations.of(context).changeFontSize,
         child: Icon(
           Icons.text_format_outlined,
           size: 34,
@@ -436,7 +436,7 @@ class TafsirStyle {
           primary.withValues(alpha: 0.05),
         ],
       ),
-      dialogHeaderTitle: 'تغيير التفسير',
+      dialogHeaderTitle: QuranLocalizations.of(context).changeTafsirLabel,
       tabBarLabelStyle: TextStyle(
         fontFamily: 'cairo',
         package: 'quran_library',

@@ -159,7 +159,7 @@ class AudioCtrl extends GetxController {
       if (Get.context != null) {
         // تنبيه ودّي للمستخدم النهائي بدون تفاصيل تقنية
         ToastUtils().showToast(
-            Get.context!, 'تعذّرت تهيئة خدمة الصوت. ستعمل دون تحكم بالنظام.');
+            Get.context!, QuranLocalizations.of(Get.context!).audioServiceInitError);
       }
       // علّم الحالة ليتصرّف المشغّل دون تكامل النظام
       state.audioServiceInitialized.value = false;
@@ -209,7 +209,7 @@ class AudioCtrl extends GetxController {
     } else {
       if (!isConnected) {
         if (Get.context != null) {
-          ToastUtils().showToast(Get.context!, 'لا يوجد اتصال بالإنترنت');
+          ToastUtils().showToast(Get.context!, QuranLocalizations.of(Get.context!).noInternetText);
         }
       } else {
         state.isPlaying.value = true;
@@ -259,11 +259,11 @@ class AudioCtrl extends GetxController {
       if (context!.mounted) {
         if (showSnakbars && !state.snackBarShownForBatch) {
           if (!isConnected) {
-            ToastUtils().showToast(context, 'لا يوجد اتصال بالإنترنت');
+            ToastUtils().showToast(context, QuranLocalizations.of(context).noInternetText);
           } else if (isPhoneData) {
             state.snackBarShownForBatch = true; // Set the flag to true
             ToastUtils()
-                .showToast(context, 'تنبيه: أنت تستخدم بيانات الجوال للتحميل');
+                .showToast(context, QuranLocalizations.of(context).mobileDataWarning);
           }
         }
       }
@@ -280,7 +280,7 @@ class AudioCtrl extends GetxController {
         }
       } else {
         if (context.mounted) {
-          ToastUtils().showToast(context, 'لا يوجد اتصال بالإنترنت');
+          ToastUtils().showToast(context, QuranLocalizations.of(context).noInternetText);
         }
       }
     }
@@ -610,7 +610,7 @@ class AudioCtrl extends GetxController {
     if (!hasAudioFocus) {
       if (Get.context != null) {
         ToastUtils().showToast(
-            Get.context!, 'يتم تشغيل صوت آخر في التطبيق. يرجى إيقافه أولاً.');
+            Get.context!, QuranLocalizations.of(Get.context!).audioFocusError);
       }
       return false;
     }

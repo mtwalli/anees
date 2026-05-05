@@ -26,14 +26,14 @@ class AutoScrollSettingsWidget extends StatelessWidget {
     final style = autoScrollStyle ?? AutoScrollTheme.of(context)?.style;
 
     // ─── Resolve texts ──────────────────────────────────────────
-    final titleText = style?.settingsTitleText ?? 'السكرول التلقائي';
-    final stopLabel = style?.stopConditionLabelText ?? 'التوقف عند:';
-    final pageCountLabel = style?.pageCountLabelText ?? 'عدد الصفحات:';
-    final speedLabel = style?.speedLabelText ?? 'السرعة:';
-    final slowText = style?.slowLabelText ?? 'بطيء';
-    final fastText = style?.fastLabelText ?? 'سريع';
+    final titleText = style?.settingsTitleText ?? QuranLocalizations.of(context).autoScrollTitle;
+    final stopLabel = style?.stopConditionLabelText ?? QuranLocalizations.of(context).stopAtLabel;
+    final pageCountLabel = style?.pageCountLabelText ?? QuranLocalizations.of(context).pageCountLabel;
+    final speedLabel = style?.speedLabelText ?? QuranLocalizations.of(context).speedLabel;
+    final slowText = style?.slowLabelText ?? QuranLocalizations.of(context).slowLabel;
+    final fastText = style?.fastLabelText ?? QuranLocalizations.of(context).fastLabel;
     final notesText =
-        style?.notesLabelText ?? 'ضبط سرعة السكرول والتوقف التلقائي';
+        style?.notesLabelText ?? QuranLocalizations.of(context).autoScrollNotes;
 
     // ─── Resolve styles ─────────────────────────────────────────
     final titleStyle = style?.settingsTitleStyle ??
@@ -122,7 +122,7 @@ class AutoScrollSettingsWidget extends StatelessWidget {
               children: AutoScrollStopCondition.values.map((condition) {
                 final isSelected = selectedCondition == condition;
                 final chipLabel =
-                    style?.stopConditionLabels?[condition] ?? condition.labelAr;
+                    style?.stopConditionLabels?[condition] ?? condition.label(context);
                 final chipStyle = style?.chipTextStyle != null
                     ? style!.chipTextStyle!.copyWith(
                         color: isSelected

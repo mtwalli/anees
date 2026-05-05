@@ -73,9 +73,9 @@ class SurahInfoStyle {
     final scheme = Theme.of(context).colorScheme;
     final primary = scheme.primary;
     return SurahInfoStyle(
-      ayahCount: 'عدد الآيات',
-      secondTabText: 'عن السورة',
-      firstTabText: 'أسماء السورة',
+      ayahCount: QuranLocalizations.of(context).surahInfoAyahCount,
+      secondTabText: QuranLocalizations.of(context).surahInfoAboutTab,
+      firstTabText: QuranLocalizations.of(context).surahInfoNamesTab,
       backgroundColor: AppColors.getBackgroundColor(isDark),
       closeIconColor: AppColors.getTextColor(isDark),
       indicatorColor: primary.withValues(alpha: .2),
