@@ -66,6 +66,18 @@ extension SurahUi on AudioCtrl {
     state.box.write(StorageConstants.surahReaderIndex, index);
     state.surahReaderIndex.value = index;
 
+    // مزامنة مع قائمة قراء الآيات بالاسم
+    final surahReaderName = ReadersConstants.activeSurahReaders[index].name;
+    final matchedAyahIndex = ReadersConstants.activeAyahReaders
+        .indexWhere((r) => r.name == surahReaderName);
+    if (matchedAyahIndex != -1) {
+      state.box.write(StorageConstants.ayahReaderIndex, matchedAyahIndex);
+      state.box.write(StorageConstants.ayahAudioPlayerSound,
+          ReadersConstants.activeAyahReaders[matchedAyahIndex].readerNamePath);
+      state.ayahReaderIndex.value = matchedAyahIndex;
+      update(['change_ayah_reader']);
+    }
+
     // إعادة تهيئة حالة التحميل للقارئ الجديد
     await initializeSurahDownloadStatus();
 
@@ -83,6 +95,17 @@ extension SurahUi on AudioCtrl {
         ReadersConstants.activeAyahReaders[index].readerNamePath);
     state.box.write(StorageConstants.ayahReaderIndex, index);
     state.ayahReaderIndex.value = index;
+
+    // مزامنة مع قائمة قراء السور بالاسم
+    final ayahReaderName = ReadersConstants.activeAyahReaders[index].name;
+    final matchedSurahIndex = ReadersConstants.activeSurahReaders
+        .indexWhere((r) => r.name == ayahReaderName);
+    if (matchedSurahIndex != -1) {
+      state.box.write(StorageConstants.surahReaderIndex, matchedSurahIndex);
+      state.surahReaderIndex.value = matchedSurahIndex;
+      update(['change_surah_reader']);
+    }
+
     Navigator.of(context).pop();
     update(['change_ayah_reader']);
     await _updateDownloadedAyahsMap();
