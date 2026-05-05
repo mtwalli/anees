@@ -59,12 +59,28 @@ class QpcV4RichTextLine extends StatefulWidget {
   State<QpcV4RichTextLine> createState() => _QpcV4RichTextLineState();
 }
 
-class _QpcV4RichTextLineState extends State<QpcV4RichTextLine> {
+class _QpcV4RichTextLineState extends State<QpcV4RichTextLine>
+    with SingleTickerProviderStateMixin {
   /// كاش الويدجت المبني — يُعاد بناؤه فقط عند تغيّر selection/bookmarks/word_info
   Widget? _cachedWidget;
 
   /// بصمة البيانات المؤثرة على البناء — عند تغيّرها يُبطل الكاش
   int _lastFingerprint = 0;
+
+  late final AnimationController _highlightAnim = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1800),
+  );
+  late final Animation<double> _highlightPulse = CurvedAnimation(
+    parent: _highlightAnim,
+    curve: Curves.easeInOut,
+  );
+
+  @override
+  void dispose() {
+    _highlightAnim.dispose();
+    super.dispose();
+  }
 
   /// حساب بصمة سريعة للبيانات التي تؤثر فعلياً على شكل الويدجت
   int _computeFingerprint() {
@@ -365,7 +381,13 @@ class _QpcV4RichTextLineState extends State<QpcV4RichTextLine> {
     final hasWordSelection = wordSelectionRange != null;
 
     if (!hasSelection && !hasBookmarks && !hasWordSelection) {
+      _highlightAnim.stop();
       return richText;
+    }
+
+    // Start / keep running the pulse animation whenever there is something to highlight.
+    if (!_highlightAnim.isAnimating) {
+      _highlightAnim.repeat(reverse: true);
     }
 
     return _AyahSelectionWidget(
@@ -374,6 +396,7 @@ class _QpcV4RichTextLineState extends State<QpcV4RichTextLine> {
           const Color(0xffCDAD80).withValues(alpha: 0.25),
       bookmarkRanges: bookmarkCharRanges.values.toList(),
       wordSelectionRange: wordSelectionRange,
+      highlightAnimation: _highlightPulse,
       child: richText,
     );
   }
@@ -409,12 +432,14 @@ class _AyahSelectionWidget extends SingleChildRenderObjectWidget {
   final Color selectionColor;
   final List<_ColoredTextRange> bookmarkRanges;
   final TextSelection? wordSelectionRange;
+  final Animation<double> highlightAnimation;
 
   const _AyahSelectionWidget({
     required this.selectedRanges,
     required this.selectionColor,
     this.bookmarkRanges = const [],
     this.wordSelectionRange,
+    required this.highlightAnimation,
     required super.child,
   });
 
@@ -425,6 +450,7 @@ class _AyahSelectionWidget extends SingleChildRenderObjectWidget {
       selectionColor: selectionColor,
       bookmarkRanges: bookmarkRanges,
       wordSelectionRange: wordSelectionRange,
+      highlightAnimation: highlightAnimation,
     );
   }
 
@@ -435,7 +461,8 @@ class _AyahSelectionWidget extends SingleChildRenderObjectWidget {
       ..selectedRanges = selectedRanges
       ..selectionColor = selectionColor
       ..bookmarkRanges = bookmarkRanges
-      ..wordSelectionRange = wordSelectionRange;
+      ..wordSelectionRange = wordSelectionRange
+      ..highlightAnimation = highlightAnimation;
   }
 }
 
@@ -447,10 +474,12 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
     required Color selectionColor,
     List<_ColoredTextRange> bookmarkRanges = const [],
     TextSelection? wordSelectionRange,
+    required Animation<double> highlightAnimation,
   })  : _selectedRanges = selectedRanges,
         _selectionColor = selectionColor,
         _bookmarkRanges = bookmarkRanges,
-        _wordSelectionRange = wordSelectionRange;
+        _wordSelectionRange = wordSelectionRange,
+        _highlightAnimation = highlightAnimation;
 
   static const _wordSelectionColor =
       Color(0xffCDAD80); // بدون alpha — يُطبّق عند الرسم
@@ -482,57 +511,82 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
     markNeedsPaint();
   }
 
+  Animation<double> _highlightAnimation;
+  set highlightAnimation(Animation<double> value) {
+    if (_highlightAnimation == value) return;
+    if (attached) {
+      _highlightAnimation.removeListener(markNeedsPaint);
+    }
+    _highlightAnimation = value;
+    if (attached) {
+      _highlightAnimation.addListener(markNeedsPaint);
+    }
+    markNeedsPaint();
+  }
+
+  @override
+  void attach(PipelineOwner owner) {
+    super.attach(owner);
+    _highlightAnimation.addListener(markNeedsPaint);
+  }
+
+  @override
+  void detach() {
+    _highlightAnimation.removeListener(markNeedsPaint);
+    super.detach();
+  }
+
   @override
   void paint(PaintingContext context, Offset offset) {
     if (child is RenderParagraph) {
+      final animVal = _highlightAnimation.value;
       // 1) علامات مرجعية (أسفل طبقة)
       if (_bookmarkRanges.isNotEmpty) {
-        _paintColoredRanges(context, offset, _bookmarkRanges);
+        _paintColoredRanges(context, offset, _bookmarkRanges, animVal);
       }
       // 2) تحديد الكلمة
       if (_wordSelectionRange != null) {
-        final paint = Paint()
-          ..color = _wordSelectionColor.withValues(alpha: 0.25);
         _paintMergedBoxes(
           child! as RenderParagraph,
           context,
           offset,
           [_wordSelectionRange!],
-          paint,
+          _wordSelectionColor,
+          animVal,
         );
       }
       // 3) تحديد الآية (أعلى طبقة)
       if (_selectedRanges.isNotEmpty) {
-        _paintSelectionBackgrounds(context, offset);
+        _paintSelectionBackgrounds(context, offset, animVal);
       }
     }
     super.paint(context, offset);
   }
 
   /// رسم خلفيات التحديد خلف الآيات المحدّدة.
-  void _paintSelectionBackgrounds(PaintingContext context, Offset offset) {
-    final paragraph = child! as RenderParagraph;
-    final bgPaint = Paint()..color = _selectionColor;
-    _paintMergedBoxes(paragraph, context, offset, _selectedRanges, bgPaint);
+  void _paintSelectionBackgrounds(
+      PaintingContext context, Offset offset, double animVal) {
+    _paintMergedBoxes(
+        child! as RenderParagraph, context, offset, _selectedRanges, _selectionColor, animVal);
   }
 
   /// رسم خلفيات العلامات المرجعية - كل نطاق بلونه الخاص.
-  void _paintColoredRanges(
-      PaintingContext context, Offset offset, List<_ColoredTextRange> ranges) {
+  void _paintColoredRanges(PaintingContext context, Offset offset,
+      List<_ColoredTextRange> ranges, double animVal) {
     final paragraph = child! as RenderParagraph;
     for (final cr in ranges) {
-      final paint = Paint()..color = cr.color;
-      _paintMergedBoxes(paragraph, context, offset, [cr.range], paint);
+      _paintMergedBoxes(paragraph, context, offset, [cr.range], cr.color, animVal);
     }
   }
 
-  /// دمج المستطيلات على نفس السطر ورسم RRect مستدير.
+  /// دمج المستطيلات على نفس السطر ورسم RRect مستدير مع تأثيرات فاخرة.
   void _paintMergedBoxes(
     RenderParagraph paragraph,
     PaintingContext context,
     Offset offset,
     List<TextSelection> ranges,
-    Paint bgPaint,
+    Color baseColor,
+    double animVal,
   ) {
     const padding = EdgeInsets.only(right: 4, top: 0, bottom: -6);
 
@@ -570,9 +624,11 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
 
       for (final rect in mergedRects) {
         final padded = padding.inflateRect(rect).shift(offset);
-        context.canvas.drawRRect(
+        paintFancyHighlight(
+          context.canvas,
           RRect.fromRectAndRadius(padded, const Radius.circular(16)),
-          bgPaint,
+          baseColor,
+          animVal,
         );
       }
     }

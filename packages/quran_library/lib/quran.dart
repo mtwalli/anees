@@ -37,6 +37,7 @@ import 'src/tafsir/tafsir.dart';
 
 part 'src/core/theme/quran_library_theme.dart';
 part 'src/core/utils/assets_path.dart';
+part 'src/core/utils/highlight_painter_utils.dart';
 part 'src/core/utils/toast_utils.dart';
 part 'src/core/widgets/patched_preload_page_view.dart';
 part 'src/flutter_quran_utils.dart';

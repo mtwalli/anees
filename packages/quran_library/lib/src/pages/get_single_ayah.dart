@@ -481,17 +481,71 @@ class GetSingleAyah extends StatelessWidget {
 }
 
 /// ويدجت رسم محلي لتظليل الكلمات المحدّدة — معزول عن [_AyahSelectionWidget]
-class _SingleAyahWordHighlight extends SingleChildRenderObjectWidget {
+class _SingleAyahWordHighlight extends StatefulWidget {
   final List<TextSelection> wordSelectionRanges;
   final Color highlightColor;
 
   /// عند `true` يُرسم النطاق كشريط متصل مع borderRadius على أول/آخر حافة فقط.
   final bool isContiguous;
 
+  final Widget child;
+
   const _SingleAyahWordHighlight({
     required this.wordSelectionRanges,
     required this.highlightColor,
     this.isContiguous = false,
+    required this.child,
+  });
+
+  @override
+  State<_SingleAyahWordHighlight> createState() =>
+      _SingleAyahWordHighlightState();
+}
+
+class _SingleAyahWordHighlightState extends State<_SingleAyahWordHighlight>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _ctrl = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1800),
+  )..repeat(reverse: true);
+
+  late final Animation<double> _pulse = CurvedAnimation(
+    parent: _ctrl,
+    curve: Curves.easeInOut,
+  );
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _SingleAyahWordHighlightLeaf(
+      wordSelectionRanges: widget.wordSelectionRanges,
+      highlightColor: widget.highlightColor,
+      isContiguous: widget.isContiguous,
+      highlightAnimation: _pulse,
+      child: widget.child,
+    );
+  }
+}
+
+class _SingleAyahWordHighlightLeaf extends SingleChildRenderObjectWidget {
+  final List<TextSelection> wordSelectionRanges;
+  final Color highlightColor;
+
+  /// عند `true` يُرسم النطاق كشريط متصل مع borderRadius على أول/آخر حافة فقط.
+  final bool isContiguous;
+
+  final Animation<double> highlightAnimation;
+
+  const _SingleAyahWordHighlightLeaf({
+    required this.wordSelectionRanges,
+    required this.highlightColor,
+    this.isContiguous = false,
+    required this.highlightAnimation,
     required super.child,
   });
 
@@ -501,6 +555,7 @@ class _SingleAyahWordHighlight extends SingleChildRenderObjectWidget {
       wordRanges: wordSelectionRanges,
       highlightColor: highlightColor,
       isContiguous: isContiguous,
+      highlightAnimation: highlightAnimation,
     );
   }
 
@@ -510,7 +565,8 @@ class _SingleAyahWordHighlight extends SingleChildRenderObjectWidget {
     renderObject
       ..wordRanges = wordSelectionRanges
       ..highlightColor = highlightColor
-      ..isContiguous = isContiguous;
+      ..isContiguous = isContiguous
+      ..highlightAnimation = highlightAnimation;
   }
 }
 
@@ -519,9 +575,11 @@ class _SingleAyahWordHighlightRenderBox extends RenderProxyBox {
     required List<TextSelection> wordRanges,
     required Color highlightColor,
     required bool isContiguous,
+    required Animation<double> highlightAnimation,
   })  : _wordRanges = wordRanges,
         _highlightColor = highlightColor,
-        _isContiguous = isContiguous;
+        _isContiguous = isContiguous,
+        _highlightAnimation = highlightAnimation;
 
   List<TextSelection> _wordRanges;
   set wordRanges(List<TextSelection> value) {
@@ -544,6 +602,31 @@ class _SingleAyahWordHighlightRenderBox extends RenderProxyBox {
     markNeedsPaint();
   }
 
+  Animation<double> _highlightAnimation;
+  set highlightAnimation(Animation<double> value) {
+    if (_highlightAnimation == value) return;
+    if (attached) {
+      _highlightAnimation.removeListener(markNeedsPaint);
+    }
+    _highlightAnimation = value;
+    if (attached) {
+      _highlightAnimation.addListener(markNeedsPaint);
+    }
+    markNeedsPaint();
+  }
+
+  @override
+  void attach(PipelineOwner owner) {
+    super.attach(owner);
+    _highlightAnimation.addListener(markNeedsPaint);
+  }
+
+  @override
+  void detach() {
+    _highlightAnimation.removeListener(markNeedsPaint);
+    super.detach();
+  }
+
   static const _radius = Radius.circular(16);
   static const _padding =
       EdgeInsets.only(left: 4, right: 4, top: 0, bottom: -6);
@@ -551,13 +634,11 @@ class _SingleAyahWordHighlightRenderBox extends RenderProxyBox {
   @override
   void paint(PaintingContext context, Offset offset) {
     if (child is RenderParagraph && _wordRanges.isNotEmpty) {
-      final paragraph = child! as RenderParagraph;
-      final paint = Paint()..color = _highlightColor;
-
+      final animVal = _highlightAnimation.value;
       if (_isContiguous) {
-        _paintContiguous(paragraph, context, offset, paint);
+        _paintContiguous(context, offset, animVal);
       } else {
-        _paintIndividual(paragraph, context, offset, paint);
+        _paintIndividual(context, offset, animVal);
       }
     }
     super.paint(context, offset);
@@ -565,11 +646,11 @@ class _SingleAyahWordHighlightRenderBox extends RenderProxyBox {
 
   /// رسم نطاق متصل — كل سطر مستطيل واحد، borderRadius على الحواف الخارجية فقط.
   void _paintContiguous(
-    RenderParagraph paragraph,
     PaintingContext context,
     Offset offset,
-    Paint paint,
+    double animVal,
   ) {
+    final paragraph = child! as RenderParagraph;
     // جمع كل boxes من كل النطاقات في قائمة واحدة
     final allBoxes = <TextBox>[];
     for (final range in _wordRanges) {
@@ -636,17 +717,17 @@ class _SingleAyahWordHighlightRenderBox extends RenderProxyBox {
         rRect = RRect.fromRectAndRadius(padded, Radius.zero);
       }
 
-      context.canvas.drawRRect(rRect, paint);
+      paintFancyHighlight(context.canvas, rRect, _highlightColor, animVal);
     }
   }
 
   /// رسم كل كلمة بشكل منفصل مع borderRadius على كل مستطيل.
   void _paintIndividual(
-    RenderParagraph paragraph,
     PaintingContext context,
     Offset offset,
-    Paint paint,
+    double animVal,
   ) {
+    final paragraph = child! as RenderParagraph;
     for (final range in _wordRanges) {
       final boxes = paragraph.getBoxesForSelection(
         range,
@@ -681,9 +762,11 @@ class _SingleAyahWordHighlightRenderBox extends RenderProxyBox {
 
       for (final rect in mergedRects) {
         final padded = _padding.inflateRect(rect).shift(offset);
-        context.canvas.drawRRect(
+        paintFancyHighlight(
+          context.canvas,
           RRect.fromRectAndRadius(padded, _radius),
-          paint,
+          _highlightColor,
+          animVal,
         );
       }
     }
