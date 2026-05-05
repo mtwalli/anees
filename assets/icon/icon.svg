@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Background rounded square -->
+  <rect width="1024" height="1024" rx="220" ry="220" fill="#1A6B3C"/>
+
+  <!-- Subtle inner glow ring -->
+  <rect x="40" y="40" width="944" height="944" rx="190" ry="190"
+        fill="none" stroke="#2E8B57" stroke-width="6" opacity="0.5"/>
+
+  <!-- Open book base -->
+  <g transform="translate(512, 490)">
+    <!-- Left page -->
+    <path d="M-260,-170 C-260,-185 -248,-195 -234,-192
+             L-20,-150 L-20,190 L-234,148
+             C-248,145 -260,135 -260,120 Z"
+          fill="#F5F0E8" opacity="0.97"/>
+
+    <!-- Right page -->
+    <path d="M260,-170 C260,-185 248,-195 234,-192
+             L20,-150 L20,190 L234,148
+             C248,145 260,135 260,120 Z"
+          fill="#EDE8DC" opacity="0.97"/>
+
+    <!-- Spine / binding line -->
+    <rect x="-10" y="-160" width="20" height="355" rx="10" fill="#C8A84B"/>
+
+    <!-- Left page lines (text lines) -->
+    <line x1="-220" y1="-100" x2="-40" y2="-88"  stroke="#C8A84B" stroke-width="7"  stroke-linecap="round" opacity="0.6"/>
+    <line x1="-220" y1="-55"  x2="-40" y2="-43"  stroke="#C8A84B" stroke-width="5"  stroke-linecap="round" opacity="0.4"/>
+    <line x1="-220" y1="-10"  x2="-40" y2="2"    stroke="#C8A84B" stroke-width="5"  stroke-linecap="round" opacity="0.4"/>
+    <line x1="-220" y1="35"   x2="-40" y2="47"   stroke="#C8A84B" stroke-width="5"  stroke-linecap="round" opacity="0.4"/>
+    <line x1="-220" y1="80"   x2="-40" y2="92"   stroke="#C8A84B" stroke-width="5"  stroke-linecap="round" opacity="0.4"/>
+    <line x1="-220" y1="125"  x2="-40" y2="137"  stroke="#C8A84B" stroke-width="5"  stroke-linecap="round" opacity="0.4"/>
+
+    <!-- Right page lines -->
+    <line x1="220" y1="-100" x2="40" y2="-88"  stroke="#C8A84B" stroke-width="7"  stroke-linecap="round" opacity="0.6"/>
+    <line x1="220" y1="-55"  x2="40" y2="-43"  stroke="#C8A84B" stroke-width="5"  stroke-linecap="round" opacity="0.4"/>
+    <line x1="220" y1="-10"  x2="40" y2="2"    stroke="#C8A84B" stroke-width="5"  stroke-linecap="round" opacity="0.4"/>
+    <line x1="220" y1="35"   x2="40" y2="47"   stroke="#C8A84B" stroke-width="5"  stroke-linecap="round" opacity="0.4"/>
+    <line x1="220" y1="80"   x2="40" y2="92"   stroke="#C8A84B" stroke-width="5"  stroke-linecap="round" opacity="0.4"/>
+    <line x1="220" y1="125"  x2="40" y2="137"  stroke="#C8A84B" stroke-width="5"  stroke-linecap="round" opacity="0.4"/>
+  </g>
+
+  <!-- Gold crescent moon, top center -->
+  <g transform="translate(512, 185)">
+    <circle cx="0" cy="0" r="88" fill="#C8A84B"/>
+    <circle cx="36" cy="-20" r="72" fill="#1A6B3C"/>
+  </g>
+
+  <!-- Small gold star next to crescent -->
+  <g transform="translate(608, 128) scale(0.9)">
+    <polygon points="0,-28 6.5,-9 26,-9 11,3 17,22 0,11 -17,22 -11,3 -26,-9 -6.5,-9"
+             fill="#C8A84B"/>
+  </g>
+
+  <!-- App name "Anees" at bottom -->
+  <text x="512" y="890"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="96"
+        font-weight="bold"
+        fill="#C8A84B"
+        text-anchor="middle"
+        letter-spacing="6">Anees</text>
+</svg>
