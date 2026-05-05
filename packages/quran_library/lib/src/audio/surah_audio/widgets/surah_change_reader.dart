@@ -15,16 +15,15 @@ class SurahChangeSurahReader extends StatelessWidget {
     return GestureDetector(
       onTap: () => showDialog(
         context: context,
-        builder: (context) => AlertDialog(
+        builder: (context) => Dialog(
           backgroundColor:
               s.dialogBackgroundColor ?? AppColors.getBackgroundColor(dark),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(s.dialogBorderRadius ?? 16.0),
           ),
-          contentPadding: EdgeInsets.zero,
           insetPadding:
               const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
-          content: ConstrainedBox(
+          child: ConstrainedBox(
             constraints: BoxConstraints(
               maxHeight:
                   s.dialogHeight ?? MediaQuery.of(context).size.height * 0.7,

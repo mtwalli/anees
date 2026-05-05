@@ -16,17 +16,16 @@ class AyahChangeReader extends StatelessWidget {
     return GestureDetector(
       onTap: () => showDialog(
         context: context,
-        builder: (context) => AlertDialog(
+        builder: (context) => Dialog(
           backgroundColor: effectiveStyle.dialogBackgroundColor ??
               AppColors.getBackgroundColor(dark),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
                 effectiveStyle.dialogBorderRadius ?? 16.0),
           ),
-          contentPadding: EdgeInsets.zero,
           insetPadding:
               const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
-          content: ConstrainedBox(
+          child: ConstrainedBox(
             constraints: BoxConstraints(
               maxHeight: effectiveStyle.dialogHeight ??
                   MediaQuery.of(context).size.height * 0.7,

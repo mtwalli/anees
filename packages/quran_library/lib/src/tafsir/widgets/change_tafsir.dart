@@ -92,12 +92,11 @@ class DailogBuild extends StatelessWidget {
     return GetBuilder<TafsirCtrl>(
       id: 'tafsirs_menu_list',
       builder: (tafsirCtrl) {
-        return AlertDialog(
+        return Dialog(
           backgroundColor: tafsirStyle?.dialogBackgroundColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          contentPadding: EdgeInsets.zero,
-          content: ConstrainedBox(
+          child: ConstrainedBox(
             constraints: BoxConstraints(
               maxWidth: tafsirStyle?.changeTafsirDialogWidth ??
                   MediaQuery.of(context).size.width,
