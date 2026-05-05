@@ -76,8 +76,88 @@ class _QpcV4RichTextLineState extends State<QpcV4RichTextLine>
     curve: Curves.easeInOut,
   );
 
+  /// تقدّم تشغيل الصوت للآية المحدّدة على هذا السطر (0.0–1.0، أو -1.0 إذا لم يكن نشطاً).
+  /// يُستخدم مباشرة بواسطة [_AyahSelectionRenderBox] دون إعادة بناء الويدجت.
+  final ValueNotifier<double> _playbackProgress = ValueNotifier<double>(-1.0);
+  StreamSubscription<PackagePositionData>? _positionSub;
+
+  void _subscribeToAudio() {
+    _positionSub?.cancel();
+    final audioCtrl = AudioCtrl.instance;
+
+    // Cached per-ayah line fractions so we don't recompute on every position tick.
+    int? cachedAyahUq;
+    double lineStart = 0.0; // global progress at which this line starts filling
+    double lineEnd = 1.0;   // global progress at which this line is fully filled
+
+    _positionSub = audioCtrl.positionDataStream.listen((data) {
+      final playingUq = audioCtrl.state.currentAyahUniqueNumber.value;
+      final isOnThisLine = widget.segments.any((s) => s.ayahUq == playingUq);
+
+      if (!isOnThisLine ||
+          !audioCtrl.state.isPlaying.value ||
+          data.duration == Duration.zero) {
+        if (_playbackProgress.value != -1.0) {
+          _playbackProgress.value = -1.0;
+        }
+        return;
+      }
+
+      // Recompute line fractions when the playing ayah changes.
+      if (cachedAyahUq != playingUq) {
+        cachedAyahUq = playingUq;
+
+        // Words of the playing ayah that are on THIS line.
+        final lineWords = widget.segments
+            .where((s) => s.ayahUq == playingUq)
+            .map((s) => s.wordNumber)
+            .toList();
+        final lineFirstWord = lineWords.reduce(math.min);
+        final lineLastWord = lineWords.reduce(math.max);
+
+        // Total word count for this ayah: scan all lines of this page.
+        int totalWords = lineLastWord; // fallback if we can't find more
+        final pageBlocks = widget.quranCtrl
+            .getQpcLayoutBlocksForPageSync(widget.pageIndex + 1);
+        for (final block in pageBlocks) {
+          if (block is! QpcV4AyahLineBlock) continue;
+          for (final seg in block.segments) {
+            if (seg.ayahUq == playingUq && seg.wordNumber > totalWords) {
+              totalWords = seg.wordNumber;
+            }
+          }
+        }
+
+        // Each line's share is proportional to its word count.
+        // lineStart = (lineFirstWord - 1) / totalWords
+        // lineEnd   = lineLastWord / totalWords
+        lineStart = (lineFirstWord - 1) / totalWords;
+        lineEnd = lineLastWord / totalWords;
+      }
+
+      // Map global 0→1 progress into this line's 0→1 local progress.
+      final globalProgress =
+          (data.position.inMicroseconds / data.duration.inMicroseconds)
+              .clamp(0.0, 1.0);
+
+      double lineProgress;
+      if (globalProgress <= lineStart) {
+        lineProgress = 0.0;
+      } else if (globalProgress >= lineEnd) {
+        lineProgress = 1.0;
+      } else {
+        final span = lineEnd - lineStart;
+        lineProgress = ((globalProgress - lineStart) / span).clamp(0.0, 1.0);
+      }
+
+      _playbackProgress.value = lineProgress;
+    });
+  }
+
   @override
   void dispose() {
+    _positionSub?.cancel();
+    _playbackProgress.dispose();
     _highlightAnim.dispose();
     super.dispose();
   }
@@ -382,12 +462,24 @@ class _QpcV4RichTextLineState extends State<QpcV4RichTextLine>
 
     if (!hasSelection && !hasBookmarks && !hasWordSelection) {
       _highlightAnim.stop();
+      _positionSub?.cancel();
+      _positionSub = null;
+      if (_playbackProgress.value != -1.0) _playbackProgress.value = -1.0;
       return richText;
     }
 
     // Start / keep running the pulse animation whenever there is something to highlight.
     if (!_highlightAnim.isAnimating) {
       _highlightAnim.repeat(reverse: true);
+    }
+
+    // Subscribe to audio progress whenever there is an ayah selection on this line.
+    if (hasSelection && _positionSub == null) {
+      _subscribeToAudio();
+    } else if (!hasSelection) {
+      _positionSub?.cancel();
+      _positionSub = null;
+      if (_playbackProgress.value != -1.0) _playbackProgress.value = -1.0;
     }
 
     return _AyahSelectionWidget(
@@ -397,6 +489,7 @@ class _QpcV4RichTextLineState extends State<QpcV4RichTextLine>
       bookmarkRanges: bookmarkCharRanges.values.toList(),
       wordSelectionRange: wordSelectionRange,
       highlightAnimation: _highlightPulse,
+      playbackProgressNotifier: _playbackProgress,
       child: richText,
     );
   }
@@ -433,6 +526,8 @@ class _AyahSelectionWidget extends SingleChildRenderObjectWidget {
   final List<_ColoredTextRange> bookmarkRanges;
   final TextSelection? wordSelectionRange;
   final Animation<double> highlightAnimation;
+  /// تقدّم تشغيل الصوت (0.0–1.0). القيمة -1.0 تعني لا يوجد تشغيل نشط.
+  final ValueNotifier<double> playbackProgressNotifier;
 
   const _AyahSelectionWidget({
     required this.selectedRanges,
@@ -440,6 +535,7 @@ class _AyahSelectionWidget extends SingleChildRenderObjectWidget {
     this.bookmarkRanges = const [],
     this.wordSelectionRange,
     required this.highlightAnimation,
+    required this.playbackProgressNotifier,
     required super.child,
   });
 
@@ -451,6 +547,7 @@ class _AyahSelectionWidget extends SingleChildRenderObjectWidget {
       bookmarkRanges: bookmarkRanges,
       wordSelectionRange: wordSelectionRange,
       highlightAnimation: highlightAnimation,
+      playbackProgressNotifier: playbackProgressNotifier,
     );
   }
 
@@ -462,7 +559,8 @@ class _AyahSelectionWidget extends SingleChildRenderObjectWidget {
       ..selectionColor = selectionColor
       ..bookmarkRanges = bookmarkRanges
       ..wordSelectionRange = wordSelectionRange
-      ..highlightAnimation = highlightAnimation;
+      ..highlightAnimation = highlightAnimation
+      ..playbackProgressNotifier = playbackProgressNotifier;
   }
 }
 
@@ -475,11 +573,13 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
     List<_ColoredTextRange> bookmarkRanges = const [],
     TextSelection? wordSelectionRange,
     required Animation<double> highlightAnimation,
+    required ValueNotifier<double> playbackProgressNotifier,
   })  : _selectedRanges = selectedRanges,
         _selectionColor = selectionColor,
         _bookmarkRanges = bookmarkRanges,
         _wordSelectionRange = wordSelectionRange,
-        _highlightAnimation = highlightAnimation;
+        _highlightAnimation = highlightAnimation,
+        _playbackProgressNotifier = playbackProgressNotifier;
 
   static const _wordSelectionColor =
       Color(0xffCDAD80); // بدون alpha — يُطبّق عند الرسم
@@ -524,15 +624,30 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
     markNeedsPaint();
   }
 
+  ValueNotifier<double> _playbackProgressNotifier;
+  set playbackProgressNotifier(ValueNotifier<double> value) {
+    if (_playbackProgressNotifier == value) return;
+    if (attached) {
+      _playbackProgressNotifier.removeListener(markNeedsPaint);
+    }
+    _playbackProgressNotifier = value;
+    if (attached) {
+      _playbackProgressNotifier.addListener(markNeedsPaint);
+    }
+    markNeedsPaint();
+  }
+
   @override
   void attach(PipelineOwner owner) {
     super.attach(owner);
     _highlightAnimation.addListener(markNeedsPaint);
+    _playbackProgressNotifier.addListener(markNeedsPaint);
   }
 
   @override
   void detach() {
     _highlightAnimation.removeListener(markNeedsPaint);
+    _playbackProgressNotifier.removeListener(markNeedsPaint);
     super.detach();
   }
 
@@ -540,6 +655,7 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
   void paint(PaintingContext context, Offset offset) {
     if (child is RenderParagraph) {
       final animVal = _highlightAnimation.value;
+      final progress = _playbackProgressNotifier.value;
       // 1) علامات مرجعية (أسفل طبقة)
       if (_bookmarkRanges.isNotEmpty) {
         _paintColoredRanges(context, offset, _bookmarkRanges, animVal);
@@ -555,9 +671,9 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
           animVal,
         );
       }
-      // 3) تحديد الآية (أعلى طبقة)
+      // 3) تحديد الآية (أعلى طبقة) — مع تأثير شريط التقدّم عند التشغيل
       if (_selectedRanges.isNotEmpty) {
-        _paintSelectionBackgrounds(context, offset, animVal);
+        _paintSelectionBackgrounds(context, offset, animVal, progress);
       }
     }
     super.paint(context, offset);
@@ -565,9 +681,11 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
 
   /// رسم خلفيات التحديد خلف الآيات المحدّدة.
   void _paintSelectionBackgrounds(
-      PaintingContext context, Offset offset, double animVal) {
+      PaintingContext context, Offset offset, double animVal, double progress) {
     _paintMergedBoxes(
-        child! as RenderParagraph, context, offset, _selectedRanges, _selectionColor, animVal);
+        child! as RenderParagraph, context, offset, _selectedRanges,
+        _selectionColor, animVal,
+        playbackProgress: progress);
   }
 
   /// رسم خلفيات العلامات المرجعية - كل نطاق بلونه الخاص.
@@ -586,8 +704,9 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
     Offset offset,
     List<TextSelection> ranges,
     Color baseColor,
-    double animVal,
-  ) {
+    double animVal, {
+    double playbackProgress = -1.0,
+  }) {
     const padding = EdgeInsets.only(right: 4, top: 0, bottom: -6);
 
     for (final range in ranges) {
@@ -629,6 +748,7 @@ class _AyahSelectionRenderBox extends RenderProxyBox {
           RRect.fromRectAndRadius(padded, const Radius.circular(16)),
           baseColor,
           animVal,
+          playbackProgress: playbackProgress,
         );
       }
     }
