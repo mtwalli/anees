@@ -243,7 +243,7 @@ class AyahMenuStyle {
     final scheme = Theme.of(context).colorScheme;
     final primary = scheme.primary;
     return AyahMenuStyle(
-      backgroundColor: AppColors.getBackgroundColor(isDark),
+      backgroundColor: AppColors.getSurfaceColor(isDark),
       borderColor: primary.withValues(alpha: 0.1),
       borderWidth: 2.0,
       borderRadius: 6.0,

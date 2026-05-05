@@ -7,7 +7,8 @@ class AppColors {
   static const Color textColor = Color(0xFF0A1520);
 
   // Dark: pure black background, light blue text
-  static const Color darkBackground = Color(0xFF0D0D0D);
+  static const Color darkBackground = Color(0xFF1A1A1A);
+  static const Color darkSurface = Color(0xFF111111);
   static const Color darkTextColor = Color(0xFF90CFFA);
 
   // Getter theme colors
@@ -15,4 +16,6 @@ class AppColors {
       isDarkMode ? darkTextColor : textColor;
   static Color getBackgroundColor(bool isDarkMode) =>
       isDarkMode ? darkBackground : background;
+  static Color getSurfaceColor(bool isDarkMode) =>
+      isDarkMode ? darkSurface : Colors.white;
 }

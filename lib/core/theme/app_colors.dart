@@ -18,8 +18,8 @@ class AppColors {
   static const Color lightDivider = Color(0xFFAACCE8);
 
   // ── Dark theme (blue on black) ─────────────────────────────────────────────
-  static const Color darkBackground = Color(0xFF0D0D0D);
-  static const Color darkSurface = Color(0xFF001525);
+  static const Color darkBackground = Color(0xFF1A1A1A);
+  static const Color darkSurface = Color(0xFF111111);
   static const Color darkText = Color(0xFFD0E8F8);
   static const Color darkSubtext = Color(0xFF6AAAD0);
   static const Color darkDivider = Color(0xFF0D2A40);

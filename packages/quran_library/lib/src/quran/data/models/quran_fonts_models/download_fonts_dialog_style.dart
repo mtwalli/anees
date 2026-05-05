@@ -244,7 +244,7 @@ class DownloadFontsDialogStyle {
     final primary = scheme.primary;
     return DownloadFontsDialogStyle(
       // لون خلفية النافذة الافتراضي
-      backgroundColor: AppColors.getBackgroundColor(isDarkMode),
+      backgroundColor: AppColors.getSurfaceColor(isDarkMode),
       // لون الفاصل الافتراضي
       dividerColor: primary,
       // لا نضع أسماء افتراضية هنا: الواجهة ستستخدم QuranRecitation.arabicName.

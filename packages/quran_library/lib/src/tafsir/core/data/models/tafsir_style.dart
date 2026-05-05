@@ -290,7 +290,7 @@ class TafsirStyle {
 
   factory TafsirStyle.defaults(
       {required bool isDark, required BuildContext context}) {
-    final bg = AppColors.getBackgroundColor(isDark);
+    final bg = AppColors.getSurfaceColor(isDark);
     final scheme = Theme.of(context).colorScheme;
     final primary = scheme.primary;
     final onBg = isDark ? Colors.white : Colors.black87;

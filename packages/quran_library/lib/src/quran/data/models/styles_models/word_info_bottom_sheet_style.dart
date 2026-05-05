@@ -278,7 +278,7 @@ class WordInfoBottomSheetStyle {
     const fontFamily = 'cairo';
 
     return WordInfoBottomSheetStyle(
-      backgroundColor: AppColors.getBackgroundColor(isDark),
+      backgroundColor: AppColors.getSurfaceColor(isDark),
       borderRadius: 12,
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       maxHeightFactor: 0.9,
@@ -338,7 +338,7 @@ class WordInfoBottomSheetStyle {
       verticalMargin: 8,
       horizontalMargin: 8,
       innerContainerPadding: const EdgeInsets.all(0),
-      tafsirBackgroundColor: AppColors.getBackgroundColor(isDark),
+      tafsirBackgroundColor: AppColors.getSurfaceColor(isDark),
       innerContainerBorderRadius: 16,
       innerShadowColor: Colors.grey.withValues(alpha: 0.1),
       innerShadowBlurRadius: 8,

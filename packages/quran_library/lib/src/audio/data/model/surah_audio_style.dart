@@ -373,7 +373,7 @@ class SurahAudioStyle {
     required BuildContext context,
   }) {
     final scheme = Theme.of(context).colorScheme;
-    final bg = AppColors.getBackgroundColor(isDark);
+    final bg = AppColors.getSurfaceColor(isDark);
     final onBg = AppColors.getTextColor(isDark);
     final primary = scheme.primary;
 
