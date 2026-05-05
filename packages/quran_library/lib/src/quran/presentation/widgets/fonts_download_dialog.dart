@@ -39,7 +39,7 @@ class FontsDownloadDialog extends StatelessWidget {
               )),
       icon: downloadFontsDialogStyle?.iconWidget ??
           Icon(
-            Icons.more_vert_rounded,
+            Icons.text_fields,
             size: defaults.iconSize,
             color: defaults.iconColor ?? Theme.of(context).colorScheme.primary,
           ),
