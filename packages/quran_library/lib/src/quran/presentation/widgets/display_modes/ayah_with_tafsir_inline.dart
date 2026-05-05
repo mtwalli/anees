@@ -561,7 +561,7 @@ class _InlineAyahTafsirItem extends StatelessWidget {
                   width: double.infinity,
                   margin: const EdgeInsets.only(bottom: 8),
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   decoration: BoxDecoration(
                     color: style.optionsBarBackgroundColor ??
                         Theme.of(context)
@@ -570,34 +570,62 @@ class _InlineAyahTafsirItem extends StatelessWidget {
                             .withValues(alpha: .1),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      (hasBookmark && showAyahBookmarkedIcon)
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 4.0),
-                              child: SvgPicture.asset(
-                                AssetsPath.assets.ayahBookmarked,
-                                height: 30,
-                                width: 30,
-                              ),
-                            )
-                          : Text(
-                              '${ayah.ayahNumber}'
-                                  .convertEnglishNumbersToArabic(
-                                      ayah.ayahNumber.toString()),
-                              style: TextStyle(
-                                fontFamily: 'ayahNumber',
-                                fontSize: (fontSize + 5),
-                                height: 1.5,
-                                package: 'quran_library',
-                                color: style.ayahNumberColor ??
-                                    Theme.of(context).colorScheme.primary,
-                              ),
-                            ),
-                      const Spacer(),
                       Row(
+                        textDirection: TextDirection.ltr,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          // Ayah number
+                          (hasBookmark && showAyahBookmarkedIcon)
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0),
+                                  child: SvgPicture.asset(
+                                    AssetsPath.assets.ayahBookmarked,
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                                )
+                              : Text(
+                                  '${ayah.ayahNumber}'
+                                      .convertEnglishNumbersToArabic(
+                                          ayah.ayahNumber.toString()),
+                                  style: TextStyle(
+                                    fontFamily: 'ayahNumber',
+                                    fontSize: (fontSize + 5),
+                                    height: 1.5,
+                                    package: 'quran_library',
+                                    color: style.ayahNumberColor ??
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                          const SizedBox(width: 12),
+                          // Ayah text
+                          Expanded(
+                            child: GetSingleAyah(
+                              surahNumber: surah.surahNumber,
+                              ayahNumber: ayah.ayahNumber,
+                              fontSize: fontSize,
+                              isBold: false,
+                              ayahs: ayah,
+                              isSingleAyah: false,
+                              showAyahNumber: showAyahNumber,
+                              isDark: isDark,
+                              pageIndex: pageIndex + 1,
+                              textColor: style.ayahTextColor,
+                              textAlign: TextAlign.center,
+                              enabledTajweed: QuranCtrl
+                                  .instance.state.isTajweedEnabled.value,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      // Action buttons
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           GestureDetector(
                             onTap: () {
@@ -686,25 +714,10 @@ class _InlineAyahTafsirItem extends StatelessWidget {
                             ),
                           }
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
-          // نص الآية
-          GetSingleAyah(
-            surahNumber: surah.surahNumber,
-            ayahNumber: ayah.ayahNumber,
-            fontSize: fontSize,
-            isBold: false,
-            ayahs: ayah,
-            isSingleAyah: false,
-            showAyahNumber: showAyahNumber,
-            isDark: isDark,
-            pageIndex: pageIndex + 1,
-            textColor: style.ayahTextColor,
-            textAlign: TextAlign.center,
-            enabledTajweed: QuranCtrl.instance.state.isTajweedEnabled.value,
-          ),
           const SizedBox(height: 10),
           // خلفية التفسير
           Container(
@@ -762,8 +775,10 @@ class _InlineAyahTafsirItem extends StatelessWidget {
       textDirection: context.alignmentLayoutWPassLang(
           language, TextDirection.rtl, TextDirection.ltr),
       maxLines: style.tafsirMaxLines ?? 4,
-      readMoreText: style.readMoreText ?? QuranLocalizations.of(context).readMore,
-      readLessText: style.readLessText ?? QuranLocalizations.of(context).readLess,
+      readMoreText:
+          style.readMoreText ?? QuranLocalizations.of(context).readMore,
+      readLessText:
+          style.readLessText ?? QuranLocalizations.of(context).readLess,
       readMoreButtonColor: style.readMoreButtonColor,
       readMoreTextStyle: style.readMoreTextStyle,
       translation: !isTafsir ? translation : null,
