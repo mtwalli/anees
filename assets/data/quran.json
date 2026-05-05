@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "name_arabic": "الفاتحة",
+    "name_transliteration": "Al-Fatiha",
+    "name_english": "The Opening",
+    "revelation_type": "Meccan",
+    "ayah_count": 7,
+    "ayahs": [
+      {
+        "ayah_number": 1,
+        "text_uthmani": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+        "translation_en": "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3"
+      },
+      {
+        "ayah_number": 2,
+        "text_uthmani": "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ",
+        "translation_en": "[All] praise is [due] to Allah, Lord of the worlds -",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2.mp3"
+      },
+      {
+        "ayah_number": 3,
+        "text_uthmani": "ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+        "translation_en": "The Entirely Merciful, the Especially Merciful,",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/3.mp3"
+      },
+      {
+        "ayah_number": 4,
+        "text_uthmani": "مَـٰلِكِ يَوْمِ ٱلدِّينِ",
+        "translation_en": "Sovereign of the Day of Recompense.",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/4.mp3"
+      },
+      {
+        "ayah_number": 5,
+        "text_uthmani": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+        "translation_en": "It is You we worship and You we ask for help.",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/5.mp3"
+      },
+      {
+        "ayah_number": 6,
+        "text_uthmani": "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ",
+        "translation_en": "Guide us to the straight path -",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6.mp3"
+      },
+      {
+        "ayah_number": 7,
+        "text_uthmani": "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
+        "translation_en": "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray.",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/7.mp3"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name_arabic": "البقرة",
+    "name_transliteration": "Al-Baqara",
+    "name_english": "The Cow",
+    "revelation_type": "Medinan",
+    "ayah_count": 286,
+    "ayahs": [
+      {
+        "ayah_number": 1,
+        "text_uthmani": "الٓمٓ",
+        "translation_en": "Alif, Lam, Meem.",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/8.mp3"
+      },
+      {
+        "ayah_number": 2,
+        "text_uthmani": "ذَٰلِكَ ٱلْكِتَـٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ",
+        "translation_en": "This is the Book about which there is no doubt, a guidance for those conscious of Allah -",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/9.mp3"
+      },
+      {
+        "ayah_number": 3,
+        "text_uthmani": "ٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ",
+        "translation_en": "Who believe in the unseen, establish prayer, and spend out of what We have provided for them,",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/10.mp3"
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "name_arabic": "الإخلاص",
+    "name_transliteration": "Al-Ikhlas",
+    "name_english": "Sincerity",
+    "revelation_type": "Meccan",
+    "ayah_count": 4,
+    "ayahs": [
+      {
+        "ayah_number": 1,
+        "text_uthmani": "قُلْ هُوَ ٱللَّهُ أَحَدٌ",
+        "translation_en": "Say, \"He is Allah, [who is] One,",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6272.mp3"
+      },
+      {
+        "ayah_number": 2,
+        "text_uthmani": "ٱللَّهُ ٱلصَّمَدُ",
+        "translation_en": "Allah, the Eternal Refuge.",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6273.mp3"
+      },
+      {
+        "ayah_number": 3,
+        "text_uthmani": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+        "translation_en": "He neither begets nor is born,",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6274.mp3"
+      },
+      {
+        "ayah_number": 4,
+        "text_uthmani": "وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
+        "translation_en": "Nor is there to Him any equivalent.\"",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6275.mp3"
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "name_arabic": "الفلق",
+    "name_transliteration": "Al-Falaq",
+    "name_english": "The Daybreak",
+    "revelation_type": "Meccan",
+    "ayah_count": 5,
+    "ayahs": [
+      {
+        "ayah_number": 1,
+        "text_uthmani": "قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ",
+        "translation_en": "Say, \"I seek refuge in the Lord of daybreak",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6279.mp3"
+      },
+      {
+        "ayah_number": 2,
+        "text_uthmani": "مِن شَرِّ مَا خَلَقَ",
+        "translation_en": "From the evil of that which He created",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6280.mp3"
+      },
+      {
+        "ayah_number": 3,
+        "text_uthmani": "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ",
+        "translation_en": "And from the evil of darkness when it settles",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6281.mp3"
+      },
+      {
+        "ayah_number": 4,
+        "text_uthmani": "وَمِن شَرِّ ٱلنَّفَّـٰثَـٰتِ فِى ٱلْعُقَدِ",
+        "translation_en": "And from the evil of the blowers in knots",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6282.mp3"
+      },
+      {
+        "ayah_number": 5,
+        "text_uthmani": "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+        "translation_en": "And from the evil of an envier when he envies.\"",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6283.mp3"
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "name_arabic": "الناس",
+    "name_transliteration": "An-Nas",
+    "name_english": "Mankind",
+    "revelation_type": "Meccan",
+    "ayah_count": 6,
+    "ayahs": [
+      {
+        "ayah_number": 1,
+        "text_uthmani": "قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ",
+        "translation_en": "Say, \"I seek refuge in the Lord of mankind,",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6284.mp3"
+      },
+      {
+        "ayah_number": 2,
+        "text_uthmani": "مَلِكِ ٱلنَّاسِ",
+        "translation_en": "The Sovereign of mankind.",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6285.mp3"
+      },
+      {
+        "ayah_number": 3,
+        "text_uthmani": "إِلَـٰهِ ٱلنَّاسِ",
+        "translation_en": "The God of mankind,",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6286.mp3"
+      },
+      {
+        "ayah_number": 4,
+        "text_uthmani": "مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ",
+        "translation_en": "From the evil of the retreating whisperer",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6287.mp3"
+      },
+      {
+        "ayah_number": 5,
+        "text_uthmani": "ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ",
+        "translation_en": "Who whispers [evil] into the breasts of mankind -",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6288.mp3"
+      },
+      {
+        "ayah_number": 6,
+        "text_uthmani": "مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ",
+        "translation_en": "From among the jinn and mankind.\"",
+        "audio_url": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6289.mp3"
+      }
+    ]
+  }
+]

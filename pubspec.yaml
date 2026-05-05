@@ -1,0 +1,45 @@
+name: anees
+description: "Anees"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Quran display engine — authentic Medina Mushaf rendering
+  quran_library: ^4.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+dependency_overrides:
+  quran_library:
+    path: packages/quran_library
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/data/
+    - assets/fonts/
+
+  fonts:
+    - family: UthmanicHafs
+      fonts:
+        - asset: assets/fonts/UthmanicHafs_V20.ttf
+    - family: NotoNaskhArabic
+      fonts:
+        - asset: assets/fonts/NotoNaskhArabic-VariableFont_wght.ttf
+    - family: SurahNameNaskh
+      fonts:
+        - asset: assets/fonts/surah_name_naskh.ttf
+    - family: SurahNameV4
+      fonts:
+        - asset: assets/fonts/surah-name-v4.ttf
