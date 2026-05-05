@@ -21,32 +21,29 @@ class FontsDownloadDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final QuranTopBarStyle defaults = topBarStyle ??
         QuranTopBarStyle.defaults(isDark: isDark, context: context);
-    return Theme(
-      data: ThemeData(useMaterial3: true),
-      child: IconButton(
-        onPressed: () => showDialog(
-            context: context,
-            builder: (ctx) => Dialog(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0)),
-                  elevation: 3,
-                  backgroundColor: downloadFontsDialogStyle?.backgroundColor,
-                  child: FontsDownloadWidget(
-                    downloadFontsDialogStyle: downloadFontsDialogStyle,
-                    languageCode: languageCode,
-                    isDark: isDark,
-                    isFontsLocal: isFontsLocal ?? false,
-                    ctrl: quranCtrl,
-                  ),
-                )),
-        icon: downloadFontsDialogStyle?.iconWidget ??
-            SvgPicture.asset(
-                defaults.optionsIconPath ?? AssetsPath.assets.options,
-                height: defaults.iconSize,
-                colorFilter: ColorFilter.mode(
-                    defaults.iconColor ?? Theme.of(context).colorScheme.primary,
-                    BlendMode.srcIn)),
-      ),
+    return IconButton(
+      onPressed: () => showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0)),
+                backgroundColor: downloadFontsDialogStyle?.backgroundColor,
+                contentPadding: EdgeInsets.zero,
+                content: FontsDownloadWidget(
+                  downloadFontsDialogStyle: downloadFontsDialogStyle,
+                  languageCode: languageCode,
+                  isDark: isDark,
+                  isFontsLocal: isFontsLocal ?? false,
+                  ctrl: quranCtrl,
+                ),
+              )),
+      icon: downloadFontsDialogStyle?.iconWidget ??
+          SvgPicture.asset(
+              defaults.optionsIconPath ?? AssetsPath.assets.options,
+              height: defaults.iconSize,
+              colorFilter: ColorFilter.mode(
+                  defaults.iconColor ?? Theme.of(context).colorScheme.primary,
+                  BlendMode.srcIn)),
     );
   }
 }

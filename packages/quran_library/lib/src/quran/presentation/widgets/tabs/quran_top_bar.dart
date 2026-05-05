@@ -194,14 +194,15 @@ class _QuranTopBar extends StatelessWidget {
   void _showDialog(BuildContext context, TajweedMenuStyle defaults) {
     showDialog(
       context: context,
-      builder: (ctx) => Dialog(
+      builder: (ctx) => AlertDialog(
         backgroundColor: backgroundColor ??
             defaults.backgroundColor ??
             AppColors.getBackgroundColor(isDark),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(defaults.borderRadius ?? 12),
+          borderRadius: BorderRadius.circular(defaults.borderRadius ?? 16),
         ),
-        child: TajweedMenuWidget(isDark: isDark, languageCode: languageCode),
+        contentPadding: EdgeInsets.zero,
+        content: TajweedMenuWidget(isDark: isDark, languageCode: languageCode),
       ),
     );
   }
