@@ -502,12 +502,6 @@ class _InlineAyahTafsirItem extends StatelessWidget {
           0xAA00CD00,
         ];
 
-    final int ayahUQNum = ayah.ayahUQNumber;
-    final hasBookmark = isAyahBookmarked != null
-        ? isAyahBookmarked!(ayah)
-        : (ayahBookmarked.contains(ayahUQNum) ||
-            bookmarksSet.contains(ayahUQNum));
-
     return Container(
       padding: style.ayahPadding ??
           const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -577,31 +571,6 @@ class _InlineAyahTafsirItem extends StatelessWidget {
                         textDirection: TextDirection.ltr,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          // Ayah number
-                          (hasBookmark && showAyahBookmarkedIcon)
-                              ? Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 4.0),
-                                  child: SvgPicture.asset(
-                                    AssetsPath.assets.ayahBookmarked,
-                                    height: 30,
-                                    width: 30,
-                                  ),
-                                )
-                              : Text(
-                                  '${ayah.ayahNumber}'
-                                      .convertEnglishNumbersToArabic(
-                                          ayah.ayahNumber.toString()),
-                                  style: TextStyle(
-                                    fontFamily: 'ayahNumber',
-                                    fontSize: (fontSize + 5),
-                                    height: 1.5,
-                                    package: 'quran_library',
-                                    color: style.ayahNumberColor ??
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
-                                ),
-                          const SizedBox(width: 12),
                           // Ayah text
                           Expanded(
                             child: GetSingleAyah(
@@ -611,7 +580,7 @@ class _InlineAyahTafsirItem extends StatelessWidget {
                               isBold: false,
                               ayahs: ayah,
                               isSingleAyah: false,
-                              showAyahNumber: showAyahNumber,
+                              showAyahNumber: true,
                               isDark: isDark,
                               pageIndex: pageIndex + 1,
                               textColor: style.ayahTextColor,
