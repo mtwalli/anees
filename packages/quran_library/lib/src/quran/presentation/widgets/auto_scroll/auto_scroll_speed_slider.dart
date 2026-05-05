@@ -112,10 +112,9 @@ class AutoScrollSpeedSlider extends StatelessWidget {
                 ),
                 // زر Play — الشريط يظهر فقط أثناء الإيقاف المؤقت
                 GestureDetector(
-                  child: CustomWidgets.customSvgWithColor(
-                    AssetsPath.assets.playArrow,
-                    height: 24,
-                    ctx: context,
+                  child: Icon(
+                    Icons.play_arrow_rounded,
+                    size: 24,
                     color: style.activeIconColor ??
                         Theme.of(context).colorScheme.primary,
                   ),

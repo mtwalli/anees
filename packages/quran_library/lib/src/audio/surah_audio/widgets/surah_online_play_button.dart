@@ -52,10 +52,9 @@ class SurahOnlinePlayButton extends StatelessWidget {
                   ));
             } else if (playerState != null && !playerState.playing) {
               return IconButton(
-                icon: CustomWidgets.customSvgWithColor(
-                  style?.playIconPath ?? AssetsPath.assets.playArrow,
-                  height: style?.playIconHeight ?? 38,
-                  ctx: context,
+                icon: Icon(
+                  Icons.play_arrow_rounded,
+                  size: style?.playIconHeight ?? 38,
                   color: style?.playIconColor ??
                       Theme.of(context).colorScheme.primary,
                 ),
@@ -69,10 +68,9 @@ class SurahOnlinePlayButton extends StatelessWidget {
             } else if (processingState != ProcessingState.completed ||
                 !playerState!.playing) {
               return IconButton(
-                icon: CustomWidgets.customSvgWithColor(
-                  style?.pauseIconPath ?? AssetsPath.assets.pauseArrow,
-                  height: style?.pauseIconHeight ?? 38,
-                  ctx: context,
+                icon: Icon(
+                  Icons.pause_rounded,
+                  size: style?.pauseIconHeight ?? 38,
                   color: style?.playIconColor ??
                       Theme.of(context).colorScheme.primary,
                 ),

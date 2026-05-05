@@ -92,12 +92,10 @@ class PlaySurahsWidget extends StatelessWidget {
                                 Duration(
                                     seconds: surahCtrl
                                         .state.seekNextSeconds.value += 5)),
-                            child: SvgPicture.asset(
-                              AssetsPath.assets.rewind,
-                              colorFilter:
-                                  ColorFilter.mode(accent, BlendMode.srcIn),
-                              height: 30,
-                              width: 30,
+                            child: Icon(
+                              Icons.fast_forward_rounded,
+                              color: accent,
+                              size: 28,
                             ),
                           ),
                         ),
@@ -117,12 +115,10 @@ class PlaySurahsWidget extends StatelessWidget {
                                   seconds: surahCtrl
                                       .state.seekNextSeconds.value -= 5));
                             },
-                            child: SvgPicture.asset(
-                              AssetsPath.assets.backward,
-                              colorFilter:
-                                  ColorFilter.mode(accent, BlendMode.srcIn),
-                              height: 30,
-                              width: 30,
+                            child: Icon(
+                              Icons.fast_rewind_rounded,
+                              color: accent,
+                              size: 28,
                             ),
                           ),
                         ),

@@ -38,12 +38,11 @@ class FontsDownloadDialog extends StatelessWidget {
                 ),
               )),
       icon: downloadFontsDialogStyle?.iconWidget ??
-          SvgPicture.asset(
-              defaults.optionsIconPath ?? AssetsPath.assets.options,
-              height: defaults.iconSize,
-              colorFilter: ColorFilter.mode(
-                  defaults.iconColor ?? Theme.of(context).colorScheme.primary,
-                  BlendMode.srcIn)),
+          Icon(
+            Icons.more_vert_rounded,
+            size: defaults.iconSize,
+            color: defaults.iconColor ?? Theme.of(context).colorScheme.primary,
+          ),
     );
   }
 }

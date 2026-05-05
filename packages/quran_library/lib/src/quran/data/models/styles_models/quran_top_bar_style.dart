@@ -181,7 +181,7 @@ class QuranTopBarStyle {
     final scheme = Theme.of(context).colorScheme;
     final primary = scheme.primary;
     return QuranTopBarStyle(
-      backIconPath: AssetsPath.assets.backArrow,
+      backIconPath: null,
       backgroundColor: AppColors.getBackgroundColor(isDark),
       textColor: AppColors.getTextColor(isDark),
       accentColor: primary,
@@ -191,8 +191,8 @@ class QuranTopBarStyle {
       borderRadius: 12,
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       height: 55,
-      menuIconPath: AssetsPath.assets.buttomSheet,
-      audioIconPath: AssetsPath.assets.surahsAudio,
+      menuIconPath: null,
+      audioIconPath: null,
       iconSize: 22,
       iconColor: null, // will fallback to textColor
       fontsDialogTitle: QuranLocalizations.of(context).fontsLabel,
@@ -207,10 +207,10 @@ class QuranTopBarStyle {
       showAudioButton: true,
       showFontsButton: true,
       showBackButton: false,
-      optionsIconPath: AssetsPath.assets.options,
+      optionsIconPath: null,
       customTopBarWidgets: null,
-      tajweedIconPath: AssetsPath.assets.exclamation,
-      autoScrollIconPath: AssetsPath.assets.arrowDown,
+      tajweedIconPath: null,
+      autoScrollIconPath: null,
       showTajweedButton: true,
       showAutoScrollButton: true,
       quranTabText: QuranLocalizations.of(context).quranTabMain,

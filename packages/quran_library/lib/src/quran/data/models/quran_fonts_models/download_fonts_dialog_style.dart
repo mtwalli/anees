@@ -297,10 +297,11 @@ class DownloadFontsDialogStyle {
       ),
       iconColor: primary,
       iconSize: 24.0,
-      iconWidget: SvgPicture.asset(AssetsPath.assets.options,
-          height: 24.0,
-          colorFilter: ColorFilter.mode(
-              Theme.of(context).colorScheme.primary, BlendMode.srcIn)),
+      iconWidget: Icon(
+        Icons.more_vert_rounded,
+        size: 24.0,
+        color: Theme.of(context).colorScheme.primary,
+      ),
       notes: QuranLocalizations.of(context).fontsDialogNotes,
       notesColor: AppColors.getTextColor(isDarkMode),
       notesStyle: TextStyle(

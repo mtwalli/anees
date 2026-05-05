@@ -7,18 +7,8 @@ abstract class _AssetsPath {
   String get ayahBookmarked;
   String get sajdaIcon;
   String get suraNum;
-  String get playArrow;
-  String get pauseArrow;
   String get checkMark;
   String get alert;
-  String get backward;
-  String get rewind;
-  String get surahsAudio;
-  String get buttomSheet;
-  String get options;
-  String get backArrow;
-  String get exclamation;
-  String get arrowDown;
 }
 
 class AssetsPath implements _AssetsPath {

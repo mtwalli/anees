@@ -31,11 +31,10 @@ class PlayAyahWidget extends StatelessWidget {
                 ));
           } else if (playerState != null && !playerState.playing) {
             return GestureDetector(
-              child: CustomWidgets.customSvgWithColor(
-                effectiveStyle.playIconPath ?? AssetsPath.assets.playArrow,
-                height: effectiveStyle.playIconHeight!,
-                ctx: context,
-                color: effectiveStyle.playIconColor!,
+              child: Icon(
+                Icons.play_arrow_rounded,
+                size: effectiveStyle.playIconHeight,
+                color: effectiveStyle.playIconColor,
               ),
               onTap: () async {
                 // اضبط وضع التشغيل للآيات فقط
@@ -57,11 +56,10 @@ class PlayAyahWidget extends StatelessWidget {
             );
           }
           return GestureDetector(
-            child: CustomWidgets.customSvgWithColor(
-              effectiveStyle.pauseIconPath ?? AssetsPath.assets.pauseArrow,
-              height: effectiveStyle.pauseIconHeight!,
-              ctx: context,
-              color: effectiveStyle.playIconColor!,
+            child: Icon(
+              Icons.pause_rounded,
+              size: effectiveStyle.pauseIconHeight,
+              color: effectiveStyle.playIconColor,
             ),
             onTap: () async {
               // Pause only, don't auto-toggle play again
