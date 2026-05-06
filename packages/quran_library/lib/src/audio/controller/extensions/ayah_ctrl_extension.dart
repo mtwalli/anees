@@ -279,6 +279,20 @@ extension AyahCtrlExtension on AudioCtrl {
       state._playerStateSubscription =
           state.audioPlayer.playerStateStream.listen((d) async {
         if (d.processingState == ProcessingState.completed) {
+          if (kIsWeb) {
+            // On web, browsers block auto-advance of cross-origin playlist items
+            // after the first ayah. Manually seek to the next ayah and call play()
+            // to satisfy the "same user gesture" requirement carried from the
+            // initial tap.
+            final nextIndex = (state.audioPlayer.currentIndex ?? 0) + 1;
+            if (nextIndex < audioSources.length) {
+              log('Web: manually advancing to ayah index $nextIndex',
+                  name: 'AudioController');
+              await state.audioPlayer.seek(Duration.zero, index: nextIndex);
+              await state.audioPlayer.play();
+              return;
+            }
+          }
           // اكتملت قائمة التشغيل الحالية
           log('Surah playlist completed. Stopping playback.',
               name: 'AudioController');
