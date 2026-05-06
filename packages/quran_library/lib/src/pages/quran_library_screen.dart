@@ -647,6 +647,7 @@ class QuranLibraryScreen extends StatelessWidget {
                                               isDark: isDark,
                                               context: context,
                                             ),
+                                    withOptionsBar: false,
                                   );
                                 case QuranDisplayMode.defaultMode:
                                   return _buildDefaultPageView(

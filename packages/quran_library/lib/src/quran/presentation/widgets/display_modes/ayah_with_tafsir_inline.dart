@@ -1,12 +1,6 @@
 part of '/quran.dart';
 
 /// وضع عرض آيات الصفحة مع تفسير كل آية (عمودي وأفقي)
-///
-/// يعرض آيات الصفحة الحالية مع تفسير كل آية تحتها مباشرة.
-/// يمكن التمرير عموديًا لقراءة كل الآيات، والتقليب يمين/يسار لتغيير الصفحة.
-///
-/// [AyahWithTafsirInline] Displays page ayahs with inline tafsir below each
-/// ayah. Vertically scrollable, swipe left/right to change pages.
 class AyahWithTafsirInline extends StatelessWidget {
   const AyahWithTafsirInline({
     super.key,
@@ -51,12 +45,6 @@ class AyahWithTafsirInline extends StatelessWidget {
   final bool showAyahBookmarkedIcon;
   final Color? bookmarksColor;
   final Color? Function(AyahModel)? customBookmarksColor;
-
-  /// عند `false` يُعرض المحتوى بدون PageView ويستمع لتغيّر الصفحة من [QuranCtrl].
-  /// عند استخدامه داخل [QuranWithTafsirSide] يجب أن يكون `false`.
-  ///
-  /// When `false`, content is shown without PageView and listens to
-  /// page changes from [QuranCtrl]. Set to `false` inside [QuranWithTafsirSide].
   final bool usePageView;
   final bool? withOptionsBar;
   final bool? showAyahNumber;
@@ -67,7 +55,6 @@ class AyahWithTafsirInline extends StatelessWidget {
         (AyahTafsirInlineTheme.of(context)?.style ??
             AyahTafsirInlineStyle.defaults(isDark: isDark, context: context));
 
-    // بدون PageView: يستمع لرقم الصفحة الحالية ويعرض المحتوى مباشرة
     if (!usePageView) {
       return Directionality(
         textDirection: TextDirection.rtl,
@@ -98,7 +85,6 @@ class AyahWithTafsirInline extends StatelessWidget {
       );
     }
 
-    // مع PageView: التقليب الأفقي بين الصفحات
     return Directionality(
       textDirection: TextDirection.rtl,
       child: PatchedPreloadPageView.builder(
@@ -201,11 +187,12 @@ class _AyahTafsirInlinePage extends StatefulWidget {
 
 class _AyahTafsirInlinePageState extends State<_AyahTafsirInlinePage>
     with AutomaticKeepAliveClientMixin {
-  /// حفظ الـ Future مرة واحدة لتجنب إعادة التحميل في كل build
   late Future<void> _tafsirFuture;
   late int _lastRadioValue;
-
   bool _lastIsDark = false;
+
+  final ScrollController _scrollController = ScrollController();
+  Worker? _audioWorker;
 
   @override
   bool get wantKeepAlive => true;
@@ -216,13 +203,45 @@ class _AyahTafsirInlinePageState extends State<_AyahTafsirInlinePage>
     _lastRadioValue = TafsirCtrl.instance.radioValue.value;
     _lastIsDark = widget.isDark;
     _tafsirFuture = _loadTafsir(widget.pageIndex + 1);
+    _setupAudioScrollWorker();
+  }
+
+  void _setupAudioScrollWorker() {
+    final audioState = AudioCtrl.instance.state;
+    _audioWorker = ever(audioState.currentAyahUniqueNumber, (int uqNumber) {
+      if (!mounted) return;
+      final pageAyahs =
+          QuranCtrl.instance.getPageAyahsByIndex(widget.pageIndex);
+      final index = pageAyahs.indexWhere((a) => a.ayahUQNumber == uqNumber);
+      if (index == -1) return;
+      // Estimate scroll offset; the list will clamp at maxScrollExtent.
+      const estimatedItemHeight = 280.0;
+      final targetOffset = index * estimatedItemHeight;
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          targetOffset.clamp(0.0, _scrollController.position.maxScrollExtent),
+          duration: const Duration(milliseconds: 400),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Rebuild when the theme brightness changes so children get fresh colors.
+    final currentIsDark = Theme.of(context).brightness == Brightness.dark;
+    if (currentIsDark != _lastIsDark) {
+      _lastIsDark = currentIsDark;
+      setState(() {});
+    }
   }
 
   @override
   void didUpdateWidget(covariant _AyahTafsirInlinePage oldWidget) {
     super.didUpdateWidget(oldWidget);
     final currentRadio = TafsirCtrl.instance.radioValue.value;
-    // أعد تحميل التفسير فقط إذا تغيّر رقم الصفحة أو مصدر التفسير
     if (oldWidget.pageIndex != widget.pageIndex ||
         _lastRadioValue != currentRadio) {
       final sourceChanged = _lastRadioValue != currentRadio;
@@ -235,10 +254,16 @@ class _AyahTafsirInlinePageState extends State<_AyahTafsirInlinePage>
     }
   }
 
+  @override
+  void dispose() {
+    _audioWorker?.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   Future<void> _loadTafsir(int pageNumber, {bool forceReload = false}) async {
     final tafsirCtrl = TafsirCtrl.instance;
     if (tafsirCtrl.selectedTafsir.isTafsir) {
-      // تحميل فقط إذا كانت القائمة فارغة أو تغيّر المصدر
       if (forceReload || tafsirCtrl.tafseerList.isEmpty) {
         await tafsirCtrl.fetchData(pageNumber);
       }
@@ -251,7 +276,7 @@ class _AyahTafsirInlinePageState extends State<_AyahTafsirInlinePage>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context); // مطلوب لـ AutomaticKeepAliveClientMixin
+    super.build(context);
     final quranCtrl = QuranCtrl.instance;
 
     return FutureBuilder<void>(
@@ -264,14 +289,12 @@ class _AyahTafsirInlinePageState extends State<_AyahTafsirInlinePage>
 
         return Column(
           children: [
-            // شريط تغيير التفسير وحجم الخط
             widget.style.headerWidget ??
                 _InlineTafsirHeader(
                   isDark: widget.isDark,
                   style: widget.style,
                   languageCode: widget.languageCode,
                 ),
-            // الآيات مع التفسير
             Expanded(
               child: GetBuilder<TafsirCtrl>(
                 id: 'change_font_size',
@@ -280,7 +303,6 @@ class _AyahTafsirInlinePageState extends State<_AyahTafsirInlinePage>
                   final language = ctrl
                       .tafsirAndTranslationsItems[ctrl.radioValue.value].name;
 
-                  // بناء Map للتفسير مرة واحدة بدل البحث الخطي لكل آية
                   final tafsirMap = <int, TafsirTableData>{};
                   if (isTafsir) {
                     for (final t in ctrl.tafseerList) {
@@ -288,7 +310,6 @@ class _AyahTafsirInlinePageState extends State<_AyahTafsirInlinePage>
                     }
                   }
 
-                  // بناء Map للترجمة عند وضع الترجمة
                   final translationMap = <String, TranslationModel>{};
                   if (!isTafsir) {
                     for (final t in ctrl.translationList) {
@@ -301,6 +322,7 @@ class _AyahTafsirInlinePageState extends State<_AyahTafsirInlinePage>
                     builder: (bookmarksCtrl) {
                       final bookmarksSet = bookmarksCtrl.bookmarksAyahsSet;
                       return ListView.builder(
+                        controller: _scrollController,
                         padding: EdgeInsets.zero,
                         itemCount: pageAyahs.length,
                         addAutomaticKeepAlives: true,
@@ -324,13 +346,11 @@ class _AyahTafsirInlinePageState extends State<_AyahTafsirInlinePage>
                                   surahNum: 0,
                                 );
 
-                          // البحث عن الترجمة بناءً على رقم السورة والآية
                           final translation = !isTafsir
                               ? translationMap[
                                   '${ayah.surahNumber}:${ayah.ayahNumber}']
                               : null;
 
-                          // O(1) بدل O(n) — الوصول المباشر عبر surahNumber
                           final surahNum = ayah.surahNumber ?? 0;
                           final surah = (surahNum > 0 &&
                                   surahNum <= quranCtrl.surahs.length)
@@ -431,7 +451,7 @@ class _InlineTafsirHeader extends StatelessWidget {
 }
 
 /// عنصر آية واحدة مع التفسير في وضع العرض المدمج
-class _InlineAyahTafsirItem extends StatelessWidget {
+class _InlineAyahTafsirItem extends StatefulWidget {
   const _InlineAyahTafsirItem({
     required this.ayah,
     required this.tafsir,
@@ -485,280 +505,312 @@ class _InlineAyahTafsirItem extends StatelessWidget {
   final String language;
 
   @override
+  State<_InlineAyahTafsirItem> createState() => _InlineAyahTafsirItemState();
+}
+
+class _InlineAyahTafsirItemState extends State<_InlineAyahTafsirItem> {
+  bool _actionsVisible = false;
+
+  @override
   Widget build(BuildContext context) {
-    final isTafsir = tafsirCtrl.selectedTafsir.isTafsir;
-    final fontSize = tafsirCtrl.fontSizeArabic.value;
+    final effectiveDark = Theme.of(context).brightness == Brightness.dark;
+    final isTafsir = widget.tafsirCtrl.selectedTafsir.isTafsir;
+    final fontSize = widget.tafsirCtrl.fontSizeArabic.value;
 
-    // الحصول على نمط الصوت / Get audio style
-    final sAudio =
-        audioStyle ?? AyahAudioStyle.defaults(isDark: isDark, context: context);
-    final sDownloadManager = ayahDownloadManagerStyle ??
-        AyahDownloadManagerStyle.defaults(isDark: isDark, context: context);
+    // Recompute defaults from the live theme so colors always reflect current
+    // brightness, even when the passed style was baked with a different isDark.
+    final liveDefaults =
+        AyahTafsirInlineStyle.defaults(isDark: effectiveDark, context: context);
+    final s = liveDefaults.copyWith(
+      backgroundColor: widget.style.backgroundColor,
+      ayahTextColor: widget.style.ayahTextColor,
+      tafsirTextColor: widget.style.tafsirTextColor,
+      tafsirBackgroundColor: widget.style.tafsirBackgroundColor,
+      dividerColor: widget.style.dividerColor,
+      dividerThickness: widget.style.dividerThickness,
+      tafsirMaxLines: widget.style.tafsirMaxLines,
+      tafsirCollapsedHeight: widget.style.tafsirCollapsedHeight,
+      readMoreText: widget.style.readMoreText,
+      readLessText: widget.style.readLessText,
+      readMoreButtonColor: widget.style.readMoreButtonColor,
+      readMoreTextStyle: widget.style.readMoreTextStyle,
+      ayahPadding: widget.style.ayahPadding,
+      tafsirPadding: widget.style.tafsirPadding,
+      ayahNumberColor: widget.style.ayahNumberColor,
+      tafsirSelectorBarColor: widget.style.tafsirSelectorBarColor,
+      tafsirSelectorTextColor: widget.style.tafsirSelectorTextColor,
+      fontSizeIconColor: widget.style.fontSizeIconColor,
+      fontSizeWidget: widget.style.fontSizeWidget,
+      headerWidget: widget.style.headerWidget,
+      optionsBarWidget: widget.style.optionsBarWidget,
+      playIconData: widget.style.playIconData,
+      playIconColor: widget.style.playIconColor,
+      iconSize: widget.style.iconSize,
+      playAllIconData: widget.style.playAllIconData,
+      playAllIconColor: widget.style.playAllIconColor,
+      copyIconData: widget.style.copyIconData,
+      copyIconColor: widget.style.copyIconColor,
+      bookmarkColorCodes: widget.style.bookmarkColorCodes,
+      iconHorizontalPadding: widget.style.iconHorizontalPadding,
+      bookmarkIconData: widget.style.bookmarkIconData,
+      tafsirBackgroundBorderRadius: widget.style.tafsirBackgroundBorderRadius,
+    );
 
-    final colors = style.bookmarkColorCodes ??
-        const [
-          0xAAFFD354,
-          0xAAF36077,
-          0xAA00CD00,
-        ];
+    final sAudio = widget.audioStyle ??
+        AyahAudioStyle.defaults(isDark: effectiveDark, context: context);
+    final sDownloadManager = widget.ayahDownloadManagerStyle ??
+        AyahDownloadManagerStyle.defaults(
+            isDark: effectiveDark, context: context);
 
-    return Container(
-      padding: style.ayahPadding ??
-          const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: style.backgroundColor ?? AppColors.getBackgroundColor(isDark),
-        border: Border(
-          bottom: BorderSide(
-            color: style.dividerColor ??
-                (isDark ? Colors.grey.shade700 : Colors.grey.shade300),
-            width: style.dividerThickness ?? 1.0,
+    final colors =
+        s.bookmarkColorCodes ?? const [0xAAFFD354, 0xAAF36077, 0xAA00CD00];
+
+    final primaryColor = Theme.of(context).colorScheme.primary;
+
+    // Obx reacts to audio state changes without rebuilding the whole page.
+    return Obx(() {
+      final isPlaying = AudioCtrl.instance.state.isPlaying.value;
+      final playingUq = AudioCtrl.instance.state.currentAyahUniqueNumber.value;
+      final isCurrentAyah = isPlaying && playingUq == widget.ayah.ayahUQNumber;
+
+      return GestureDetector(
+        onTap: () {
+          if (widget.withOptionsBar == true) {
+            setState(() => _actionsVisible = !_actionsVisible);
+          }
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          padding: s.ayahPadding ??
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          decoration: BoxDecoration(
+            color: isCurrentAyah
+                ? primaryColor.withValues(alpha: .12)
+                : s.backgroundColor ??
+                    AppColors.getBackgroundColor(effectiveDark),
+            border: Border(
+              bottom: BorderSide(
+                color: s.dividerColor ??
+                    (effectiveDark
+                        ? Colors.grey.shade700
+                        : Colors.grey.shade300),
+                width: s.dividerThickness ?? 1.0,
+              ),
+              right: isCurrentAyah
+                  ? BorderSide(color: primaryColor, width: 4)
+                  : BorderSide.none,
+            ),
           ),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ayah.ayahNumber == 1
-              ? SurahHeaderWidget(
-                  surah.surahNumber,
-                  bannerStyle: bannerStyle ??
-                      BannerStyle().copyWith(
-                        bannerSvgHeight: 35.w,
-                      ),
-                  surahNameStyle: surahNameStyle ??
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (widget.ayah.ayahNumber == 1)
+                SurahHeaderWidget(
+                  widget.surah.surahNumber,
+                  bannerStyle: widget.bannerStyle ??
+                      BannerStyle().copyWith(bannerSvgHeight: 35.w),
+                  surahNameStyle: widget.surahNameStyle ??
                       SurahNameStyle(
                         surahNameSize: 35.w,
-                        surahNameColor: AppColors.getTextColor(isDark),
+                        surahNameColor: AppColors.getTextColor(effectiveDark),
                       ),
-                  onSurahBannerPress: onSurahBannerPress,
-                  isDark: isDark,
-                )
-              : const SizedBox.shrink(),
-          ayah.ayahNumber == 1 &&
-                  surah.surahNumber != 9 &&
-                  surah.surahNumber != 1
-              ? BasmallahWidget(
-                  surahNumber: surah.surahNumber,
-                  basmalaStyle: basmalaStyle ??
+                  onSurahBannerPress: widget.onSurahBannerPress,
+                  isDark: effectiveDark,
+                ),
+              if (widget.ayah.ayahNumber == 1 &&
+                  widget.surah.surahNumber != 9 &&
+                  widget.surah.surahNumber != 1)
+                BasmallahWidget(
+                  surahNumber: widget.surah.surahNumber,
+                  basmalaStyle: widget.basmalaStyle ??
                       BasmalaStyle(
-                        basmalaColor: AppColors.getTextColor(isDark),
+                        basmalaColor: AppColors.getTextColor(effectiveDark),
                         basmalaFontSize: 23.0.w,
                         verticalPadding: 0.0,
                       ),
-                )
-              : const SizedBox.shrink(),
-          // رقم الآية واسم السورة — يتفاعل مع تغييرات الإشارات المرجعية
-
-          if (withOptionsBar == true)
-            (style.optionsBarWidget?.call(ayah, surah, pageIndex)) ??
-                Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.only(bottom: 8),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: style.optionsBarBackgroundColor ??
-                        Theme.of(context)
-                            .colorScheme
-                            .primary
-                            .withValues(alpha: .1),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        textDirection: TextDirection.ltr,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          // Ayah text
-                          Expanded(
-                            child: GetSingleAyah(
-                              surahNumber: surah.surahNumber,
-                              ayahNumber: ayah.ayahNumber,
-                              fontSize: fontSize,
-                              isBold: false,
-                              ayahs: ayah,
-                              isSingleAyah: false,
-                              showAyahNumber: true,
-                              isDark: isDark,
-                              pageIndex: pageIndex + 1,
-                              textColor: style.ayahTextColor,
-                              textAlign: TextAlign.center,
-                              enabledTajweed: QuranCtrl
-                                  .instance.state.isTajweedEnabled.value,
-                            ),
-                          ),
-                        ],
+                ),
+              // Ayah text — always visible
+              GetSingleAyah(
+                surahNumber: widget.surah.surahNumber,
+                ayahNumber: widget.ayah.ayahNumber,
+                fontSize: fontSize,
+                isBold: false,
+                ayahs: widget.ayah,
+                isSingleAyah: false,
+                showAyahNumber: true,
+                isDark: effectiveDark,
+                pageIndex: widget.pageIndex + 1,
+                textColor: s.ayahTextColor,
+                textAlign: TextAlign.center,
+                enabledTajweed: QuranCtrl.instance.state.isTajweedEnabled.value,
+              ),
+              // Actions bar — shown only when the ayah is tapped
+              if (widget.withOptionsBar == true && _actionsVisible)
+                (s.optionsBarWidget
+                        ?.call(widget.ayah, widget.surah, widget.pageIndex)) ??
+                    Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.only(top: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: s.optionsBarBackgroundColor ??
+                            primaryColor.withValues(alpha: .1),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      const SizedBox(height: 8),
-                      // Action buttons
-                      Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           GestureDetector(
                             onTap: () {
                               AudioCtrl.instance.playAyah(
                                 context,
-                                ayah.ayahUQNumber,
+                                widget.ayah.ayahUQNumber,
                                 playSingleAyah: true,
                                 ayahAudioStyle: sAudio,
                                 ayahDownloadManagerStyle: sDownloadManager,
-                                isDarkMode: isDark,
+                                isDarkMode: effectiveDark,
                               );
-                              log('Second Menu Child Tapped: ${ayah.ayahUQNumber}');
+                              log('Second Menu Child Tapped: ${widget.ayah.ayahUQNumber}');
                             },
-                            child: Icon(
-                              style.playIconData,
-                              color: style.playIconColor,
-                              size: style.iconSize,
-                            ),
+                            child: Icon(s.playIconData,
+                                color: s.playIconColor, size: s.iconSize),
                           ),
-                          SizedBox(width: style.iconHorizontalPadding ?? 4.0),
+                          SizedBox(width: s.iconHorizontalPadding ?? 4.0),
                           GestureDetector(
                             onTap: () {
                               AudioCtrl.instance.playAyah(
                                 context,
-                                ayah.ayahUQNumber,
+                                widget.ayah.ayahUQNumber,
                                 playSingleAyah: false,
                                 ayahAudioStyle: sAudio,
                                 ayahDownloadManagerStyle: sDownloadManager,
-                                isDarkMode: isDark,
+                                isDarkMode: effectiveDark,
                               );
-                              log('Second Menu Child Tapped: ${ayah.ayahUQNumber}');
+                              log('Second Menu Child Tapped: ${widget.ayah.ayahUQNumber}');
                             },
-                            child: Icon(
-                              style.playAllIconData,
-                              color: style.playAllIconColor,
-                              size: style.iconSize,
-                            ),
+                            child: Icon(s.playAllIconData,
+                                color: s.playAllIconColor, size: s.iconSize),
                           ),
-                          SizedBox(width: style.iconHorizontalPadding ?? 4.0),
+                          SizedBox(width: s.iconHorizontalPadding ?? 4.0),
                           GestureDetector(
                             onTap: () {
-                              Clipboard.setData(ClipboardData(text: ayah.text));
+                              Clipboard.setData(
+                                  ClipboardData(text: widget.ayah.text));
                             },
-                            child: Icon(
-                              style.copyIconData,
-                              color: style.copyIconColor,
-                              size: style.iconSize,
-                            ),
+                            child: Icon(s.copyIconData,
+                                color: s.copyIconColor, size: s.iconSize),
                           ),
-                          SizedBox(width: style.iconHorizontalPadding ?? 4.0),
-
-                          // أزرار العلامات المرجعية
-
+                          SizedBox(width: s.iconHorizontalPadding ?? 4.0),
                           for (final colorCode in colors) ...{
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                horizontal: style.iconHorizontalPadding ?? 4.0,
-                              ),
+                                  horizontal: s.iconHorizontalPadding ?? 4.0),
                               child: GestureDetector(
                                 onTap: () {
                                   final bmCtrl = BookmarksCtrl.instance;
                                   final existing = bmCtrl.bookmarks[colorCode]
                                       ?.cast<BookmarkModel?>()
                                       .firstWhere(
-                                        (b) => b!.ayahId == ayah.ayahUQNumber,
+                                        (b) =>
+                                            b!.ayahId ==
+                                            widget.ayah.ayahUQNumber,
                                         orElse: () => null,
                                       );
                                   if (existing != null) {
                                     bmCtrl.removeBookmark(existing.id);
                                   } else {
                                     bmCtrl.saveBookmark(
-                                      surahName: surah.arabicName,
-                                      ayahNumber: ayah.ayahNumber,
-                                      ayahId: ayah.ayahUQNumber,
-                                      page: ayah.page,
+                                      surahName: widget.surah.arabicName,
+                                      ayahNumber: widget.ayah.ayahNumber,
+                                      ayahId: widget.ayah.ayahUQNumber,
+                                      page: widget.ayah.page,
                                       colorCode: colorCode,
                                     );
                                   }
                                 },
-                                child: Icon(
-                                  style.bookmarkIconData,
-                                  color: Color(colorCode),
-                                  size: style.iconSize,
-                                ),
+                                child: Icon(s.bookmarkIconData,
+                                    color: Color(colorCode), size: s.iconSize),
                               ),
                             ),
-                          }
+                          },
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+              const SizedBox(height: 10),
+              // Tafsir / translation
+              Container(
+                width: double.infinity,
+                padding: s.tafsirPadding ??
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  color: s.tafsirBackgroundColor ??
+                      (effectiveDark
+                          ? Colors.grey.shade900.withValues(alpha: .5)
+                          : Colors.grey.shade100.withValues(alpha: .7)),
+                  borderRadius: BorderRadius.circular(
+                      s.tafsirBackgroundBorderRadius ?? 12.0),
                 ),
-          const SizedBox(height: 10),
-          // خلفية التفسير
-          Container(
-            width: double.infinity,
-            padding: style.tafsirPadding ??
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: style.tafsirBackgroundColor ??
-                  (isDark
-                      ? Colors.grey.shade900.withValues(alpha: .5)
-                      : Colors.grey.shade100.withValues(alpha: .7)),
-              borderRadius: BorderRadius.circular(
-                  style.tafsirBackgroundBorderRadius ?? 12.0),
-            ),
-            child: _buildTafsirOrTranslationContent(
-              context: context,
-              isTafsir: isTafsir,
-              fontSize: fontSize,
-              language: language,
-            ),
+                child: _buildTafsirContent(
+                  context: context,
+                  isTafsir: isTafsir,
+                  fontSize: fontSize,
+                  effectiveDark: effectiveDark,
+                  resolvedStyle: s,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        ),
+      );
+    });
   }
 
-  Widget _buildTafsirOrTranslationContent({
+  Widget _buildTafsirContent({
     required BuildContext context,
     required bool isTafsir,
     required double fontSize,
-    required String language,
+    required bool effectiveDark,
+    required AyahTafsirInlineStyle resolvedStyle,
   }) {
-    final rawText = isTafsir ? tafsir.tafsirText : translation?.text;
+    final rawText =
+        isTafsir ? widget.tafsir.tafsirText : widget.translation?.text;
     final hasContent = rawText != null && rawText.isNotEmpty;
 
     if (!hasContent) {
       return Text(
         QuranLocalizations.of(context).noTafsirAvailable,
         style: TextStyle(
-          color: isDark ? Colors.grey.shade500 : Colors.grey.shade500,
+          color: effectiveDark ? Colors.grey.shade400 : Colors.grey.shade600,
           fontSize: 14,
           fontStyle: FontStyle.italic,
         ),
       );
     }
 
-    final textColor = style.tafsirTextColor ??
-        (isDark ? Colors.grey.shade300 : Colors.grey.shade800);
+    final textColor = resolvedStyle.tafsirTextColor ??
+        (effectiveDark ? Colors.grey.shade300 : Colors.grey.shade800);
 
     return _ExpandableTafsirText(
       rawText: rawText,
-      isDark: isDark,
+      isDark: effectiveDark,
       fontSize: fontSize,
       textColor: textColor,
       textDirection: context.alignmentLayoutWPassLang(
-          language, TextDirection.rtl, TextDirection.ltr),
-      maxLines: style.tafsirMaxLines ?? 4,
+          widget.language, TextDirection.rtl, TextDirection.ltr),
+      maxLines: resolvedStyle.tafsirMaxLines ?? 4,
       readMoreText:
-          style.readMoreText ?? QuranLocalizations.of(context).readMore,
+          resolvedStyle.readMoreText ?? QuranLocalizations.of(context).readMore,
       readLessText:
-          style.readLessText ?? QuranLocalizations.of(context).readLess,
-      readMoreButtonColor: style.readMoreButtonColor,
-      readMoreTextStyle: style.readMoreTextStyle,
-      translation: !isTafsir ? translation : null,
+          resolvedStyle.readLessText ?? QuranLocalizations.of(context).readLess,
+      readMoreButtonColor: resolvedStyle.readMoreButtonColor,
+      readMoreTextStyle: resolvedStyle.readMoreTextStyle,
+      translation: !isTafsir ? widget.translation : null,
     );
   }
 }
 
-/// ويدجت عرض التفسير/الترجمة بأداء عالي:
-/// - في الوضع المطوي: يعرض نص عادي مُجرّد من HTML (بدون parsing ثقيل)
-/// - عند الضغط على "اقرأ المزيد": يحلّل HTML ويعرض النص المنسّق كاملاً
-/// هذا يتجنب أعباء toFlutterText() و TextPainter.layout() للنصوص الطويلة
+/// ويدجت عرض التفسير/الترجمة بأداء عالي
 class _ExpandableTafsirText extends StatefulWidget {
   const _ExpandableTafsirText({
     required this.rawText,
@@ -861,11 +913,13 @@ class _ExpandableTafsirTextState extends State<_ExpandableTafsirText> {
   void didUpdateWidget(covariant _ExpandableTafsirText oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.rawText != widget.rawText ||
-        oldWidget.isDark != widget.isDark ||
         oldWidget.translation != widget.translation) {
       _parsedSpans = null;
       _strippedText = null;
       _expanded = false;
+    } else if (oldWidget.isDark != widget.isDark ||
+        oldWidget.textColor != widget.textColor) {
+      _parsedSpans = null;
     }
   }
 
@@ -902,7 +956,6 @@ class _ExpandableTafsirTextState extends State<_ExpandableTafsirText> {
       );
     }
 
-    // الوضع المطوي: نص عادي مُجرّد — بدون HTML parsing
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
