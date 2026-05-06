@@ -111,14 +111,14 @@ class ShowTafseer extends StatelessWidget {
                         labelColor: scheme.onPrimaryContainer,
                         unselectedLabelColor: scheme.onSurfaceVariant,
                         labelStyle: s.tabBarLabelStyle ??
-                            TextStyle(
+                            const TextStyle(
                               fontFamily: 'cairo',
                               package: 'quran_library',
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
                             ),
                         unselectedLabelStyle: s.tabBarUnselectedLabelStyle ??
-                            TextStyle(
+                            const TextStyle(
                               fontFamily: 'cairo',
                               package: 'quran_library',
                               fontWeight: FontWeight.bold,
