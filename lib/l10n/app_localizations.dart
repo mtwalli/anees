@@ -105,6 +105,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Anees — The Intelligent Quran'**
   String get appTitle;
+
+  /// Title shown in the home screen app bar
+  ///
+  /// In en, this message translates to:
+  /// **'Anees'**
+  String get homeAppBarTitle;
+
+  /// Section header for the Quran section on the home screen
+  ///
+  /// In en, this message translates to:
+  /// **'The Holy Quran'**
+  String get sectionQuran;
+
+  /// Section header for the Azkar section on the home screen
+  ///
+  /// In en, this message translates to:
+  /// **'Azkar'**
+  String get sectionAzkar;
+
+  /// Title for the Quran reader tile
+  ///
+  /// In en, this message translates to:
+  /// **'The Noble Mushaf'**
+  String get tileQuranReaderTitle;
+
+  /// Subtitle for the Quran reader tile
+  ///
+  /// In en, this message translates to:
+  /// **'Read and browse the Quran'**
+  String get tileQuranReaderSubtitle;
+
+  /// Title for the Tajweed tile
+  ///
+  /// In en, this message translates to:
+  /// **'Tajweed Rules'**
+  String get tileTajweedTitle;
+
+  /// Subtitle for the Tajweed tile
+  ///
+  /// In en, this message translates to:
+  /// **'Learn the rules of Quranic recitation'**
+  String get tileTajweedSubtitle;
+
+  /// Title for the Azkar placeholder tile
+  ///
+  /// In en, this message translates to:
+  /// **'Morning & Evening Azkar'**
+  String get tileAzkarTitle;
+
+  /// Subtitle for the Azkar placeholder tile
+  ///
+  /// In en, this message translates to:
+  /// **'Coming soon — daily remembrances & supplication'**
+  String get tileAzkarSubtitle;
+
+  /// Title shown in the Tajweed screen app bar
+  ///
+  /// In en, this message translates to:
+  /// **'Tajweed Rules'**
+  String get tajweedScreenTitle;
+
+  /// Body text shown on the Tajweed coming-soon screen
+  ///
+  /// In en, this message translates to:
+  /// **'Coming soon — this section will include a comprehensive explanation of the rules of Quranic tajweed'**
+  String get tajweedScreenBody;
 }
 
 class _AppLocalizationsDelegate

@@ -1,4 +1,15 @@
 {
   "@@locale": "de",
-  "appTitle": "Anees — Der intelligente Koran"
+  "appTitle": "Anees — Der intelligente Koran",
+  "homeAppBarTitle": "Anees",
+  "sectionQuran": "Der Heilige Quran",
+  "sectionAzkar": "Gebetsformeln",
+  "tileQuranReaderTitle": "Der edle Mushaf",
+  "tileQuranReaderSubtitle": "Quran lesen und durchsuchen",
+  "tileTajweedTitle": "Tajweed-Regeln",
+  "tileTajweedSubtitle": "Regeln der Quran-Rezitation lernen",
+  "tileAzkarTitle": "Morgen- und Abendgebete",
+  "tileAzkarSubtitle": "Demnächst — tägliche Gebetsformeln & Bittgebete",
+  "tajweedScreenTitle": "Tajweed-Regeln",
+  "tajweedScreenBody": "Demnächst — dieser Bereich wird eine umfassende Erläuterung der Tajweed-Regeln des Quran enthalten"
 }

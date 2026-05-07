@@ -1,4 +1,15 @@
 {
   "@@locale": "ar",
-  "appTitle": "أنيس — القرآن الذكي"
+  "appTitle": "أنيس — القرآن الذكي",
+  "homeAppBarTitle": "أنيس",
+  "sectionQuran": "القرآن الكريم",
+  "sectionAzkar": "الأذكار",
+  "tileQuranReaderTitle": "المصحف الشريف",
+  "tileQuranReaderSubtitle": "اقرأ وتصفّح القرآن",
+  "tileTajweedTitle": "أحكام التجويد",
+  "tileTajweedSubtitle": "تعلّم أحكام تلاوة القرآن",
+  "tileAzkarTitle": "أذكار الصباح والمساء",
+  "tileAzkarSubtitle": "قريباً — أذكار اليوم والدعاء",
+  "tajweedScreenTitle": "أحكام التجويد",
+  "tajweedScreenBody": "قريباً — سيتضمن هذا القسم شرحاً وافياً لأحكام تجويد القرآن الكريم"
 }

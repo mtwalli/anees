@@ -3,5 +3,49 @@
   "appTitle": "Anees — The Intelligent Quran",
   "@appTitle": {
     "description": "The application title"
+  },
+  "homeAppBarTitle": "Anees",
+  "@homeAppBarTitle": {
+    "description": "Title shown in the home screen app bar"
+  },
+  "sectionQuran": "The Holy Quran",
+  "@sectionQuran": {
+    "description": "Section header for the Quran section on the home screen"
+  },
+  "sectionAzkar": "Azkar",
+  "@sectionAzkar": {
+    "description": "Section header for the Azkar section on the home screen"
+  },
+  "tileQuranReaderTitle": "The Noble Mushaf",
+  "@tileQuranReaderTitle": {
+    "description": "Title for the Quran reader tile"
+  },
+  "tileQuranReaderSubtitle": "Read and browse the Quran",
+  "@tileQuranReaderSubtitle": {
+    "description": "Subtitle for the Quran reader tile"
+  },
+  "tileTajweedTitle": "Tajweed Rules",
+  "@tileTajweedTitle": {
+    "description": "Title for the Tajweed tile"
+  },
+  "tileTajweedSubtitle": "Learn the rules of Quranic recitation",
+  "@tileTajweedSubtitle": {
+    "description": "Subtitle for the Tajweed tile"
+  },
+  "tileAzkarTitle": "Morning & Evening Azkar",
+  "@tileAzkarTitle": {
+    "description": "Title for the Azkar placeholder tile"
+  },
+  "tileAzkarSubtitle": "Coming soon — daily remembrances & supplication",
+  "@tileAzkarSubtitle": {
+    "description": "Subtitle for the Azkar placeholder tile"
+  },
+  "tajweedScreenTitle": "Tajweed Rules",
+  "@tajweedScreenTitle": {
+    "description": "Title shown in the Tajweed screen app bar"
+  },
+  "tajweedScreenBody": "Coming soon — this section will include a comprehensive explanation of the rules of Quranic tajweed",
+  "@tajweedScreenBody": {
+    "description": "Body text shown on the Tajweed coming-soon screen"
   }
 }

@@ -1,0 +1,702 @@
+{
+  "version": "1.0.0",
+  "language": "ar",
+  "title": "أحكام التجويد",
+  "title_transliteration": "Ahkam Al-Tajweed",
+  "description": "القواعد الأساسية لتحسين تلاوة القرآن الكريم",
+  "color_coding": {
+    "description": "ألوان مصحف التجويد المعتمدة للدلالة على الأحكام",
+    "legend": [
+      {
+        "rule": "الغنة",
+        "rule_transliteration": "Al-Ghunnah",
+        "color_name": "أخضر",
+        "color_hex": "#008000",
+        "applies_to": "النون المشددة والميم المشددة"
+      },
+      {
+        "rule": "الإخفاء",
+        "rule_transliteration": "Al-Ikhfa",
+        "color_name": "أخضر",
+        "color_hex": "#008000",
+        "applies_to": "إخفاء النون الساكنة والتنوين"
+      },
+      {
+        "rule": "الإدغام بغنة",
+        "rule_transliteration": "Al-Idgham bi-Ghunnah",
+        "color_name": "أخضر",
+        "color_hex": "#008000",
+        "applies_to": "إدغام النون مع حروف ينمو"
+      },
+      {
+        "rule": "الإقلاب",
+        "rule_transliteration": "Al-Iqlab",
+        "color_name": "أخضر",
+        "color_hex": "#008000",
+        "applies_to": "إقلاب النون الساكنة إلى ميم"
+      },
+      {
+        "rule": "الإخفاء الشفوي",
+        "rule_transliteration": "Al-Ikhfa Al-Shafawi",
+        "color_name": "أخضر",
+        "color_hex": "#008000",
+        "applies_to": "إخفاء الميم الساكنة عند الباء"
+      },
+      {
+        "rule": "المد الواجب المتصل",
+        "rule_transliteration": "Al-Madd Al-Wajib Al-Muttasil",
+        "color_name": "أحمر",
+        "color_hex": "#FF0000",
+        "applies_to": "مد مؤكد يمتد 4-5 حركات"
+      },
+      {
+        "rule": "المد الجائز المنفصل",
+        "rule_transliteration": "Al-Madd Al-Jaiz Al-Munfasil",
+        "color_name": "أزرق",
+        "color_hex": "#0000FF",
+        "applies_to": "مد جائز يمتد 2-5 حركات"
+      },
+      {
+        "rule": "المد اللازم",
+        "rule_transliteration": "Al-Madd Al-Lazim",
+        "color_name": "أزرق",
+        "color_hex": "#0000FF",
+        "applies_to": "مد لازم يمتد 6 حركات"
+      },
+      {
+        "rule": "القلقلة",
+        "rule_transliteration": "Al-Qalqalah",
+        "color_name": "بنفسجي",
+        "color_hex": "#800080",
+        "applies_to": "حروف القلقلة: قطب جد"
+      },
+      {
+        "rule": "التفخيم",
+        "rule_transliteration": "Al-Tafkhim",
+        "color_name": "أصفر / ذهبي",
+        "color_hex": "#DAA520",
+        "applies_to": "حروف التفخيم والراء المفخمة"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "noon_saakin",
+      "arabic_name": "النون الساكنة والتنوين",
+      "transliteration": "Al-Noon Al-Saakinah wa Al-Tanween",
+      "arabic_description": "النون الساكنة هي النون التي لا حركة عليها، سواء أكانت في وسط الكلمة أم في آخرها. والتنوين هو نون ساكنة زائدة تلحق آخر الأسماء لفظاً لا خطاً. ولهما أربعة أحكام تختلف باختلاف الحروف التي تليهما.",
+      "color_hex": "#008000",
+      "sub_rules": [
+        {
+          "id": "izhar_halqi",
+          "arabic_name": "الإظهار الحلقي",
+          "transliteration": "Al-Izhar Al-Halqi",
+          "arabic_definition": "الإظهار لغةً هو البيان والوضوح. واصطلاحاً هو إخراج النون الساكنة أو التنوين من مخرجها دون غنة ظاهرة عند الحروف الحلقية الستة. وسُمِّي حلقياً لأن حروفه تخرج من الحلق.",
+          "letters": "أ، هـ، ع، ح، غ، خ",
+          "letters_mnemonic": "أخي هاك علماً حازه غير خاسر",
+          "harakaat": null,
+          "example_arabic": "مَنْ أَمَنَ — مِنْ عِلْمٍ — أَنْعَمْتَ",
+          "example_transliteration": "Man amana — min 'ilmin — an'amta",
+          "color_hex": null,
+          "notes": "لا غنة عند النطق بهذه الأحكام الستة"
+        },
+        {
+          "id": "idgham_bi_ghunnah",
+          "arabic_name": "الإدغام بغنة",
+          "transliteration": "Al-Idgham bi-Ghunnah",
+          "arabic_definition": "الإدغام لغةً إدخال الشيء في الشيء. واصطلاحاً هو إدخال النون الساكنة أو التنوين في الحرف التالي إدخالاً كاملاً مع إبقاء الغنة. ويكون مع أربعة حروف يجمعها: (ينمو).",
+          "letters": "ي، ن، م، و",
+          "letters_mnemonic": "ينمو",
+          "harakaat": 2,
+          "example_arabic": "مَنْ يَقُولُ — مِنْ وَرَائِهِمْ — جَنَّاتٍ وَأَنْهَارٌ",
+          "example_transliteration": "Man yaqool — min waraa'ihim — jannatin wa-anhar",
+          "color_hex": "#008000",
+          "notes": "لا يجوز الإدغام إذا كانت النون والحرف التالي في كلمة واحدة كـ(بُنيان، قِنوان)"
+        },
+        {
+          "id": "idgham_bila_ghunnah",
+          "arabic_name": "الإدغام بلا غنة",
+          "transliteration": "Al-Idgham bila Ghunnah",
+          "arabic_definition": "هو إدخال النون الساكنة أو التنوين في الحرف التالي إدخالاً كاملاً مع إسقاط الغنة كلياً. ويكون مع حرفين هما: اللام والراء.",
+          "letters": "ل، ر",
+          "letters_mnemonic": "لر",
+          "harakaat": null,
+          "example_arabic": "مِنْ رَبِّهِمْ — هُدًى لِلْمُتَّقِينَ",
+          "example_transliteration": "Min rabbihim — hudan lil-muttaqeen",
+          "color_hex": null,
+          "notes": "تختفي الغنة كلياً مع اللام والراء"
+        },
+        {
+          "id": "ikhfa",
+          "arabic_name": "الإخفاء الحقيقي",
+          "transliteration": "Al-Ikhfa Al-Haqiqi",
+          "arabic_definition": "الإخفاء لغةً هو الستر. واصطلاحاً هو النطق بالنون الساكنة أو التنوين بصفة بين الإظهار والإدغام مع بقاء الغنة وامتدادها حركتين، عند خمسة عشر حرفاً من حروف الهجاء.",
+          "letters": "ص، ذ، ث، ك، ج، ش، ق، س، د، ط، ز، ف، ت، ض، ظ",
+          "letters_mnemonic": "صف ذا ثنا كم جاد شخص قد سما دم طيباً زد في تقى ضع ظالماً",
+          "harakaat": 2,
+          "example_arabic": "مَنْ كَفَرَ — أَنْدَاداً — مِنْ قَبْلِ",
+          "example_transliteration": "Man kafara — andaadan — min qabl",
+          "color_hex": "#008000",
+          "notes": "اللسان لا يلتصق بمخرج الحرف التالي بل يقترب منه فقط"
+        },
+        {
+          "id": "iqlab",
+          "arabic_name": "الإقلاب",
+          "transliteration": "Al-Iqlab",
+          "arabic_definition": "الإقلاب لغةً تحويل الشيء عن وجهه. واصطلاحاً هو قلب النون الساكنة أو التنوين ميماً خالصة مع إخفائها والغنة عند حرف الباء فقط.",
+          "letters": "ب",
+          "letters_mnemonic": "الباء",
+          "harakaat": 2,
+          "example_arabic": "مِنْ بَعْدِ — سَمِيعٌ بَصِيرٌ — أَنْبِئْهُمْ",
+          "example_transliteration": "Min ba'di — samee'un baseer — anbi'hum",
+          "color_hex": "#008000",
+          "notes": "يُرمز له بميم صغيرة فوق النون أو التنوين في المصحف"
+        }
+      ]
+    },
+    {
+      "id": "meem_saakin",
+      "arabic_name": "الميم الساكنة",
+      "transliteration": "Al-Meem Al-Saakinah",
+      "arabic_description": "الميم الساكنة هي الميم التي سكّنت في الكلمة ولم تُحرَّك، وتقع في وسط الكلمة أو في آخرها وصلاً. ولها ثلاثة أحكام تختلف باختلاف ما يأتي بعدها من الحروف.",
+      "color_hex": "#008000",
+      "sub_rules": [
+        {
+          "id": "ikhfa_shafawi",
+          "arabic_name": "الإخفاء الشفوي",
+          "transliteration": "Al-Ikhfa Al-Shafawi",
+          "arabic_definition": "هو إخفاء الميم الساكنة عند حرف الباء مع إبقاء الغنة ومدّها مقدار حركتين. وسُمِّي شفوياً لأن الميم والباء كليهما حرفان شفويان يخرجان من الشفتين.",
+          "letters": "ب",
+          "letters_mnemonic": "الباء",
+          "harakaat": 2,
+          "example_arabic": "وَمَا هُمْ بِمُؤْمِنِينَ — تَرْمِيهِمْ بِحِجَارَةٍ",
+          "example_transliteration": "Wa ma hum bi-mu'mineen — tarmeehim bihajarah",
+          "color_hex": "#008000",
+          "notes": "الفرق بينه وبين الإقلاب: الإقلاب للنون والتنوين، والإخفاء الشفوي للميم الساكنة"
+        },
+        {
+          "id": "idgham_shafawi",
+          "arabic_name": "الإدغام الشفوي",
+          "transliteration": "Al-Idgham Al-Shafawi",
+          "arabic_definition": "هو إدغام الميم الساكنة في الميم المتحركة التي تليها إدغاماً كاملاً مع الغنة ومدّها حركتين. ويُسمى إدغام المتماثلين الصغير لأن الحرفين متماثلان.",
+          "letters": "م",
+          "letters_mnemonic": "الميم",
+          "harakaat": 2,
+          "example_arabic": "إِنَّهُمْ مَفَازاً — كَمْ مِنْ فِئَةٍ",
+          "example_transliteration": "Innahum mafaaza — kam min fi'ah",
+          "color_hex": "#008000",
+          "notes": "يجب مد الغنة حركتين بالضبط، ولا يجوز الزيادة أو النقصان"
+        },
+        {
+          "id": "izhar_shafawi",
+          "arabic_name": "الإظهار الشفوي",
+          "transliteration": "Al-Izhar Al-Shafawi",
+          "arabic_definition": "هو النطق بالميم الساكنة واضحة بلا غنة ظاهرة عند جميع الحروف الهجائية ما عدا الميم والباء. وسُمِّي شفوياً لخروج الميم من الشفتين.",
+          "letters": "جميع الحروف ما عدا الميم والباء",
+          "letters_mnemonic": "26 حرفاً",
+          "harakaat": null,
+          "example_arabic": "وَأَنْتُمْ تَنْظُرُونَ — لَهُمْ فِيهَا — رَبُّهُمْ",
+          "example_transliteration": "Wa antum tandhuroon — lahum feeha — rabbuhum",
+          "color_hex": null,
+          "notes": "يُستحسن الاحتراز عند حرف الواو والفاء تحديداً لتجنب الإخفاء غير المقصود"
+        }
+      ]
+    },
+    {
+      "id": "mudood",
+      "arabic_name": "المدود",
+      "transliteration": "Al-Mudood",
+      "arabic_description": "المد في اللغة هو الزيادة والامتداد. وفي الاصطلاح هو إطالة الصوت بحرف المد (الألف الساكن المفتوح ما قبله، والواو الساكن المضموم ما قبله، والياء الساكن المكسور ما قبله). وينقسم إلى قسمين: المد الأصلي ومدود فرعية.",
+      "color_hex": "#FF0000",
+      "sub_rules": [
+        {
+          "id": "madd_tabii",
+          "arabic_name": "المد الطبيعي (الأصلي)",
+          "transliteration": "Al-Madd Al-Tabii (Al-Asli)",
+          "arabic_definition": "هو المد الذي لا تقوم ذات الحرف إلا به، ولا يتوقف على سبب من همز أو سكون. وسُمِّي طبيعياً لأن صاحب الطبيعة السليمة لا يزيد فيه ولا ينقص. مقداره حركتان.",
+          "letters": "ا، و، ي",
+          "harakaat": 2,
+          "example_arabic": "قَالَ — يَقُولُ — قِيلَ",
+          "example_transliteration": "Qaala — yaqoolu — qeela",
+          "color_hex": null,
+          "notes": "هو الأساس الذي تُقاس عليه جميع المدود الأخرى (2 حركة = وحدة قياس)"
+        },
+        {
+          "id": "madd_wajib_muttasil",
+          "arabic_name": "المد الواجب المتصل",
+          "transliteration": "Al-Madd Al-Wajib Al-Muttasil",
+          "arabic_definition": "هو أن يأتي حرف المد والهمزة في كلمة واحدة. سُمِّي واجباً لوجوب مده زيادةً على المد الطبيعي، ومتصلاً لاتصال حرف المد بالهمزة في كلمة واحدة. مقداره أربع إلى خمس حركات.",
+          "letters": "حرف مد + همزة في كلمة واحدة",
+          "harakaat_range": "4-5",
+          "example_arabic": "جَاءَ — السَّمَاءَ — وَالْمَلَائِكَةُ — سُوءَ",
+          "example_transliteration": "Jaa'a — al-samaa'a — wal-malaa'ikatu — soo'a",
+          "color_hex": "#FF0000",
+          "notes": "يجب مده عند جميع القراء، وهو حكم ثابت لا خلاف فيه"
+        },
+        {
+          "id": "madd_jaiz_munfasil",
+          "arabic_name": "المد الجائز المنفصل",
+          "transliteration": "Al-Madd Al-Jaiz Al-Munfasil",
+          "arabic_definition": "هو أن يأتي حرف المد في آخر كلمة والهمزة في أول الكلمة التي تليها. سُمِّي جائزاً لجواز مده وقصره، ومنفصلاً لانفصال حرف المد عن الهمزة في كلمتين مختلفتين. مقداره حركتان إلى خمس.",
+          "letters": "حرف مد في نهاية كلمة + همزة في بداية الكلمة التالية",
+          "harakaat_range": "2-5",
+          "example_arabic": "يَا أَيُّهَا — بِمَا أُنْزِلَ — فِي أَنْفُسِكُمْ",
+          "example_transliteration": "Yaa ayyuhaa — bimaa unzila — fee anfusikum",
+          "color_hex": "#0000FF",
+          "notes": "في رواية حفص عن عاصم: يُمد في الغالب 4-5 حركات"
+        },
+        {
+          "id": "madd_leen",
+          "arabic_name": "مد اللين",
+          "transliteration": "Madd Al-Leen",
+          "arabic_definition": "هو أن تأتي الواو أو الياء الساكنتان المفتوح ما قبلهما بعدهما حرف ساكن عند الوقف. سُمِّي لين الإتيان به وسهولة النطق به. مقداره حركتان إلى ست عند الوقف.",
+          "letters": "واو أو ياء ساكنة مفتوح ما قبلها + حرف ساكن",
+          "harakaat_range": "2-6 عند الوقف",
+          "example_arabic": "خَوْفٌ — بَيْتٌ — قُرَيْشٍ",
+          "example_transliteration": "Khawf — bayt — quraysh",
+          "color_hex": null,
+          "notes": "خاص بالوقف فقط، ولا يُمد في الوصل"
+        },
+        {
+          "id": "madd_badal",
+          "arabic_name": "مد البدل",
+          "transliteration": "Madd Al-Badal",
+          "arabic_definition": "هو أن تتقدم الهمزة على حرف المد في كلمة واحدة. سُمِّي بدلاً لأن الأصل في هذا المد همزة أُبدلت حرفَ مدٍّ. مقداره حركتان فقط.",
+          "letters": "همزة + حرف مد",
+          "harakaat": 2,
+          "example_arabic": "آمَنَ (أَأْمَنَ) — إِيمَانٌ (إِئْمَانٌ) — أُوتِيَ (أُؤْتِيَ)",
+          "example_transliteration": "Aamana — eemanun — ootiya",
+          "color_hex": null,
+          "notes": "مده حركتان في رواية حفص"
+        },
+        {
+          "id": "madd_iwad",
+          "arabic_name": "مد العوض",
+          "transliteration": "Madd Al-Iwad",
+          "arabic_definition": "هو الوقف على التنوين المنصوب المنوّن بألف. سُمِّي عوضاً لأن الألف عوضٌ عن التنوين عند الوقف. مقداره حركتان.",
+          "letters": "تنوين نصب عند الوقف",
+          "harakaat": 2,
+          "example_arabic": "عَلِيماً (الوقف: عَلِيمَا) — رَحِيماً",
+          "example_transliteration": "Aleeman (waqf: aleema) — Raheeman",
+          "color_hex": null,
+          "notes": "لا يُطبق إذا كانت الكلمة تنتهي بتاء مربوطة"
+        },
+        {
+          "id": "madd_sila_sughra",
+          "arabic_name": "مد الصلة الصغرى",
+          "transliteration": "Madd Al-Sila Al-Sughra",
+          "arabic_definition": "هو مد هاء الضمير الغائب المفرد المذكر إذا وقعت بين متحركين وليس بعدها همزة. مقداره حركتان. ويمتد الصوت بها كحرف المد.",
+          "letters": "هاء الضمير بين متحركين بدون همزة",
+          "harakaat": 2,
+          "example_arabic": "إِنَّهُ هُوَ — لَهُ مَا",
+          "example_transliteration": "Innahu huwa — lahu ma",
+          "color_hex": null,
+          "notes": "خاص برواية حفص، وتُكتب الهاء صغيرة فوق السطر في بعض المصاحف"
+        },
+        {
+          "id": "madd_sila_kubra",
+          "arabic_name": "مد الصلة الكبرى",
+          "transliteration": "Madd Al-Sila Al-Kubra",
+          "arabic_definition": "هو مد هاء الضمير الغائب المفرد المذكر إذا وقعت بين متحركين وجاء بعدها همزة. مقداره أربع إلى خمس حركات.",
+          "letters": "هاء الضمير بين متحركين + همزة بعدها",
+          "harakaat_range": "4-5",
+          "example_arabic": "عِنْدَهُ إِلَّا — بِهِ أَحَداً",
+          "example_transliteration": "Indahu illa — bihi ahadan",
+          "color_hex": null,
+          "notes": "يُعامَل معاملة المد الجائز المنفصل في المقدار"
+        },
+        {
+          "id": "madd_lazim_kalimi",
+          "arabic_name": "المد اللازم الكلمي",
+          "transliteration": "Al-Madd Al-Lazim Al-Kalimi",
+          "arabic_definition": "هو أن يأتي بعد حرف المد حرف ساكن سكوناً أصلياً في نفس الكلمة. سُمِّي لازماً لأنه لازم في الوصل والوقف كليهما. مقداره ست حركات.",
+          "letters": "حرف مد + حرف ساكن سكوناً أصلياً",
+          "harakaat": 6,
+          "example_arabic": "الضَّالِّينَ — دَابَّةٍ — الصَّاخَّةُ",
+          "example_transliteration": "Al-daalleen — daabbah — al-saaakhkhah",
+          "color_hex": "#0000FF",
+          "notes": "مده ست حركات وجوباً"
+        },
+        {
+          "id": "madd_lazim_harfi",
+          "arabic_name": "المد اللازم الحرفي",
+          "transliteration": "Al-Madd Al-Lazim Al-Harfi",
+          "arabic_definition": "هو المد الذي يقع في الحروف المقطعة التي في أوائل السور، إذا كانت تُهجى على ثلاثة أحرف وسطها حرف مد أو لين. مقداره ست حركات.",
+          "letters": "الحروف المقطعة ذات ثلاثة مدود: الم، الر، الق، ن، ص، ق",
+          "harakaat": 6,
+          "example_arabic": "الم — الر — كهيعص — حم",
+          "example_transliteration": "Alif-Lam-Meem — Alif-Lam-Ra — Kaf-Ha-Ya-Ain-Sad — Ha-Meem",
+          "color_hex": "#0000FF",
+          "notes": "الحروف التي تُهجى على حرفين كـ(ح، ي، ط) تُمد مدها الطبيعي فقط"
+        }
+      ]
+    },
+    {
+      "id": "ahkam_lam",
+      "arabic_name": "أحكام اللام",
+      "transliteration": "Ahkam Al-Lam",
+      "arabic_description": "اللام من الحروف التي لها أحكام متعددة في علم التجويد. وتنقسم إلى أقسام عدة بحسب موقعها في الكلمة: لام التعريف ولام الفعل ولام الاسم. ولكل نوع حكمه الخاص من حيث الإظهار والإدغام.",
+      "color_hex": null,
+      "sub_rules": [
+        {
+          "id": "lam_shamsiyya",
+          "arabic_name": "اللام الشمسية",
+          "transliteration": "Al-Lam Al-Shamsiyya",
+          "arabic_definition": "هي لام التعريف التي تُدغم في الحرف الذي يليها، فيصير الحرف التالي مشدداً وتختفي اللام. سُمِّيت شمسية نسبةً إلى كلمة (الشمس) التي تُدغم فيها اللام. وحروفها أربعة عشر حرفاً.",
+          "letters": "ت، ث، د، ذ، ر، ز، س، ش، ص، ض، ط، ظ، ل، ن",
+          "letters_mnemonic": "طب ثم صل رحماً تفز ضف ذا نعم دع سوء ظن زر شريفاً كرم",
+          "harakaat": null,
+          "example_arabic": "الشَّمْسُ — النَّجْمُ — الرَّحِيمُ — التَّوَّابُ",
+          "example_transliteration": "Al-shamsu — al-najmu — al-raheemu — al-tawwaabu",
+          "color_hex": null,
+          "notes": "علامتها في المصحف: عدم وجود السكون على اللام وتشديد الحرف التالي"
+        },
+        {
+          "id": "lam_qamariyya",
+          "arabic_name": "اللام القمرية",
+          "transliteration": "Al-Lam Al-Qamariyya",
+          "arabic_definition": "هي لام التعريف التي تُنطق ظاهرة ولا تُدغم في الحرف التالي. سُمِّيت قمرية نسبةً إلى كلمة (القمر) التي تظهر فيها اللام. وحروفها أربعة عشر حرفاً.",
+          "letters": "أ، ب، ج، ح، خ، ع، غ، ف، ق، ك، م، هـ، و، ي",
+          "letters_mnemonic": "ابغ حجك وخف عقيمه",
+          "harakaat": null,
+          "example_arabic": "الْقَمَرُ — الْكِتَابُ — الْحَمْدُ — الْمُؤْمِنُونَ",
+          "example_transliteration": "Al-qamaru — al-kitaabu — al-hamdu — al-mu'minoon",
+          "color_hex": null,
+          "notes": "علامتها في المصحف: وجود السكون على اللام"
+        },
+        {
+          "id": "lam_fil",
+          "arabic_name": "لام الفعل",
+          "transliteration": "Lam Al-Fi'l",
+          "arabic_definition": "هي اللام الأصلية التي تكون جزءاً من بنية الفعل. تُظهر دائماً ولا تُدغم إلا إذا جاء بعدها لام أو راء في الكلمة نفسها، وذلك بحسب قواعد التجويد.",
+          "letters": "ل، ر",
+          "letters_mnemonic": null,
+          "harakaat": null,
+          "example_arabic": "قُلْ رَبِّي — قُلْنَا — فَعَلَ",
+          "example_transliteration": "Qul rabbi — qulna — fa'ala",
+          "color_hex": null,
+          "notes": "لام (قل) تُدغم في الراء: قُلْ رَبِّي تُقرأ (قُرَّبِّي)"
+        },
+        {
+          "id": "lam_ism",
+          "arabic_name": "لام الاسم",
+          "transliteration": "Lam Al-Ism",
+          "arabic_definition": "هي اللام التي تكون جزءاً أصلياً من الاسم. وتُنطق ظاهرة دائماً كونها حرفاً أصلياً في الكلمة، ولا تخضع لأحكام لام التعريف.",
+          "letters": null,
+          "letters_mnemonic": null,
+          "harakaat": null,
+          "example_arabic": "اللَّيْلُ — الْبَلَدُ — سُلَيْمَانُ",
+          "example_transliteration": "Al-laylu — al-baladu — sulaymaanu",
+          "color_hex": null,
+          "notes": "هي لام أصلية من الجذر، تخضع لقواعد الإظهار أو الإدغام حسب السياق"
+        }
+      ]
+    },
+    {
+      "id": "tafkhim_tarqeeq",
+      "arabic_name": "التفخيم والترقيق",
+      "transliteration": "Al-Tafkhim wa Al-Tarqeeq",
+      "arabic_description": "التفخيم لغةً التسمين. واصطلاحاً هو سِمَنٌ يدخل على الحرف فيمتلئ الفم بصداه. والترقيق ضده، وهو نحول يدخل على الحرف فلا يمتلئ الفم بصداه. وللحروف العربية أحكام مختلفة في التفخيم والترقيق.",
+      "color_hex": "#DAA520",
+      "sub_rules": [
+        {
+          "id": "huroof_mufakhkhama",
+          "arabic_name": "الحروف المفخمة دائماً",
+          "transliteration": "Al-Huroof Al-Mufakhkhama",
+          "arabic_definition": "هي الحروف التي تُفخَّم دائماً في كل أحوالها ولا ترقق أبداً. وهي سبعة حروف تجمعها عبارة: (خُصَّ ضَغْطٍ قِظْ). وتسمى أيضاً حروف الاستعلاء لأن اللسان يرتفع عند النطق بها.",
+          "letters": "خ، ص، ض، غ، ط، ق، ظ",
+          "letters_mnemonic": "خص ضغط قظ",
+          "harakaat": null,
+          "example_arabic": "الطَّيِّبَاتُ — الصَّوَابُ — الضَّرَرُ — قُلْ",
+          "example_transliteration": "Al-tayyibaat — al-sawaab — al-darar — qul",
+          "color_hex": "#DAA520",
+          "notes": "سبعة حروف: لا استثناء فيها"
+        },
+        {
+          "id": "huroof_muraqqaqa",
+          "arabic_name": "الحروف المرققة دائماً",
+          "transliteration": "Al-Huroof Al-Muraqqaqa",
+          "arabic_definition": "هي جميع حروف الهجاء ما عدا حروف الاستعلاء السبعة وحرف الألف والراء. وهذه الحروف ترقق دائماً في جميع أحوالها بلا استثناء.",
+          "letters": "ب، ت، ث، ج، ح، د، ذ، ز، س، ش، ف، ك، ل، م، ن، هـ، و، ي",
+          "letters_mnemonic": null,
+          "harakaat": null,
+          "example_arabic": "بِسْمِ — كِتَابٌ — لَيْلٌ",
+          "example_transliteration": "Bismi — kitaabun — laylun",
+          "color_hex": null,
+          "notes": "جميع الحروف عدا السبعة المفخمة والراء والألف"
+        },
+        {
+          "id": "ahkam_raa",
+          "arabic_name": "أحكام الراء",
+          "transliteration": "Ahkam Al-Ra'",
+          "arabic_definition": "الراء من الحروف التي تتردد بين التفخيم والترقيق بحسب الحركة والسياق. تُفخَّم الراء في ثلاثة مواضع: مع الفتح والضم، ومع السكون وما قبله مفتوح أو مضموم. وتُرقَّق مع الكسر.",
+          "letters": "ر",
+          "letters_mnemonic": null,
+          "harakaat": null,
+          "example_arabic": "رَبَّنَا (تفخيم) — رِزْقٌ (ترقيق) — مِرْيَةٍ (ترقيق) — نَارٌ (تفخيم)",
+          "example_transliteration": "Rabbana (tafkhim) — rizqun (tarqeeq) — miryatin (tarqeeq) — naarun (tafkhim)",
+          "color_hex": null,
+          "notes": "الراء المكسورة ترقق دائماً؛ الراء المفتوحة أو المضمومة تفخم دائماً"
+        },
+        {
+          "id": "ahkam_alif",
+          "arabic_name": "أحكام الألف",
+          "transliteration": "Ahkam Al-Alif",
+          "arabic_definition": "الألف الممدودة (ألف المد) تتبع دائماً الحرف الذي قبلها في التفخيم والترقيق. فإن كان ما قبلها مفخماً فُخِّمت، وإن كان ما قبلها مرققاً رُقِّقت.",
+          "letters": "ا (الألف)",
+          "letters_mnemonic": null,
+          "harakaat": null,
+          "example_arabic": "قَالَ (تفخيم لأن القاف مفخمة) — مَالٌ (ترقيق لأن الميم مرققة)",
+          "example_transliteration": "Qaala (tafkhim) — maalun (tarqeeq)",
+          "color_hex": null,
+          "notes": "الألف لا حكم مستقل لها بل تتبع ما قبلها"
+        },
+        {
+          "id": "ahkam_lam_jalalah",
+          "arabic_name": "لام لفظ الجلالة",
+          "transliteration": "Lam Lafz Al-Jalala",
+          "arabic_definition": "لام لفظ الجلالة (الله) تُفخَّم إذا سبقها فتح أو ضم، وتُرقَّق إذا سبقها كسر. وهذا الحكم خاص بلفظ الجلالة (الله) دون سواه من الكلمات.",
+          "letters": "ل في لفظ الجلالة (الله)",
+          "letters_mnemonic": null,
+          "harakaat": null,
+          "example_arabic": "قَالَ اللهُ (تفخيم) — بِسْمِ اللهِ (ترقيق) — رَسُولُ اللهِ (تفخيم)",
+          "example_transliteration": "Qaala allahu (tafkhim) — bismi allahi (tarqeeq) — rasoolullahi (tafkhim)",
+          "color_hex": null,
+          "notes": "حكم خاص بلفظ الجلالة فقط"
+        }
+      ]
+    },
+    {
+      "id": "sifaat_huroof",
+      "arabic_name": "صفات الحروف",
+      "transliteration": "Sifaat Al-Huroof",
+      "arabic_description": "صفات الحروف هي أوصاف ذاتية ملازمة لكل حرف تُميِّزه عن غيره من الحروف حتى مع الاشتراك في المخرج. وتنقسم إلى قسمين: صفات ذات أضداد وصفات لا أضداد لها.",
+      "color_hex": null,
+      "sub_rules": [
+        {
+          "id": "jahr_hams",
+          "arabic_name": "الجهر والهمس",
+          "transliteration": "Al-Jahr wa Al-Hams",
+          "arabic_definition": "الجهر لغةً الإعلان. واصطلاحاً هو إجراء الصوت واعتماد الاعتماد على المخرج عند النطق بالحرف. والهمس ضده، وهو جريان النَّفَس عند النطق بالحرف لضعف الاعتماد على المخرج.",
+          "letters_jahr": "جميع الحروف ما عدا حروف الهمس",
+          "letters_hams": "ف، ح، ث، هـ، ش، خ، ص، س، ك، ت",
+          "letters_hams_mnemonic": "فحثه شخص سكت",
+          "example_arabic": "الجهر: ذ، ز، ع | الهمس: هـ، س، ف",
+          "example_transliteration": "Jahr: dh, z, ain | Hams: h, s, f",
+          "color_hex": null,
+          "notes": "عشرة حروف مهموسة تجمعها: فحثه شخص سكت"
+        },
+        {
+          "id": "shidda_rakhawa",
+          "arabic_name": "الشدة والرخاوة والتوسط",
+          "transliteration": "Al-Shidda wa Al-Rakhawa wa Al-Tawassut",
+          "arabic_definition": "الشدة انحباس الصوت عند النطق بالحرف لشدة الاعتماد على المخرج. والرخاوة جريان الصوت مع الحرف لضعف الاعتماد. والتوسط بين الشدة والرخاوة.",
+          "letters_shidda": "ء، ج، د، ق، ط، ب، ك، ت",
+          "letters_tawassut": "ل، ن، ع، م، ر",
+          "letters_rakhawa": "باقي الحروف",
+          "letters_shidda_mnemonic": "أجد قط بكت",
+          "letters_tawassut_mnemonic": "لن عمر",
+          "example_arabic": "الشدة: قَطَعَ | التوسط: نَعَمَ | الرخاوة: سَفَرَ",
+          "example_transliteration": "Shidda: qata'a | Tawassut: na'am | Rakhawa: safara",
+          "color_hex": null,
+          "notes": "حروف التوسط خمسة تجمعها: لن عمر"
+        },
+        {
+          "id": "istila_istifal",
+          "arabic_name": "الاستعلاء والاستفال",
+          "transliteration": "Al-Isti'la wa Al-Istifal",
+          "arabic_definition": "الاستعلاء ارتفاع اللسان إلى الحنك الأعلى عند النطق بالحرف. والاستفال انخفاض اللسان إلى قاع الفم. وحروف الاستعلاء هي الحروف المفخمة السبعة.",
+          "letters_istila": "خ، ص، ض، غ، ط، ق، ظ",
+          "letters_istifal": "باقي الحروف",
+          "letters_istila_mnemonic": "خص ضغط قظ",
+          "example_arabic": "الاستعلاء: طَلَبَ | الاستفال: كَتَبَ",
+          "example_transliteration": "Isti'la: talaba | Istifal: kataba",
+          "color_hex": null,
+          "notes": "حروف الاستعلاء هي نفسها حروف التفخيم السبعة"
+        },
+        {
+          "id": "itbaq_infitah",
+          "arabic_name": "الإطباق والانفتاح",
+          "transliteration": "Al-Itbaq wa Al-Infitah",
+          "arabic_definition": "الإطباق إطباق اللسان على الحنك الأعلى عند النطق بالحرف. والانفتاح عدم إطباق اللسان. حروف الإطباق أربعة فقط وهي: الصاد والضاد والطاء والظاء.",
+          "letters_itbaq": "ص، ض، ط، ظ",
+          "letters_infitah": "باقي الحروف",
+          "letters_itbaq_mnemonic": "صضطظ",
+          "example_arabic": "الإطباق: صَبَرَ — ضَرَبَ — طَلَبَ — ظَهَرَ",
+          "example_transliteration": "Itbaq: sabara — daraba — talaba — dhahara",
+          "color_hex": null,
+          "notes": "حروف الإطباق أقوى الحروف في التفخيم"
+        },
+        {
+          "id": "qalqalah",
+          "arabic_name": "القلقلة",
+          "transliteration": "Al-Qalqalah",
+          "arabic_definition": "القلقلة لغةً الاضطراب والتحرك. واصطلاحاً هي اضطراب المخرج عند النطق بالحرف ساكناً حتى يُسمع له نبرة قوية. وحروفها خمسة تجمعها كلمة: (قطب جد).",
+          "letters": "ق، ط، ب، ج، د",
+          "letters_mnemonic": "قطب جد",
+          "harakaat": null,
+          "example_arabic": "يَخْلُقُكُمْ — لَمْ يَلِدْ — وَلَمْ يُولَدْ — الْبَقَرَةِ",
+          "example_transliteration": "Yakhluqukum — lam yalid — walam yoolad — al-baqarah",
+          "color_hex": "#800080",
+          "notes": "أقوى ما تكون عند الوقف عليها، وتكون متوسطة في الوسط"
+        },
+        {
+          "id": "ghunnah",
+          "arabic_name": "الغنة",
+          "transliteration": "Al-Ghunnah",
+          "arabic_definition": "الغنة صوت أغنّ يخرج من الخيشوم (الأنف)، وليس للسان فيه حظ. وهي صفة لازمة لحرفي النون والميم في جميع أحوالهما، سواء أكانا متحركين أم ساكنين أم مشددين.",
+          "letters": "ن، م",
+          "letters_mnemonic": "نم",
+          "harakaat": 2,
+          "example_arabic": "مَنْ — إِنَّ — أَمَّا — النُّورُ",
+          "example_transliteration": "Man — inna — amma — al-nooru",
+          "color_hex": "#008000",
+          "notes": "أعلى مراتب الغنة: المشدد، ثم الساكن مع الإخفاء، ثم الساكن مع الإدغام بغنة"
+        },
+        {
+          "id": "safeer",
+          "arabic_name": "الصفير",
+          "transliteration": "Al-Safeer",
+          "arabic_definition": "الصفير صوت حادّ يشبه صفير الطير يخرج من بين الأسنان عند النطق بهذه الحروف. وهو خاص بثلاثة حروف: الصاد والزاي والسين.",
+          "letters": "ص، ز، س",
+          "letters_mnemonic": "صزس",
+          "harakaat": null,
+          "example_arabic": "صَبَرَ — زَكَاةٌ — سَمِعَ",
+          "example_transliteration": "Sabara — zakaatun — sami'a",
+          "color_hex": null,
+          "notes": "يجب الاعتناء بإظهار صوت الصفير عند النطق بهذه الحروف"
+        }
+      ]
+    },
+    {
+      "id": "makharij_huroof",
+      "arabic_name": "مخارج الحروف",
+      "transliteration": "Makharij Al-Huroof",
+      "arabic_description": "مخرج الحرف هو المحل الذي ينشأ منه الصوت ويتميز به الحرف عن غيره. وقد حدَّد علماء التجويد سبعة عشر مخرجاً للحروف العربية الثمانية والعشرين، تندرج تحت خمسة مخارج عامة.",
+      "color_hex": null,
+      "sub_rules": [
+        {
+          "id": "makhraj_jawf",
+          "arabic_name": "الجوف",
+          "transliteration": "Al-Jawf",
+          "arabic_definition": "الجوف هو الخلاء الداخلي للفم والحلق معاً. ومنه تخرج حروف المد الثلاثة التي هي الألف الساكنة المفتوح ما قبلها، والواو الساكنة المضموم ما قبلها، والياء الساكنة المكسور ما قبلها.",
+          "letters": "ا، و، ي (حروف المد)",
+          "harakaat": null,
+          "example_arabic": "قَالَ — قُولُوا — قِيلَ",
+          "example_transliteration": "Qaala — qooloo — qeela",
+          "color_hex": null,
+          "notes": "مخرج واحد يشمل حروف المد الثلاثة"
+        },
+        {
+          "id": "makhraj_halq",
+          "arabic_name": "الحلق",
+          "transliteration": "Al-Halq",
+          "arabic_definition": "الحلق يشمل ثلاثة مخارج: أقصى الحلق (أدناه للصدر) ومنه تخرج الهمزة والهاء؛ ووسط الحلق ومنه تخرج العين والحاء؛ وأدنى الحلق (أقربه للفم) ومنه تخرج الغين والخاء.",
+          "letters": "ء، هـ، ع، ح، غ، خ",
+          "harakaat": null,
+          "example_arabic": "أَحَدٌ — هُوَ — عَلِيمٌ — حَكِيمٌ — غَفُورٌ — خَبِيرٌ",
+          "example_transliteration": "Ahadun — huwa — aleemun — hakeemun — ghafoorun — khabeerun",
+          "color_hex": null,
+          "notes": "ستة حروف في ثلاثة مخارج: ء هـ | ع ح | غ خ"
+        },
+        {
+          "id": "makhraj_lisan",
+          "arabic_name": "اللسان",
+          "transliteration": "Al-Lisan",
+          "arabic_definition": "اللسان يشمل عشرة مخارج مختلفة. وهو أكثر المخارج العامة تفصيلاً، إذ يخرج منه ثمانية عشر حرفاً من حروف اللغة العربية، من أقصى اللسان إلى أدناه وطرفه.",
+          "letters": "ق، ك، ج، ش، ي، ض، ل، ن، ر، ط، د، ت، ص، ز، س، ظ، ذ، ث",
+          "harakaat": null,
+          "example_arabic": "قَالَ — كَتَبَ — جَاءَ — شَكَرَ — ضَرَبَ — لَعَلَّ",
+          "example_transliteration": "Qaala — kataba — jaa'a — shakara — daraba — la'alla",
+          "color_hex": null,
+          "notes": "أوسع المخارج تنوعاً: 10 مخارج تفصيلية و18 حرفاً"
+        },
+        {
+          "id": "makhraj_shafatan",
+          "arabic_name": "الشفتان",
+          "transliteration": "Al-Shafatan",
+          "arabic_definition": "الشفتان يشملان مخرجين: باطن الشفة السفلى مع أطراف الثنايا العليا (مخرج الفاء)؛ وبين الشفتين معاً (مخرج الباء والميم والواو). والواو تختلف عن الباء والميم بعدم التقاء الشفتين.",
+          "letters": "ف، ب، م، و",
+          "harakaat": null,
+          "example_arabic": "فَتَحَ — بَسَطَ — مَنَعَ — وَقَفَ",
+          "example_transliteration": "Fataha — basata — mana'a — waqafa",
+          "color_hex": null,
+          "notes": "الفاء: باطن الشفة السفلى مع الثنايا | ب م: بين الشفتين | و: بين الشفتين مع تباعدهما"
+        },
+        {
+          "id": "makhraj_khayshoom",
+          "arabic_name": "الخيشوم",
+          "transliteration": "Al-Khayshoom",
+          "arabic_definition": "الخيشوم هو الخرطوم الأعلى من الأنف. ومنه يخرج صوت الغنة الخاصة بحرفي النون والميم المشددين أو الساكنين في بعض أحوالهما. وهو مخرج واحد.",
+          "letters": "غنة النون والميم",
+          "harakaat": null,
+          "example_arabic": "إِنَّ — أَمَّا — مِنْ (مع الإخفاء) — الْمُؤْمِنُونَ",
+          "example_transliteration": "Inna — amma — min (with ikhfa) — al-mu'minoon",
+          "color_hex": "#008000",
+          "notes": "مخرج واحد للغنة فقط، وليس للحروف ذاتها"
+        }
+      ]
+    },
+    {
+      "id": "waqf_ibtida",
+      "arabic_name": "الوقف والابتداء",
+      "transliteration": "Al-Waqf wa Al-Ibtida",
+      "arabic_description": "الوقف هو قطع الصوت على الكلمة القرآنية زمناً ما مع التنفس بنية استئناف القراءة. والابتداء هو الشروع في القراءة بعد الوقف أو ابتداءً. ولكل منهما أقسام وأحكام ينبغي للقارئ معرفتها.",
+      "color_hex": null,
+      "sub_rules": [
+        {
+          "id": "waqf_tam",
+          "arabic_name": "الوقف التام",
+          "transliteration": "Al-Waqf Al-Tam",
+          "arabic_definition": "هو الوقف على كلام تمَّ معناه ولم يتعلق بما بعده لا من جهة اللفظ ولا من جهة المعنى. وهو أحسن أنواع الوقف، ويستحسن الوقف عليه والابتداء بما بعده.",
+          "letters": null,
+          "letters_mnemonic": null,
+          "harakaat": null,
+          "example_arabic": "﴿وَأُولَئِكَ هُمُ الْمُفْلِحُونَ﴾ (الوقف هنا تام ثم يُبدأ بالآية التالية)",
+          "example_transliteration": "Wa ola'ika humu al-muflihoona",
+          "color_hex": null,
+          "notes": "علامته في المصحف: (م) أو نهاية الآية"
+        },
+        {
+          "id": "waqf_kafi",
+          "arabic_name": "الوقف الكافي",
+          "transliteration": "Al-Waqf Al-Kafi",
+          "arabic_definition": "هو الوقف على كلام تمَّ معناه لكنه يتعلق بما بعده من جهة المعنى لا من جهة اللفظ. ويجوز الوقف عليه والابتداء بما بعده.",
+          "letters": null,
+          "letters_mnemonic": null,
+          "harakaat": null,
+          "example_arabic": "﴿خَتَمَ اللهُ عَلَى قُلُوبِهِمْ﴾ (الوقف كافٍ والآية تتعلق بما قبلها معنىً)",
+          "example_transliteration": "Khatama allahu 'ala quloobihim",
+          "color_hex": null,
+          "notes": "يجوز الوقف والابتداء"
+        },
+        {
+          "id": "waqf_hasan",
+          "arabic_name": "الوقف الحسن",
+          "transliteration": "Al-Waqf Al-Hasan",
+          "arabic_definition": "هو الوقف على كلام يفيد معنى ما لكنه متعلق بما بعده لفظاً ومعنىً. يجوز الوقف عليه للضرورة كانقطاع النفس، لكن لا يجوز الابتداء بما بعده إلا بشرط إعادة ما وُقف عليه.",
+          "letters": null,
+          "letters_mnemonic": null,
+          "harakaat": null,
+          "example_arabic": "﴿الْحَمْدُ للهِ﴾ (الوقف حسن لكن لا يُبدأ بـ ﴿رَبِّ الْعَالَمِينَ﴾ وحدها)",
+          "example_transliteration": "Al-hamdu lillah",
+          "color_hex": null,
+          "notes": "يجب إعادة ما وُقف عليه عند الاستئناف"
+        },
+        {
+          "id": "waqf_qabih",
+          "arabic_name": "الوقف القبيح",
+          "transliteration": "Al-Waqf Al-Qabeeh",
+          "arabic_definition": "هو الوقف على ما لا يفيد معنىً تاماً أو ما يُخل بالمعنى ويحيله إلى معنى فاسد. ولا يجوز الوقف عليه إلا عند الضرورة القصوى مع وجوب العودة إلى ما قبله.",
+          "letters": null,
+          "letters_mnemonic": null,
+          "harakaat": null,
+          "example_arabic": "﴿إِنَّ اللهَ لاَ يَسْتَحْيِي﴾ (الوقف هنا قبيح إذ يُفيد معنى فاسداً دون إتمام الآية)",
+          "example_transliteration": "Innallaha la yastahyi",
+          "color_hex": null,
+          "notes": "لا يجوز اختياراً؛ يجب العودة إلى ما يصح الابتداء به"
+        }
+      ]
+    }
+  ]
+}
