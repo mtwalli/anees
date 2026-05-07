@@ -81,7 +81,7 @@ class _QuranFontsPage extends StatelessWidget {
           margin: pageIndex == 0 || pageIndex == 1
               ? EdgeInsets.symmetric(
                   vertical: UiHelper.currentOrientation(
-                      size.width * .16, size.height * .01, context))
+                      size.width * .08, size.height * .01, context))
               : EdgeInsets.zero,
           child: isScaled
               ? _buildFlowingLayout(quranCtrl)

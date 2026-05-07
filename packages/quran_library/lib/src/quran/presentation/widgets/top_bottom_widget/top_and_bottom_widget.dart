@@ -51,7 +51,7 @@ class TopAndBottomWidget extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40.0),
+              padding: const EdgeInsets.symmetric(vertical: 24.0),
               child: child,
             ),
           ),
@@ -103,7 +103,7 @@ class TopAndBottomWidget extends StatelessWidget {
                     surahNumber: surahNumber,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 40.0),
+                    padding: const EdgeInsets.symmetric(vertical: 24.0),
                     child: child,
                   ),
                   BuildBottomSection(
