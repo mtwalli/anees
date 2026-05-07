@@ -16,11 +16,12 @@ class QuranOrTenRecitationsTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final accent = defaults.accentColor ?? scheme.primary;
+    final blendBase = isDark ? Colors.black : Colors.white;
     final tabBg = defaults.accentColor != null
-        ? accent.withValues(alpha: 0.1)
-        : scheme.surfaceContainerLow;
+        ? Color.alphaBlend(accent.withValues(alpha: 0.25), blendBase)
+        : scheme.surfaceContainerHighest;
     final tabIndicator = defaults.accentColor != null
-        ? accent.withValues(alpha: 0.2)
+        ? Color.alphaBlend(accent.withValues(alpha: 0.55), blendBase)
         : scheme.primaryContainer;
     final selectedLabelColor =
         defaults.accentColor ?? scheme.onPrimaryContainer;
